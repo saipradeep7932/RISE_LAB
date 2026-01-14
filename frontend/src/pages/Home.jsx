@@ -1,123 +1,315 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Microscope, Shield, Cpu, Database } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown } from 'lucide-react';
 
 const Home = () => {
+  // --- Dynamic Image Loading Logic ---
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const loadImages = async () => {
+      const modules = import.meta.glob('../assets/highlights/*');
+      const loadedImages = [];
+      for (const path in modules) {
+        const mod = await modules[path]();
+        loadedImages.push(mod.default);
+      }
+      if (loadedImages.length > 0) {
+        setImages(loadedImages);
+      }
+    };
+    loadImages();
+  }, []);
+
+  // --- News Data ---
+  const newsItems = [
+    "RISE Lab has initiated a new consultancy project in collaboration with Pritika Auto Industries Limited, Punjab.",
+    "Dr. Avala Lavakumar’s latest research paper, “Dynamics of Portevin–Le Chatelier Banding Revealed Through Grain Refinement in High-Mn Austenitic Steel: Sequential Overcoming of Necking,” has been accepted in the Journal of Materials Science & Technology.",
+    "Mr. Gedela Santhosh Kumar joined as Ph.D. student in RISE Lab.",
+    "Dr. Avala Lavakumar has been appointed to the Editorial Board of Scientific Reports, a journal from Springer Nature.",
+    "RISE Lab has published a new journal article titled, \"Beyond the Blade: A Microstructural Investigation of an Ancient Indian Steel Sword,\" in Metallography, Microstructure, and Analysis (2025).",
+    "RISE Lab and PMR Lab announced their collaborative publication in the Journal of Environmental Management.",
+    "RISE Lab is seeking highly motivated Ph.D. students to join the research team.",
+    "Dr. Avala Lavakumar selected as Divisional Editor for ASM Handbook Volume 27 – Renewable Materials.",
+    "Mr. T. Vikram joined as Ph.D. student in RISE Lab under ERP.",
+    "Dr. Avala Lavakumar is teaching a new course titled \"Electron Microscopy and Micro-Analysis.\"",
+    "Mr. Gopikrishna Guguloth joined as Junior Research Fellow in RISE Lab.",
+    "Mr. Arun Kumar Patro presented a paper at IIM-ATM 2024 & NMA, Bengaluru.",
+    "Mr. Vishnu Prasad presented a poster at IIM-ATM 2024 & NMA, Bengaluru."
+  ];
+
+  // --- Carousel Logic ---
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const carouselIntervalRef = useRef(null);
+  const carouselTimeoutRef = useRef(null);
+
+  const startCarousel = () => {
+    if (carouselIntervalRef.current) clearInterval(carouselIntervalRef.current);
+    carouselIntervalRef.current = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 5000);
+  };
+
+  const pauseCarousel = () => {
+    if (carouselIntervalRef.current) clearInterval(carouselIntervalRef.current);
+    if (carouselTimeoutRef.current) clearTimeout(carouselTimeoutRef.current);
+    carouselTimeoutRef.current = setTimeout(() => {
+      startCarousel();
+    }, 3000);
+  };
+
+  const nextImage = () => {
+    pauseCarousel();
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    pauseCarousel();
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  useEffect(() => {
+    if (images.length > 0) startCarousel();
+    return () => {
+      if (carouselIntervalRef.current) clearInterval(carouselIntervalRef.current);
+      if (carouselTimeoutRef.current) clearTimeout(carouselTimeoutRef.current);
+    };
+  }, [images]);
+
+  // --- News Ticker Logic ---
+  const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
+  const newsIntervalRef = useRef(null);
+  const newsTimeoutRef = useRef(null);
+
+  const startNewsTicker = () => {
+    if (newsIntervalRef.current) clearInterval(newsIntervalRef.current);
+    newsIntervalRef.current = setInterval(() => {
+      setCurrentNewsIndex((prev) => (prev + 1) % newsItems.length);
+    }, 4000);
+  };
+
+  const pauseNewsTicker = () => {
+    if (newsIntervalRef.current) clearInterval(newsIntervalRef.current);
+    if (newsTimeoutRef.current) clearTimeout(newsTimeoutRef.current);
+    newsTimeoutRef.current = setTimeout(() => {
+      startNewsTicker();
+    }, 3000);
+  };
+
+  const nextNews = () => {
+    pauseNewsTicker();
+    setCurrentNewsIndex((prev) => (prev + 1) % newsItems.length);
+  };
+
+  const prevNews = () => {
+    pauseNewsTicker();
+    setCurrentNewsIndex((prev) => (prev - 1 + newsItems.length) % newsItems.length);
+  };
+
+  useEffect(() => {
+    startNewsTicker();
+    return () => {
+      if (newsIntervalRef.current) clearInterval(newsIntervalRef.current);
+      if (newsTimeoutRef.current) clearTimeout(newsTimeoutRef.current);
+    };
+  }, []);
+
+  // Helper to get previous and next image indices for the centered layout
+  const getPrevIndex = () => (currentImageIndex - 1 + images.length) % images.length;
+  const getNextIndex = () => (currentImageIndex + 1) % images.length;
+
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="relative max-w-7xl mx-auto z-10 text-center">
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-            RISE Lab
-          </h1>
-          <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-10 font-light">
+    <div className="min-h-screen bg-white font-sans text-gray-800">
+
+      {/* --- SECTION 1: HERO SECTION --- */}
+      <section className="relative w-full h-[500px] flex flex-col justify-center items-center bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white overflow-hidden shadow-lg">
+        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        <div className="z-10 text-center px-4">
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl md:text-7xl font-bold tracking-tight mb-4"
+          >
+            RISE LAB
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-xl md:text-2xl font-light text-blue-100 tracking-wide uppercase"
+          >
             Research in Intelligent Systems & Engineering
-          </p>
-          <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-10">
-            Advancing the frontiers of computer science through cutting-edge research and innovation at IIT Ropar.
-          </p>
-
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button
-              type="button"
-              className="px-8 py-3 bg-white text-blue-900 rounded-lg font-semibold text-lg hover:bg-gray-100 transition shadow-lg flex items-center justify-center gap-2"
-            >
-              Join RISE Lab <ArrowRight size={20} />
-            </button>
-            <button
-              type="button"
-              className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-lg font-semibold text-lg hover:bg-white/10 transition flex items-center justify-center"
-            >
-              Request Equipment
-            </button>
-          </div>
-        </div>
-
-        {/* Abstract Background Shapes */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
-          <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
-          <div className="absolute top-20 right-20 w-72 h-72 bg-purple-500 rounded-full blur-3xl"></div>
-        </div>
-      </div>
-
-      {/* About Summary */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">About Our Research</h2>
-          <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
-            The RISE Lab at IIT Ropar is dedicated to solving complex problems in the domains of Artificial Intelligence,
-            IoT, and Systems Engineering. We collaborate with industry leaders and academic partners globally
-            to produce high-impact research.
-          </p>
-          <Link to="/about" className="text-iitrpr-blue font-semibold hover:text-blue-800 hover:underline">
-            Learn more about us &rarr;
-          </Link>
+          </motion.p>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "100px" }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="h-1 bg-blue-400 mx-auto mt-6 rounded-full"
+          />
         </div>
       </section>
 
-      {/* Focus Areas (Cards) */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Research Focus Areas</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <FocusCard
-              icon={<Cpu size={40} className="text-blue-600" />}
-              title="IoT & Embedded Systems"
-              description="Designing smart, connected devices and efficient embedded architectures."
-            />
-            <FocusCard
-              icon={<Database size={40} className="text-purple-600" />}
-              title="Big Data & Cloud"
-              description="Scalable data processing and distributed computing infrastructures."
-            />
-            <FocusCard
-              icon={<Microscope size={40} className="text-emerald-600" />}
-              title="AI & Machine Learning"
-              description="Advanced algorithms for vision, NLP, and predictive analytics."
-            />
-            <FocusCard
-              icon={<Shield size={40} className="text-red-600" />}
-              title="Cybersecurity"
-              description="Securing networks and systems against modern digital threats."
-            />
-          </div>
+
+      {/* --- SECTION 2: ABOUT US --- */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center md:text-left">
+        <h2 className="text-3xl font-bold text-blue-900 inline-block border-b-4 border-blue-500 pb-1 mb-8">About Us</h2>
+        <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed text-justify space-y-6">
+          <p>
+            As researchers in the Department of Metallurgical and Materials Science Engineering at IIT Ropar, we focus on in-situ deformation studies. Utilizing techniques like transmission electron microscopy (TEM), synchrotron X-ray diffraction, and digital image correlation (DIC), we analyze structures and measure deformation across a diverse range of materials to address critical engineering challenges.
+          </p>
+          <p>
+            Our research spans from traditional steel, aluminum, copper, and titanium alloys with well-established properties to complex high/medium entropy alloys (HEA/MEA) and transformation/twin-induced plasticity (TRIP/TWIP) alloys that offer unique combinations of strength and ductility, with applications ranging from advanced automotive components to cutting-edge tools for the petrochemical industry.
+          </p>
+          <p>
+            In contrast to this modern approach, we also delve into archaeometallurgy, analyzing ancient metal artifacts and techniques to understand the evolution of metals and their properties.
+          </p>
         </div>
       </section>
 
-      {/* Facilities Highlight */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
-          <div className="md:w-1/2">
-            <div className="bg-gray-200 rounded-xl h-64 w-full flex items-center justify-center text-gray-400">
-              {/* Placeholder for an actual lab image later */}
-              <span>Lab Image Placeholder</span>
+
+      {/* --- SECTION 3: RESEARCH HIGHLIGHTS (Centered Carousel) --- */}
+      <section className="bg-gray-50 py-16 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center">
+          <h2 className="text-3xl font-bold text-blue-900">Research Highlights</h2>
+          <div className="w-24 h-1 bg-blue-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div className="max-w-6xl mx-auto relative h-[400px] flex items-center justify-center overflow-hidden px-4">
+          {images.length > 0 ? (
+            <>
+              {/* Controls */}
+              <button
+                onClick={prevImage}
+                className="absolute left-4 md:left-8 z-20 p-2 rounded-full bg-white/80 text-blue-900 shadow-md hover:bg-white transition-all disabled:opacity-50"
+                aria-label="Previous Highlight"
+              >
+                <ChevronLeft size={32} />
+              </button>
+              <button
+                onClick={nextImage}
+                className="absolute right-4 md:right-8 z-20 p-2 rounded-full bg-white/80 text-blue-900 shadow-md hover:bg-white transition-all disabled:opacity-50"
+                aria-label="Next Highlight"
+              >
+                <ChevronRight size={32} />
+              </button>
+
+              {/* Images Container */}
+              <div className="relative w-full h-full flex items-center justify-center">
+                <AnimatePresence mode='popLayout'>
+                  {/* Previous Image Hint (Left) */}
+                  <motion.div
+                    key={getPrevIndex()}
+                    className="absolute left-0 w-1/3 h-64 opacity-40 blur-[2px] hidden md:block"
+                    initial={{ x: -100, opacity: 0 }}
+                    animate={{ x: 0, opacity: 0.4 }}
+                    exit={{ x: -100, opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <img src={images[getPrevIndex()]} className="w-full h-full object-cover rounded-xl" alt="" />
+                  </motion.div>
+
+                  {/* Active Image (Center) */}
+                  <motion.div
+                    key={currentImageIndex}
+                    className="relative z-10 w-full md:w-3/5 h-80 md:h-96 shadow-2xl rounded-xl overflow-hidden border-2 border-white"
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.9, opacity: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  >
+                    <img
+                      src={images[currentImageIndex]}
+                      alt={`Highlight ${currentImageIndex + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+
+                  {/* Next Image Hint (Right) */}
+                  <motion.div
+                    key={getNextIndex()}
+                    className="absolute right-0 w-1/3 h-64 opacity-40 blur-[2px] hidden md:block"
+                    initial={{ x: 100, opacity: 0 }}
+                    animate={{ x: 0, opacity: 0.4 }}
+                    exit={{ x: 100, opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <img src={images[getNextIndex()]} className="w-full h-full object-cover rounded-xl" alt="" />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </>
+          ) : (
+            <div className="text-gray-500">Loading Highlights...</div>
+          )}
+        </div>
+      </section>
+
+
+      {/* --- SECTION 4: LATEST NEWS (Interactive Ticker) --- */}
+      <section className="py-16 bg-white border-t border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-blue-900 mb-12">Latest News</h2>
+
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            {/* Controls */}
+            <div className="flex md:flex-col gap-2 order-2 md:order-1">
+              <button
+                onClick={prevNews}
+                className="p-2 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors"
+                aria-label="Previous News"
+              >
+                <ChevronUp size={24} />
+              </button>
+              <button
+                onClick={nextNews}
+                className="p-2 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors"
+                aria-label="Next News"
+              >
+                <ChevronDown size={24} />
+              </button>
+            </div>
+
+            {/* News Display */}
+            <div className="relative flex-1 h-32 md:h-40 bg-white rounded-xl shadow-lg border border-blue-100 flex items-center justify-center p-8 overflow-hidden order-1 md:order-2 w-full">
+              <AnimatePresence mode='wait'>
+                <motion.div
+                  key={currentNewsIndex}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="absolute w-full px-4 text-center"
+                >
+                  <p className="text-lg font-medium text-gray-800 leading-relaxed">
+                    <span className="text-blue-500 mr-2 font-bold">•</span>
+                    {newsItems[currentNewsIndex]}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
-          <div className="md:w-1/2">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">World-Class Facilities</h2>
-            <p className="text-lg text-gray-600 mb-6">
-              Our lab is equipped with state-of-the-art high-performance computing clusters,
-              sensor testbeds, and advanced prototyping tools to support groundbreaking research.
-            </p>
-            <Link to="/facilities" className="inline-block px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition">
-              Explore Facilities
-            </Link>
+
+          {/* Dots */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {newsItems.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => {
+                  pauseNewsTicker();
+                  setCurrentNewsIndex(idx);
+                }}
+                className={`h-2 rounded-full transition-all duration-300 ${idx === currentNewsIndex ? 'w-8 bg-blue-600' : 'w-2 bg-gray-300 hover:bg-gray-400'}`}
+                aria-label={`Go to news item ${idx + 1}`}
+              />
+            ))}
           </div>
         </div>
       </section>
+
     </div>
   );
 };
-
-const FocusCard = ({ icon, title, description }) => (
-  <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col items-center text-center">
-    <div className="mb-4 p-3 bg-gray-50 rounded-full">
-      {icon}
-    </div>
-    <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
-    <p className="text-gray-600">{description}</p>
-  </div>
-);
 
 export default Home;
