@@ -140,7 +140,7 @@ const Home = () => {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="text-xl md:text-2xl font-light text-blue-100 tracking-wide uppercase"
           >
-            Research in Intelligent Systems & Engineering
+            Responsive In-Situ Studies for Material Evolution
           </motion.p>
           <motion.div
             initial={{ width: 0 }}
