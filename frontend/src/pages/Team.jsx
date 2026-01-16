@@ -1,22 +1,16 @@
 import React from 'react';
 
-// Simple image path helper - using public folder or assets logic
-// Since strictly no backend, we assume images are in src/assets/team/ and we try to load them.
-// For static builds, strictly importing is safer, but with dynamic names we can use a helper function 
-// involving string concatenation if using Vite's dynamic import features or just assume they exist.
-// Given strict instructions not to change functionality but mostly layout/content, 
-// I will implement a robust image loader or fallback to a placeholder text if image is missing.
+// Use import.meta.glob to dynamically load images from assets
+// This ensures the build process knows about them and hashes them correctly.
+const teamImages = import.meta.glob('../assets/team/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
 
 const getImagePath = (filename) => {
-  try {
-    // This is a direct URL construction which works if images are in 'public/assets/team'
-    // If they are in src/assets/team, we need import.meta.glob data.
-    // For simplicity and robustness in this specific constraints context:
-    return `/assets/team/${filename}`;
-  } catch (e) {
-    return null;
-  }
+  const key = `../assets/team/${filename}`;
+  return teamImages[key] || null;
 };
+
+// Fallback image path (make sure this exists or use a robust fallback)
+const PLACEHOLDER_IMG = teamImages['../assets/team/placeholder.jpg'] || null;
 
 const Team = () => {
   // --- Data ---
@@ -63,17 +57,17 @@ const Team = () => {
   ];
 
   const btechStudents = [
-    { name: "Prerana", batch: "2022–2026 [MME]", area: "Brazing of dissimilar Metals" },
-    { name: "Paidi Sathwika", batch: "2022–2026 [MME]", area: "Role of retained austenite in Medium Mn steels" },
-    { name: "Mudu Narendra Nayak", batch: "2022–2026 [MME]", area: "Archeometallurgical Investigation of Ancient Sword: Microstructure and Manufacturing" },
-    { name: "Banoth Deepak Teja", batch: "2022–2026 [MME]", area: "Comparative Study of Mechanical Performance of Gray and Ductile Cast iron Components Manufactured Via Lost Foam and Sand Mould Castings" }
+    { name: "Prerana", batch: "2022–2026 [MME]", area: "Brazing of dissimilar Metals", image: "placeholder.jpg" },
+    { name: "Paidi Sathwika", batch: "2022–2026 [MME]", area: "Role of retained austenite in Medium Mn steels", image: "placeholder.jpg" },
+    { name: "Mudu Narendra Nayak", batch: "2022–2026 [MME]", area: "Archeometallurgical Investigation of Ancient Sword: Microstructure and Manufacturing", image: "placeholder.jpg" },
+    { name: "Banoth Deepak Teja", batch: "2022–2026 [MME]", area: "Comparative Study of Mechanical Performance of Gray and Ductile Cast iron Components Manufactured Via Lost Foam and Sand Mould Castings", image: "placeholder.jpg" }
   ];
 
   const alumni = [
-    { name: "Mr. Vishnu Prasad (Intern)", place: "Current place: IIT Madras" },
-    { name: "Mr. Shashi Shekhar Prajapati (Intern)", place: "Current place: UNO Minda, Gujarat" },
-    { name: "Ms. Sejal Tandekar (Intern)", place: "Current place: O.P. Jindal University" },
-    { name: "Mr. Rahul Kumar Sahu (Intern)", place: "Current place: O.P. Jindal University" }
+    { name: "Mr. Vishnu Prasad (Intern)", place: "Current place: IIT Madras", image: "placeholder.jpg" },
+    { name: "Mr. Shashi Shekhar Prajapati (Intern)", place: "Current place: UNO Minda, Gujarat", image: "placeholder.jpg" },
+    { name: "Ms. Sejal Tandekar (Intern)", place: "Current place: O.P. Jindal University", image: "placeholder.jpg" },
+    { name: "Mr. Rahul Kumar Sahu (Intern)", place: "Current place: O.P. Jindal University", image: "placeholder.jpg" }
   ];
 
   return (
@@ -91,10 +85,15 @@ const Team = () => {
         <section>
           <h2 className="text-2xl font-bold text-gray-900 border-l-4 border-blue-600 pl-3 mb-8 uppercase">Group Head</h2>
           <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden flex flex-col md:flex-row">
-            <div className="md:w-1/3 h-96 md:h-auto bg-gray-200 relative flex items-center justify-center">
-              {/* Placeholder for Image */}
-              <span className="text-gray-400 font-light">Photo: {groupHead.image}</span>
-              {/* In real usage: <img src={\`src/assets/team/\${groupHead.image}\`} className="absolute inset-0 w-full h-full object-cover" /> */}
+            {/* 1:1 Aspect Ratio or properly contained */}
+            <div className="md:w-1/3 flex-shrink-0 bg-gray-200 relative">
+              <div className="w-full h-full min-h-[300px] md:min-h-full">
+                <img
+                  src={getImagePath(groupHead.image) || PLACEHOLDER_IMG}
+                  alt={groupHead.name}
+                  className="absolute inset-0 w-full h-full object-cover object-top"
+                />
+              </div>
             </div>
             <div className="md:w-2/3 p-8 flex flex-col justify-center">
               <h3 className="text-3xl font-bold text-blue-900 mb-2">{groupHead.name}</h3>
@@ -114,10 +113,15 @@ const Team = () => {
           <h2 className="text-2xl font-bold text-gray-900 border-l-4 border-blue-600 pl-3 mb-8 uppercase">Research Staff</h2>
           <div className="flex flex-col gap-8">
             {researchStaff.map((staff, idx) => (
-              <div key={idx} className="bg-white rounded-xl shadow-md border border-gray-100 p-8 flex flex-col md:flex-row gap-8">
-                <div className="md:w-1/4 flex-shrink-0">
-                  <div className="w-40 h-40 bg-gray-200 rounded-full mx-auto md:mx-0 flex items-center justify-center overflow-hidden">
-                    <span className="text-xs text-gray-400 break-all text-center p-2">{staff.image}</span>
+              <div key={idx} className="bg-white rounded-xl shadow-md border border-gray-100 p-8 flex flex-col md:flex-row gap-8 items-start">
+                <div className="md:w-1/4 flex-shrink-0 flex justify-center md:justify-start">
+                  {/* Large Avatar 1:1 */}
+                  <div className="w-48 h-48 bg-gray-200 rounded-lg overflow-hidden border-4 border-gray-50 shadow-sm relative">
+                    <img
+                      src={getImagePath(staff.image) || PLACEHOLDER_IMG}
+                      alt={staff.name}
+                      className="absolute inset-0 w-full h-full object-cover object-top"
+                    />
                   </div>
                 </div>
                 <div className="md:w-3/4">
@@ -139,10 +143,14 @@ const Team = () => {
           <h2 className="text-2xl font-bold text-gray-900 border-l-4 border-blue-600 pl-3 mb-8 uppercase">Ph.D. Students</h2>
           <div className="flex flex-col gap-10">
             {phdStudents.map((student, idx) => (
-              <div key={idx} className="bg-white rounded-xl shadow-md border border-gray-100 p-8 flex flex-col md:flex-row gap-8">
-                <div className="md:w-1/4 flex-shrink-0">
-                  <div className="w-40 h-40 bg-gray-200 rounded-full mx-auto md:mx-0 flex items-center justify-center overflow-hidden">
-                    <span className="text-xs text-gray-400 break-all text-center p-2">{student.image}</span>
+              <div key={idx} className="bg-white rounded-xl shadow-md border border-gray-100 p-8 flex flex-col md:flex-row gap-8 items-start">
+                <div className="md:w-1/4 flex-shrink-0 flex justify-center md:justify-start">
+                  <div className="w-48 h-48 bg-gray-200 rounded-lg overflow-hidden border-4 border-gray-50 shadow-sm relative">
+                    <img
+                      src={getImagePath(student.image) || PLACEHOLDER_IMG}
+                      alt={student.name}
+                      className="absolute inset-0 w-full h-full object-cover object-top"
+                    />
                   </div>
                 </div>
                 <div className="md:w-3/4">
@@ -162,14 +170,26 @@ const Team = () => {
         {/* --- SECTION 4: B.Tech. STUDENTS --- */}
         <section>
           <h2 className="text-2xl font-bold text-gray-900 border-l-4 border-blue-600 pl-3 mb-8 uppercase">B.Tech. Students</h2>
+          {/* Grid Layout - Larger Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {btechStudents.map((student, idx) => (
-              <div key={idx} className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition flex flex-col h-full">
-                <h3 className="font-bold text-blue-900 text-lg mb-2">{student.name}</h3>
-                <p className="text-sm font-semibold text-gray-600 mb-3">{student.batch}</p>
-                <div className="mt-auto">
-                  <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">Research area</span>
-                  <p className="text-sm text-gray-700 mt-1 leading-snug">{student.area}</p>
+              <div key={idx} className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden flex flex-col h-full hover:shadow-lg transition">
+                {/* Image Area - Larger (Aspect Square or 4:3) */}
+                <div className="w-full aspect-square bg-gray-100 relative">
+                  <img
+                    src={getImagePath(student.image) || PLACEHOLDER_IMG}
+                    alt={student.name}
+                    className="absolute inset-0 w-full h-full object-cover object-top"
+                  />
+                </div>
+
+                <div className="p-5 flex flex-col flex-grow">
+                  <h3 className="font-bold text-blue-900 text-lg mb-1">{student.name}</h3>
+                  <p className="text-sm font-semibold text-gray-500 mb-3">{student.batch}</p>
+                  <div className="mt-auto pt-3 border-t border-gray-100">
+                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">Research area</span>
+                    <p className="text-sm text-gray-700 mt-1 leading-snug">{student.area}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -179,15 +199,24 @@ const Team = () => {
         {/* --- SECTION 5: ALUMINI / ASSOCIATED MEMBERS --- */}
         <section>
           <h2 className="text-2xl font-bold text-gray-900 border-l-4 border-blue-600 pl-3 mb-8 uppercase">Alumni / Associated Members</h2>
-          <div className="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-200">
-            <ul className="divide-y divide-gray-200">
-              {alumni.map((member, idx) => (
-                <li key={idx} className="px-6 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between hover:bg-gray-50 transition">
-                  <span className="text-base font-medium text-blue-900 mb-1 sm:mb-0">{member.name}</span>
-                  <span className="text-sm text-gray-600 italic">{member.place}</span>
-                </li>
-              ))}
-            </ul>
+          {/* Using similar Grid Layout as B.Tech for consistent visual size */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {alumni.map((member, idx) => (
+              <div key={idx} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col h-full hover:shadow-md transition">
+                {/* Size: 1:1 Aspect ratio image */}
+                <div className="w-full aspect-square bg-gray-100 relative">
+                  <img
+                    src={getImagePath(member.image) || PLACEHOLDER_IMG}
+                    alt={member.name}
+                    className="absolute inset-0 w-full h-full object-cover object-center"
+                  />
+                </div>
+                <div className="p-4 flex flex-col flex-grow bg-gray-50/50">
+                  <span className="text-base font-bold text-blue-900 mb-1">{member.name}</span>
+                  <span className="text-sm text-gray-600 italic mt-auto">{member.place}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 

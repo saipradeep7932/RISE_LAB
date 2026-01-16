@@ -21,7 +21,7 @@ const Navbar = () => {
       dropdown: [
         { name: 'Methods', path: '/research/methods' },
         { name: 'Mechanisms', path: '/research/mechanisms' },
-        { name: 'Materials Path', path: '/research/materials-path' },
+        { name: 'Materials', path: '/research/materials-path' },
       ]
     },
     { name: 'Publications', path: '/publications' },
