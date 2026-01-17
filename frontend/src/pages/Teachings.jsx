@@ -205,89 +205,138 @@ const Teachings = () => {
   ];
 
   // --- Component ---
-  const TeachingSection = ({ title, subtitle, items }) => (
-    <section className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-10">
-      <div className="bg-gray-50/80 px-6 py-4 border-b border-gray-200">
-        <h2 className="text-xl font-bold text-slate-800 border-l-4 border-blue-800 pl-3 leading-tight">{title}</h2>
-        {subtitle && <p className="text-sm text-slate-600 font-medium mt-1 pl-4">{subtitle}</p>}
-      </div>
-      <div className="divide-y divide-gray-100">
-        {items.length > 0 ? (
-          items.map((item, idx) => (
-            <div
-              key={idx}
-              className={`px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors duration-200 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'} hover:bg-blue-50/60`}
-            >
-              <span className="text-base font-medium text-slate-700 leading-snug pr-4">
-                {item.title}
-              </span>
-              <div className="flex gap-3 flex-shrink-0 self-start md:self-center">
-                <a
-                  href={item.view}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-4 py-2 border border-blue-600 text-blue-700 rounded-md text-sm font-semibold hover:bg-blue-50 transition-colors shadow-sm"
-                >
-                  <Eye size={16} /> View
-                </a>
-                <a
-                  href={item.download}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-blue-800 text-white rounded-md text-sm font-semibold hover:bg-blue-900 transition-colors shadow-sm"
-                >
-                  <Download size={16} /> Download
-                </a>
+  const TeachingSection = ({ title, subtitle, items, themeIndex = 0 }) => {
+
+    // Academic Color Palette Cycler
+    const themes = [
+      { // 0: Indigo (Primary)
+        accent: 'border-indigo-800',
+        headerBg: 'bg-gradient-to-r from-indigo-50 to-white',
+        titleText: 'text-indigo-900',
+        rowTint: 'bg-indigo-50/30'
+      },
+      { // 1: Teal (Secondary)
+        accent: 'border-teal-600',
+        headerBg: 'bg-gradient-to-r from-teal-50 to-white',
+        titleText: 'text-teal-900',
+        rowTint: 'bg-teal-50/30'
+      },
+      { // 2: Amber (Accent 1)
+        accent: 'border-amber-500',
+        headerBg: 'bg-gradient-to-r from-amber-50 to-white',
+        titleText: 'text-amber-900',
+        rowTint: 'bg-amber-50/30'
+      },
+      { // 3: Emerald (Accent 2)
+        accent: 'border-emerald-600',
+        headerBg: 'bg-gradient-to-r from-emerald-50 to-white',
+        titleText: 'text-emerald-900',
+        rowTint: 'bg-emerald-50/30'
+      },
+      { // 4: Cyan (Neutral/Cool)
+        accent: 'border-cyan-700',
+        headerBg: 'bg-gradient-to-r from-cyan-50 to-white',
+        titleText: 'text-cyan-900',
+        rowTint: 'bg-cyan-50/30'
+      }
+    ];
+
+    const theme = themes[themeIndex % themes.length];
+
+    return (
+      <section className={`bg-white rounded-xl shadow-md border border-gray-100/80 overflow-hidden mb-12 hover:shadow-lg transition-shadow duration-300`}>
+        <div className={`${theme.headerBg} px-8 py-6 border-b border-gray-100 flex flex-col relative`}>
+          <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${theme.accent.replace('border', 'bg')}`}></div>
+          <h2 className={`text-2xl font-bold ${theme.titleText} tracking-tight`}>{title}</h2>
+          {subtitle && <p className="text-sm text-slate-500 font-medium mt-1 uppercase tracking-wider">{subtitle}</p>}
+        </div>
+
+        <div className="divide-y divide-gray-100/80">
+          {items.length > 0 ? (
+            items.map((item, idx) => (
+              <div
+                key={idx}
+                className={`px-8 py-5 flex flex-col md:flex-row md:items-center justify-between gap-6 group transition-colors duration-300 ${idx % 2 === 0 ? 'bg-white' : theme.rowTint} hover:bg-white hover:shadow-inner`}
+              >
+                <span className="text-base font-medium text-slate-700 leading-snug pr-4 group-hover:text-slate-900 transition-colors">
+                  {item.title}
+                </span>
+                <div className="flex gap-4 flex-shrink-0 self-start md:self-center">
+                  {/* View: Teal/Cyan Outline */}
+                  <a
+                    href={item.view}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-5 py-2 border border-teal-600 text-teal-700 rounded-lg text-sm font-semibold hover:bg-teal-50 hover:text-teal-800 transition-all shadow-sm"
+                  >
+                    <Eye size={16} /> View
+                  </a>
+                  {/* Download: Solid Indigo */}
+                  <a
+                    href={item.download}
+                    className="flex items-center gap-2 px-5 py-2 bg-indigo-700 text-white rounded-lg text-sm font-semibold hover:bg-indigo-800 hover:shadow-md transition-all shadow-sm"
+                  >
+                    <Download size={16} /> Download
+                  </a>
+                </div>
               </div>
+            ))
+          ) : (
+            <div className="p-10 text-slate-400 italic text-center text-sm">
+              No materials listed.
             </div>
-          ))
-        ) : (
-          <div className="p-8 text-slate-400 italic text-center text-sm">
-            No materials listed.
-          </div>
-        )}
-      </div>
-    </section>
-  );
+          )}
+        </div>
+      </section>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 py-12 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Lecture Notes</h1>
-          <p className="mt-2 text-lg text-slate-600 max-w-2xl">Access course materials, presentations, and reference documents.</p>
+      <div className="bg-white border-b border-slate-200 py-16 shadow-sm relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-teal-500 to-amber-500"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <h1 className="text-5xl font-extrabold text-slate-900 tracking-tight mb-3">Lecture Notes</h1>
+          <p className="text-xl text-slate-500 max-w-2xl font-light">Comprehensive course materials, presentations, and reference documents.</p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-        {/* Section 1 */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-10">
+        {/* Section 1: Indigo */}
         <TeachingSection
           title="Physical Metallurgy"
           subtitle="Materials Science & Engineering"
           items={physicalMetallurgy}
+          themeIndex={0}
         />
 
-        {/* Section 2 */}
+        {/* Section 2: Teal */}
         <TeachingSection
           title="Heat Treatment"
           items={heatTreatment}
+          themeIndex={1}
         />
 
-        {/* Section 3 */}
+        {/* Section 3: Amber */}
         <TeachingSection
           title="Phase Transformations"
           items={phaseTransformations}
+          themeIndex={2}
         />
 
-        {/* Section 4 */}
+        {/* Section 4: Emerald */}
         <TeachingSection
           title="Electron Microscopy and Microanalysis"
           items={electronMicroscopy}
+          themeIndex={3}
         />
 
-        {/* Section 5 */}
+        {/* Section 5: Cyan */}
         <TeachingSection
           title="Laboratory Workbooks"
           items={labWorkbooks}
+          themeIndex={4}
         />
       </div>
     </div>
