@@ -6,7 +6,16 @@ const teamImages = import.meta.glob('../assets/team/*.{png,jpg,jpeg,svg}', { eag
 
 const getImagePath = (filename) => {
   const key = `../assets/team/${filename}`;
-  return teamImages[key] || null;
+
+  if (teamImages[key]) {
+    return teamImages[key];
+  }
+
+  // Silent fallback for case-insensitivity
+  const lowerKey = key.toLowerCase();
+  const foundKey = Object.keys(teamImages).find(k => k.toLowerCase() === lowerKey);
+
+  return foundKey ? teamImages[foundKey] : null;
 };
 
 // Fallback image path (make sure this exists or use a robust fallback)
@@ -57,17 +66,17 @@ const Team = () => {
   ];
 
   const btechStudents = [
-    { name: "Prerana", batch: "2022–2026 [MME]", area: "Brazing of dissimilar Metals", image: "placeholder.jpg" },
-    { name: "Paidi Sathwika", batch: "2022–2026 [MME]", area: "Role of retained austenite in Medium Mn steels", image: "placeholder.jpg" },
-    { name: "Mudu Narendra Nayak", batch: "2022–2026 [MME]", area: "Archeometallurgical Investigation of Ancient Sword: Microstructure and Manufacturing", image: "placeholder.jpg" },
-    { name: "Banoth Deepak Teja", batch: "2022–2026 [MME]", area: "Comparative Study of Mechanical Performance of Gray and Ductile Cast iron Components Manufactured Via Lost Foam and Sand Mould Castings", image: "placeholder.jpg" }
+    { name: "Prerana", batch: "2022–2026 [MME]", area: "Brazing of dissimilar Metals", image: "prerana.jpg" },
+    { name: "Paidi Sathwika", batch: "2022–2026 [MME]", area: "Role of retained austenite in Medium Mn steels", image: "paidi_sathwika.jpg" },
+    { name: "Mudu Narendra Nayak", batch: "2022–2026 [MME]", area: "Archeometallurgical Investigation of Ancient Sword: Microstructure and Manufacturing", image: "mudu_narendra_nayak.jpg" },
+    { name: "Banoth Deepak Teja", batch: "2022–2026 [MME]", area: "Comparative Study of Mechanical Performance of Gray and Ductile Cast iron Components Manufactured Via Lost Foam and Sand Mould Castings", image: "banoth_deepak_teja.jpg" }
   ];
 
   const alumni = [
-    { name: "Mr. Vishnu Prasad (Intern)", place: "Current place: IIT Madras", image: "placeholder.jpg" },
-    { name: "Mr. Shashi Shekhar Prajapati (Intern)", place: "Current place: UNO Minda, Gujarat", image: "placeholder.jpg" },
-    { name: "Ms. Sejal Tandekar (Intern)", place: "Current place: O.P. Jindal University", image: "placeholder.jpg" },
-    { name: "Mr. Rahul Kumar Sahu (Intern)", place: "Current place: O.P. Jindal University", image: "placeholder.jpg" }
+    { name: "Mr. Vishnu Prasad (Intern)", place: "Current place: IIT Madras", image: "vishnu_prasad.jpg" },
+    { name: "Mr. Shashi Shekhar Prajapati (Intern)", place: "Current place: UNO Minda, Gujarat", image: "shashi_shekhar_prajapati.jpg" },
+    { name: "Ms. Sejal Tandekar (Intern)", place: "Current place: O.P. Jindal University", image: "sejal_tandekar.jpg" },
+    { name: "Mr. Rahul Kumar Sahu (Intern)", place: "Current place: O.P. Jindal University", image: "rahul_kumar_sahu.jpg" }
   ];
 
   return (
@@ -114,9 +123,9 @@ const Team = () => {
           <div className="flex flex-col gap-8">
             {researchStaff.map((staff, idx) => (
               <div key={idx} className="bg-white rounded-xl shadow-md border border-gray-100 p-8 flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/4 flex-shrink-0 flex justify-center md:justify-start">
+                <div className="md:w-1/3 flex-shrink-0 flex justify-center md:justify-start">
                   {/* Large Avatar 1:1 */}
-                  <div className="w-48 h-48 bg-gray-200 rounded-lg overflow-hidden border-4 border-gray-50 shadow-sm relative">
+                  <div className="w-64 h-64 bg-gray-200 rounded-lg overflow-hidden border-4 border-gray-50 shadow-sm relative">
                     <img
                       src={getImagePath(staff.image) || PLACEHOLDER_IMG}
                       alt={staff.name}
@@ -124,7 +133,7 @@ const Team = () => {
                     />
                   </div>
                 </div>
-                <div className="md:w-3/4">
+                <div className="md:w-2/3">
                   <h3 className="text-2xl font-bold text-blue-900 mb-1">{staff.name}</h3>
                   <p className="text-lg font-medium text-blue-600 mb-2">{staff.role}</p>
                   <div className="mb-4">
@@ -144,8 +153,8 @@ const Team = () => {
           <div className="flex flex-col gap-10">
             {phdStudents.map((student, idx) => (
               <div key={idx} className="bg-white rounded-xl shadow-md border border-gray-100 p-8 flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/4 flex-shrink-0 flex justify-center md:justify-start">
-                  <div className="w-48 h-48 bg-gray-200 rounded-lg overflow-hidden border-4 border-gray-50 shadow-sm relative">
+                <div className="md:w-1/3 flex-shrink-0 flex justify-center md:justify-start">
+                  <div className="w-64 h-64 bg-gray-200 rounded-lg overflow-hidden border-4 border-gray-50 shadow-sm relative">
                     <img
                       src={getImagePath(student.image) || PLACEHOLDER_IMG}
                       alt={student.name}
@@ -153,7 +162,7 @@ const Team = () => {
                     />
                   </div>
                 </div>
-                <div className="md:w-3/4">
+                <div className="md:w-2/3">
                   <h3 className="text-2xl font-bold text-blue-900 mb-1">{student.name}</h3>
                   <p className="text-lg font-medium text-blue-600 mb-2">{student.role}</p>
                   <div className="mb-4">
