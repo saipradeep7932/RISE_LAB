@@ -90,6 +90,20 @@ const Team = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
 
+        {/* --- GROUP PHOTO (New) --- */}
+        <section className="w-full">
+          <div className="w-full h-auto md:h-[500px] rounded-xl overflow-hidden shadow-lg border border-gray-200 relative">
+            <img
+              src={getImagePath('group.jpg') || PLACEHOLDER_IMG || "https://placehold.co/1200x500?text=Team+Group+Photo"}
+              alt="RISE Lab Team"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+              <h2 className="text-white text-2xl font-bold">RISE Lab Team</h2>
+            </div>
+          </div>
+        </section>
+
         {/* --- SECTION 1: GROUP HEAD --- */}
         <section>
           <h2 className="text-2xl font-bold text-gray-900 border-l-4 border-blue-600 pl-3 mb-8 uppercase">Group Head</h2>

@@ -1,15 +1,43 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Search, ChevronDown } from 'lucide-react';
+import { Menu, X, Search, ChevronDown, Linkedin, Instagram, Mail, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const location = useLocation();
-  const navigate = useNavigate();
   const [researchDropdownOpen, setResearchDropdownOpen] = useState(false);
+
+  // --- Search Logic ---
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Search Data
+  const searchableContent = [
+    { title: 'Home', path: '/' },
+    { title: 'About Us', path: '/about' },
+    { title: 'Research', path: '/research' },
+    { title: 'Publications', path: '/publications' },
+    { title: 'Projects Funded', path: '/projects-funded' },
+    { title: 'Resources', path: '/teachings' }, // Renamed from Teachings
+    { title: 'Positions', path: '/positions' },
+    { title: 'Equipment', path: '/equipment' }, // New Route
+    { title: 'Team', path: '/team' },
+    { title: 'Gallery', path: '/gallery' },
+    { title: 'Contact Us', path: '/contact' },
+    { title: 'Facilities', path: '/facilities' },
+  ];
+
+  const filteredResults = searchableContent.filter(item =>
+    item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearchNavigate = (path) => {
+    navigate(path);
+    setIsSearchFocused(false);
+    setSearchQuery('');
+  };
 
   // --- Navigation Data ---
   const links = [
@@ -26,51 +54,113 @@ const Navbar = () => {
     },
     { name: 'Publications', path: '/publications' },
     { name: 'Projects Funded', path: '/projects-funded' },
-    { name: 'Teachings', path: '/teachings' },
+    { name: 'Resources', path: '/teachings' }, // Renamed
     { name: 'Positions', path: '/positions' },
+    { name: 'Equipment', path: '/equipment' }, // Added
     { name: 'Gallery', path: '/gallery' },
     { name: 'Contact Us', path: '/contact' },
   ];
-
-  // --- Search Logic ---
-  const searchableContent = [
-    { title: 'Home', path: '/' },
-    { title: 'About Us', path: '/about' },
-    { title: 'Research - Methods', path: '/research/methods' },
-    { title: 'Research - Mechanisms', path: '/research/mechanisms' },
-    { title: 'Research - Materials Path', path: '/research/materials-path' },
-    { title: 'Publications', path: '/publications' },
-    { title: 'Projects Funded', path: '/projects-funded' },
-    { title: 'Teachings', path: '/teachings' },
-    { title: 'Team', path: '/team' },
-    { title: 'Positions', path: '/positions' },
-    { title: 'Gallery', path: '/gallery' },
-    { title: 'Facilities', path: '/facilities' },
-    { title: 'Equipment', path: '/equipment' },
-    { title: 'Contact', path: '/contact' },
-  ];
-
-  const filteredResults = searchableContent.filter(item =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const handleSearchNavigate = (path) => {
-    navigate(path);
-    setIsSearchOpen(false);
-    setSearchQuery('');
-  };
 
   const isActive = (path) => {
     if (path === '/' && location.pathname !== '/') return false;
     return location.pathname.startsWith(path);
   };
 
+  const getLogo = () => {
+    // Attempt dynamic load or fallback
+    return new URL('../../assets/header/logo.png', import.meta.url).href;
+  };
+
   return (
     <>
-      <nav className="bg-iitrpr-blue text-white shadow-lg sticky top-0 z-50">
+      {/* =========================================================================
+          PART 1: TOP HEADER (New)
+      ========================================================================= */}
+      <div className="bg-slate-50 border-b border-gray-200 py-2 hidden md:block">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-12">
+
+          {/* LEFT: Logo */}
+          <div className="flex items-center">
+            <img
+              src={getLogo()}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://placehold.co/150x50?text=LOGO"; // Fallback
+              }}
+              alt="Institute Logo"
+              className="h-10 w-auto object-contain mr-4"
+            />
+          </div>
+
+          {/* RIGHT: Socials, Email, Search */}
+          <div className="flex items-center gap-6">
+            {/* Social Icons (Placeholders) */}
+            <div className="flex items-center gap-3 text-gray-500">
+              <a href="#" className="hover:text-blue-600 transition-colors"><Linkedin size={18} /></a>
+              <a href="#" className="hover:text-pink-600 transition-colors"><Instagram size={18} /></a>
+              <a href="#" className="hover:text-emerald-600 transition-colors"><Globe size={18} /></a>
+            </div>
+
+            {/* Email Button */}
+            <a href="mailto:lava@iitrpr.ac.in" className="flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1.5 rounded-full text-xs font-bold hover:bg-blue-200 transition-colors">
+              <Mail size={14} /> Email Us
+            </a>
+
+            {/* Search Bar */}
+            <div className="relative">
+              <div className="flex items-center bg-white border border-gray-300 rounded-full px-3 py-1 focus-within:ring-2 focus-within:ring-blue-400 focus-within:border-transparent w-64">
+                <input
+                  type="text"
+                  placeholder="Search site..."
+                  className="bg-transparent border-none outline-none text-sm w-full text-gray-700 placeholder-gray-400"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => setIsSearchFocused(true)}
+                  onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)} // Delay for click handling
+                />
+                <button className="text-gray-400 hover:text-blue-600">
+                  <Search size={16} />
+                </button>
+              </div>
+
+              {/* Search Dropdown Results */}
+              <AnimatePresence>
+                {isSearchFocused && searchQuery && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute top-full right-0 mt-2 w-72 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50 max-h-64 overflow-y-auto"
+                  >
+                    {filteredResults.length > 0 ? (
+                      filteredResults.map((result, idx) => (
+                        <div
+                          key={idx}
+                          className="px-4 py-2 hover:bg-blue-50 cursor-pointer text-sm text-gray-700 flex flex-col"
+                          onMouseDown={() => handleSearchNavigate(result.path)} // Changed to onMouseDown to fire before blur
+                        >
+                          <span className="font-medium">{result.title}</span>
+                          <span className="text-xs text-gray-400">{result.path}</span>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="px-4 py-2 text-sm text-gray-400 text-center">No results found</div>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* =========================================================================
+          PART 2: MAIN NAVIGATION (Existing, updated routes)
+      ========================================================================= */}
+      <nav className="bg-iitrpr-blue text-white shadow-lg sticky top-0 z-40 bg-[#1e3a8a]"> {/* Added explicit bg color code fallback/tailwind class */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20">
-            {/* Logo */}
+            {/* Logo/Title */}
             <div className="flex items-center flex-shrink-0">
               <Link to="/" className="flex flex-col">
                 <span className="text-2xl font-bold tracking-wide">RISE LAB</span>
@@ -116,27 +206,14 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
-
-              {/* Search Icon */}
-              <button
-                onClick={() => setIsSearchOpen(true)}
-                className="p-2 ml-2 rounded-full hover:bg-blue-800 text-gray-200 hover:text-white transition-colors"
-                aria-label="Search"
-              >
-                <Search size={20} />
-              </button>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - Also includes Search Toggle for Mobile */}
             <div className="xl:hidden flex items-center space-x-4">
-              <button
-                onClick={() => setIsSearchOpen(true)}
-                className="p-2 rounded-full hover:bg-blue-800 text-gray-200 hover:text-white transition-colors"
-                aria-label="Search"
-              >
-                <Search size={22} />
-              </button>
-
+              {/* Mobile Search is complicated with double headers, keeping it simple inside menu or separate toggle if needed. 
+                   For now, removing the pure search toggle as desktop has it in top bar. 
+                   Mobile users might need access to it. Adding a simple search link in mobile menu is easier.
+               */}
               <button
                 type="button"
                 aria-label="Toggle menu"
@@ -153,6 +230,30 @@ const Navbar = () => {
         {isOpen && (
           <div className="xl:hidden bg-blue-900 border-t border-blue-800">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              {/* Mobile Search Input */}
+              <div className="px-3 pb-2">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="w-full px-3 py-2 rounded text-gray-900 text-sm"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                {searchQuery && (
+                  <div className="bg-white mt-1 rounded shadow-lg max-h-40 overflow-y-auto">
+                    {filteredResults.map((result, idx) => (
+                      <div
+                        key={idx}
+                        className="px-3 py-2 text-sm text-gray-800 border-b border-gray-100"
+                        onClick={() => { handleSearchNavigate(result.path); setIsOpen(false); }}
+                      >
+                        {result.title}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               {links.map((link) => (
                 <div key={link.name}>
                   <Link
@@ -165,7 +266,7 @@ const Navbar = () => {
                   >
                     {link.name}
                   </Link>
-                  {/* Mobile Dropdown Sub-links */}
+                  {/* Mobile Dropdown */}
                   {link.dropdown && (
                     <div className="pl-6 space-y-1">
                       {link.dropdown.map((dropItem) => (
@@ -186,63 +287,6 @@ const Navbar = () => {
           </div>
         )}
       </nav>
-
-      {/* --- Global Search Modal --- */}
-      <AnimatePresence>
-        {isSearchOpen && (
-          <div className="fixed inset-0 z-[100] overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-            <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-              <div className="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" onClick={() => setIsSearchOpen(false)}></div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-                className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full"
-              >
-                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                  <div className="flex items-center border-b-2 border-blue-500 pb-2 mb-4">
-                    <Search className="text-blue-500 mr-2" />
-                    <input
-                      type="text"
-                      autoFocus
-                      placeholder="Search pages, topics..."
-                      className="w-full text-lg outline-none text-gray-700"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                    <button onClick={() => setIsSearchOpen(false)} className="text-gray-400 hover:text-gray-600">
-                      <X size={20} />
-                    </button>
-                  </div>
-
-                  <div className="mt-2 max-h-60 overflow-y-auto">
-                    {searchQuery.trim() === '' ? (
-                      <p className="text-gray-400 text-sm text-center py-4">Start typing to search...</p>
-                    ) : filteredResults.length > 0 ? (
-                      <ul className="divide-y divide-gray-100">
-                        {filteredResults.map((result, idx) => (
-                          <li
-                            key={idx}
-                            onClick={() => handleSearchNavigate(result.path)}
-                            className="py-2 px-2 hover:bg-blue-50 cursor-pointer rounded transition-colors text-gray-700"
-                          >
-                            {result.title}
-                            <span className="block text-xs text-gray-400">{result.path}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="text-gray-500 text-sm text-center py-4">No results found.</p>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
     </>
   );
 };
