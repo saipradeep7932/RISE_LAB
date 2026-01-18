@@ -8,7 +8,7 @@ const Home = () => {
 
   useEffect(() => {
     const loadImages = async () => {
-      const modules = import.meta.glob('../assets/highlights/*');
+      const modules = import.meta.glob('../assets/highlights/*.{png,jpg,jpeg,svg,webp}');
       const loadedImages = [];
       for (const path in modules) {
         const mod = await modules[path]();
