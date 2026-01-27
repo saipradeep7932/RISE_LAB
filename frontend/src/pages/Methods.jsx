@@ -6,6 +6,8 @@ import React from 'react';
 import tensileImg from '../assets/methods/tensile_stage.jpg';
 import recyclingImg from '../assets/methods/recycling_machine.jpg';
 
+import { researchMethods } from '../data/researchData';
+
 const Methods = () => {
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-800">
@@ -20,9 +22,9 @@ const Methods = () => {
         <section className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden p-8">
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="md:w-1/2">
-              <h2 className="text-2xl font-bold text-blue-800 mb-4">Tensile and Compression Stage for Scanning Electron Microscopy</h2>
+              <h2 className="text-2xl font-bold text-blue-800 mb-4">{researchMethods[0].title}</h2>
               <p className="text-gray-700 leading-relaxed text-lg text-justify">
-                The "Tensile and Compression Stage for Scanning Electron Microscopy" is a specialized device designed to perform mechanical testing, such as tensile and compressive loading, within the confines of a scanning electron microscope (SEM). This innovative apparatus allows for precise manipulation of small-scale test specimens under load while maintaining stability and alignment to facilitate high-resolution imaging and analysis of deformation processes at the microscale.
+                {researchMethods[0].content}
               </p>
             </div>
             <div className="md:w-1/2 flex justify-center">
@@ -37,9 +39,9 @@ const Methods = () => {
         <section className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden p-8">
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="md:w-1/2">
-              <h2 className="text-2xl font-bold text-blue-800 mb-4">Solid State Recycling Machine</h2>
+              <h2 className="text-2xl font-bold text-blue-800 mb-4">{researchMethods[1].title}</h2>
               <p className="text-gray-700 leading-relaxed text-lg text-justify">
-                The newly designed recycling machine is engineered for continuous operation and can efficiently process non-ferrous metal scrap into high-quality bulk materials such as wires, rods, and plates. This innovative machine works based on the principle of Friction stir process and extrusion, and ensures minimal energy consumption and environmental impact while maintaining consistent output quality.
+                {researchMethods[1].content}
               </p>
             </div>
             <div className="md:w-1/2 flex justify-center">

@@ -3,9 +3,18 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Search, ChevronDown, Linkedin, Instagram, Mail, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { newsItems, motiveText, aboutText } from '../../data/homeData';
+import { groupHead, researchStaff, phdStudents, btechStudents, alumni } from '../../data/teamData';
+import { researchMechanisms, researchMaterials, researchMethods } from '../../data/researchData';
+import { equipmentList } from '../../data/equipmentData';
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [researchDropdownOpen, setResearchDropdownOpen] = useState(false);
+
+
+
+  // ...
 
   // --- Search Logic ---
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,25 +22,108 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Search Data
-  const searchableContent = [
-    { title: 'Home', path: '/' },
-    { title: 'About Us', path: '/about' },
-    { title: 'Research', path: '/research' },
-    { title: 'Publications', path: '/publications' },
-    { title: 'Projects Funded', path: '/projects-funded' },
-    { title: 'Resources', path: '/teachings' }, // Renamed from Teachings
-    { title: 'Positions', path: '/positions' },
-    { title: 'Equipment', path: '/equipment' }, // New Route
-    { title: 'Team', path: '/team' },
-    { title: 'Gallery', path: '/gallery' },
-    { title: 'Contact Us', path: '/contact' },
-    { title: 'Facilities', path: '/facilities' },
-  ];
+  // --- DYNAMIC SEARCH INDEX BUILDER ---
+  // Memoize this if performance becomes an issue, but for this size it's fine.
+  const buildSearchIndex = () => {
+    const index = [];
 
-  const filteredResults = searchableContent.filter(item =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+    // 1. Home Page
+    index.push({
+      title: 'Home - Motive',
+      path: '/',
+      content: `${motiveText.heading} ${motiveText.content}`
+    });
+    index.push({
+      title: 'Home - About',
+      path: '/',
+      content: `${aboutText.heading} ${aboutText.content.join(' ')}`
+    });
+    index.push({
+      title: 'Home - News',
+      path: '/',
+      content: newsItems.join(' ')
+    });
+
+    // 2. Team Page
+    // Group Head
+    index.push({
+      title: `Team - ${groupHead.name}`,
+      path: '/team',
+      content: `${groupHead.name} ${groupHead.title} ${groupHead.interest} ${groupHead.dept}`
+    });
+    // Staff & Students (Helper)
+    const addPerson = (p) => {
+      index.push({
+        title: `Team - ${p.name}`,
+        path: '/team',
+        content: `${p.name} ${p.role || ''} ${p.area || ''} ${p.bio || ''} ${p.batch || ''}`
+      });
+    };
+    researchStaff.forEach(addPerson);
+    phdStudents.forEach(addPerson);
+    btechStudents.forEach(addPerson);
+    alumni.forEach(addPerson);
+
+    // 3. Research Pages
+    // Mechanisms
+    researchMechanisms.forEach(item => {
+      index.push({
+        title: `Research - ${item.title}`,
+        path: '/research/mechanisms',
+        content: `${item.title} ${item.content}`
+      });
+    });
+    // Materials
+    researchMaterials.forEach(item => {
+      index.push({
+        title: `Research - ${item.title}`,
+        path: '/research/materials-path',
+        content: `${item.title} ${item.content}`
+      });
+    });
+    // Methods
+    researchMethods.forEach(item => {
+      index.push({
+        title: `Research - ${item.title}`,
+        path: '/research/methods',
+        content: `${item.title} ${item.content}`
+      });
+    });
+
+    // 4. Equipment Page
+    equipmentList.forEach(item => {
+      index.push({
+        title: `Equipment - ${item.name}`,
+        path: '/equipment',
+        content: `${item.name} ${item.category} ${item.description || ''}`
+      });
+    });
+
+    // 5. Static Pages (Content not yet extracted to data files, but essential for navigation)
+    const staticPages = [
+      { title: 'Publications', path: '/publications', content: 'Journal Papers, Conference Proceedings, Patents' },
+      { title: 'Projects Funded', path: '/projects-funded', content: 'Sponsored Research, Consultancy, Grants' },
+      { title: 'Resources', path: '/teachings', content: 'Course Materials, Lectures' },
+      { title: 'Positions', path: '/positions', content: 'Join Us, PhD Openings, JRF, Internships' },
+      { title: 'Facilities', path: '/facilities', content: 'Infrastructure, Labs' },
+      { title: 'Gallery', path: '/gallery', content: 'Photos, Events' },
+      { title: 'Contact Us', path: '/contact', content: 'Address, Email, Phone, Location' },
+    ];
+    staticPages.forEach(p => index.push(p));
+
+    return index;
+  };
+
+  const siteContentIndex = buildSearchIndex();
+
+  const filteredResults = siteContentIndex.filter(item => {
+    if (!searchQuery) return false;
+    const query = searchQuery.toLowerCase();
+    return (
+      item.title.toLowerCase().includes(query) ||
+      item.content.toLowerCase().includes(query)
+    );
+  });
 
   const handleSearchNavigate = (path) => {
     navigate(path);

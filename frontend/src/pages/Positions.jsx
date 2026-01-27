@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import JoinLabModal from '../components/forms/JoinLabModal';
+import { ArrowRight } from 'lucide-react';
 
 const Positions = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalPosition, setModalPosition] = useState('Ph.D. Student');
 
-  const PositionSection = ({ title, themeColor, children }) => {
-    // Theme mapping
+  const handleApply = (position) => {
+    setModalPosition(position);
+    setIsModalOpen(true);
+  };
+
+  const PositionSection = ({ title, themeColor, children, onApply }) => {
+    // ... (theme mapping same as before)
     const themes = {
       indigo: {
         border: 'border-indigo-600',
@@ -11,6 +20,7 @@ const Positions = () => {
         headerText: 'text-indigo-900',
         bodyText: 'text-slate-700',
         accentBg: 'bg-indigo-100',
+        btn: 'bg-indigo-600 hover:bg-indigo-700',
       },
       teal: {
         border: 'border-teal-600',
@@ -18,6 +28,7 @@ const Positions = () => {
         headerText: 'text-teal-900',
         bodyText: 'text-slate-700',
         accentBg: 'bg-teal-100',
+        btn: 'bg-teal-600 hover:bg-teal-700',
       },
       emerald: {
         border: 'border-emerald-600',
@@ -25,6 +36,7 @@ const Positions = () => {
         headerText: 'text-emerald-900',
         bodyText: 'text-slate-700',
         accentBg: 'bg-emerald-100',
+        btn: 'bg-emerald-600 hover:bg-emerald-700',
       },
       amber: {
         border: 'border-amber-500',
@@ -32,6 +44,7 @@ const Positions = () => {
         headerText: 'text-amber-900',
         bodyText: 'text-slate-700',
         accentBg: 'bg-amber-100',
+        btn: 'bg-amber-600 hover:bg-amber-700',
       },
       cyan: {
         border: 'border-cyan-600',
@@ -39,6 +52,7 @@ const Positions = () => {
         headerText: 'text-cyan-900',
         bodyText: 'text-slate-700',
         accentBg: 'bg-cyan-100',
+        btn: 'bg-cyan-600 hover:bg-cyan-700',
       }
     };
 
@@ -46,8 +60,16 @@ const Positions = () => {
 
     return (
       <section className={`bg-white rounded-xl shadow-md border-t-4 ${t.border} overflow-hidden hover:shadow-lg transition-shadow duration-300`}>
-        <div className={`${t.bg} px-8 py-4 border-b border-gray-100`}>
+        <div className={`${t.bg} px-8 py-4 border-b border-gray-100 flex justify-between items-center flex-wrap gap-4`}>
           <h2 className={`text-2xl font-bold ${t.headerText}`}>{title}</h2>
+          {onApply && (
+            <button
+              onClick={onApply}
+              className={`${t.btn} text-white px-5 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 transition-transform active:scale-95 shadow-md`}
+            >
+              Apply Now <ArrowRight size={16} />
+            </button>
+          )}
         </div>
         <div className="p-8 space-y-4">
           {children}
@@ -75,7 +97,11 @@ const Positions = () => {
         </div>
 
         {/* SECTION 1: Post-Doctoral Positions */}
-        <PositionSection title="Post-Doctoral Positions" themeColor="indigo">
+        <PositionSection
+          title="Post-Doctoral Positions"
+          themeColor="indigo"
+          onApply={() => handleApply("Post-Doctoral Fellow")}
+        >
           <p className="text-lg leading-relaxed mb-4">
             Our lab welcomes highly motivated and enthusiastic postdoctoral students interested in working in Physical and Mechanical Metallurgy.
           </p>
@@ -96,7 +122,11 @@ const Positions = () => {
         </PositionSection>
 
         {/* SECTION 2: Ph.D. Students */}
-        <PositionSection title="Ph.D. Students" themeColor="teal">
+        <PositionSection
+          title="Ph.D. Students"
+          themeColor="teal"
+          onApply={() => handleApply("Ph.D. Student")}
+        >
           <p className="text-lg leading-relaxed mb-4">
             Our lab has openings for motivated and enthusiastic Ph.D. students interested in working in Physical Metallurgy / Mechanical Metallurgy.
           </p>
@@ -113,7 +143,11 @@ const Positions = () => {
         </PositionSection>
 
         {/* SECTION 3: M.Tech. Thesis */}
-        <PositionSection title="M.Tech. Thesis" themeColor="emerald">
+        <PositionSection
+          title="M.Tech. Thesis"
+          themeColor="emerald"
+          onApply={() => handleApply("M.Tech. Thesis")}
+        >
           <p className="text-lg leading-relaxed mb-6 font-medium text-emerald-900">
             The RISE lab welcomes highly motivated M.Tech. students to engage in cutting-edge research.
           </p>
@@ -142,7 +176,11 @@ const Positions = () => {
         </PositionSection>
 
         {/* SECTION 4: B.Tech. Thesis */}
-        <PositionSection title="B.Tech. Thesis" themeColor="amber">
+        <PositionSection
+          title="B.Tech. Thesis"
+          themeColor="amber"
+          onApply={() => handleApply("B.Tech. Thesis")}
+        >
           <p className="text-lg leading-relaxed mb-6 font-medium text-amber-900">
             The RISE lab invites motivated B.Tech. students to contribute to ongoing research projects.
           </p>
@@ -171,7 +209,11 @@ const Positions = () => {
         </PositionSection>
 
         {/* SECTION 5: Summer Trainee */}
-        <PositionSection title="Summer Trainee" themeColor="cyan">
+        <PositionSection
+          title="Summer Trainee"
+          themeColor="cyan"
+          onApply={() => handleApply("Summer Trainee")}
+        >
           <div className="flex items-center gap-3 mb-6 bg-cyan-50/50 w-fit px-4 py-2 rounded-full border border-cyan-100">
             <span className="font-bold text-cyan-800">Duration:</span>
             <span className="text-slate-700 font-medium">2 months (minimum)</span>
@@ -192,6 +234,12 @@ const Positions = () => {
         </PositionSection>
 
       </div>
+
+      <JoinLabModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        defaultPosition={modalPosition}
+      />
     </div>
   );
 };

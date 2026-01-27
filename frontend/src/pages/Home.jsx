@@ -2,9 +2,32 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Mail, Phone, MapPin, X } from 'lucide-react';
 
+import { newsItems, motiveText, aboutText } from '../data/homeData';
+
 const Home = () => {
-  // --- 1. Dynamic Image Loading (Highlights) ---
+  // --- 1. Dynamic Image Loading ---
   const [images, setImages] = useState([]);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  // --- 2. Refs & State ---
+  const carouselIntervalRef = useRef(null);
+  const carouselTimeoutRef = useRef(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const newsIntervalRef = useRef(null);
+  const newsTimeoutRef = useRef(null);
+  const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
+
+  const [selectedProfileImage, setSelectedProfileImage] = useState(null);
+
+  // Motive Section Refs
+  const motiveSectionRef = useRef(null);
+  const motiveHeadingRef = useRef(null);
+  const motiveEndRef = useRef(null);
+  const [isMotiveActive, setIsMotiveActive] = useState(false);
+
+
+  // --- 3. Effects ---
   useEffect(() => {
     const loadImages = async () => {
       const modules = import.meta.glob('../assets/highlights/*.{png,jpg,jpeg,svg,webp}');
@@ -15,45 +38,13 @@ const Home = () => {
       }
       if (loadedImages.length > 0) {
         setImages(loadedImages);
+        setImagesLoaded(true);
       }
     };
     loadImages();
   }, []);
 
-  // --- Dynamic Image Loading (Home Cards & Profile) ---
-  const homeAssets = import.meta.glob('../assets/home/*.{png,jpg,jpeg,svg,webp}', { eager: true, as: 'url' });
-
-  const getAsset = (name) => {
-    // Try to find the file with any extension
-    for (const ext of ['jpg', 'jpeg', 'png', 'svg', 'webp']) {
-      const key = `../assets/home/${name}.${ext}`;
-      if (homeAssets[key]) return homeAssets[key];
-    }
-    return null; // or a placeholder
-  };
-
-  // --- 2. News Data ---
-  const newsItems = [
-    "RISE Lab has initiated a new consultancy project in collaboration with Pritika Auto Industries Limited, Punjab.",
-    "Dr. Avala Lavakumar’s latest research paper, “Dynamics of Portevin–Le Chatelier Banding Revealed Through Grain Refinement in High-Mn Austenitic Steel: Sequential Overcoming of Necking,” has been accepted in the Journal of Materials Science & Technology.",
-    "Mr. Gedela Santhosh Kumar joined as Ph.D. student in RISE Lab.",
-    "Dr. Avala Lavakumar has been appointed to the Editorial Board of Scientific Reports, a journal from Springer Nature.",
-    "RISE Lab has published a new journal article titled, \"Beyond the Blade: A Microstructural Investigation of an Ancient Indian Steel Sword,\" in Metallography, Microstructure, and Analysis (2025).",
-    "RISE Lab and PMR Lab announced their collaborative publication in the Journal of Environmental Management.",
-    "RISE Lab is seeking highly motivated Ph.D. students to join the research team.",
-    "Dr. Avala Lavakumar selected as Divisional Editor for ASM Handbook Volume 27 – Renewable Materials.",
-    "Mr. T. Vikram joined as Ph.D. student in RISE Lab under ERP.",
-    "Dr. Avala Lavakumar is teaching a new course titled \"Electron Microscopy and Micro-Analysis.\"",
-    "Mr. Gopikrishna Guguloth joined as Junior Research Fellow in RISE Lab.",
-    "Mr. Arun Kumar Patro presented a paper at IIM-ATM 2024 & NMA, Bengaluru.",
-    "Mr. Vishnu Prasad presented a poster at IIM-ATM 2024 & NMA, Bengaluru."
-  ];
-
-  // --- 3. Carousel Logic (Highlights) ---
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const carouselIntervalRef = useRef(null);
-  const carouselTimeoutRef = useRef(null);
-
+  // Carousel Logic
   const startCarousel = () => {
     if (carouselIntervalRef.current) clearInterval(carouselIntervalRef.current);
     carouselIntervalRef.current = setInterval(() => {
@@ -87,16 +78,7 @@ const Home = () => {
     };
   }, [images]);
 
-  // Helper for carousel
-  const getPrevIndex = () => (currentImageIndex - 1 + images.length) % images.length;
-  const getNextIndex = () => (currentImageIndex + 1) % images.length;
-
-
-  // --- 4. News Ticker Logic ---
-  const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
-  const newsIntervalRef = useRef(null);
-  const newsTimeoutRef = useRef(null);
-
+  // News Logic
   const startNewsTicker = () => {
     if (newsIntervalRef.current) clearInterval(newsIntervalRef.current);
     newsIntervalRef.current = setInterval(() => {
@@ -130,61 +112,41 @@ const Home = () => {
     };
   }, []);
 
+  // Motive Observer
+  useEffect(() => {
+    if (!motiveSectionRef.current) return;
 
-  // --- 5. Image Strip Logic (Replaces Logic) ---
-  const [selectedProfileImage, setSelectedProfileImage] = useState(null);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsMotiveActive(entry.isIntersecting);
+      },
+      { threshold: 0, rootMargin: "-80px 0px 0px 0px" } // Exclude sticky header height (80px)
+    );
 
-  // Generate slide data for photo1 to photo10
+    observer.observe(motiveSectionRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // --- Helpers ---
+  const homeAssets = import.meta.glob('../assets/home/*.{png,jpg,jpeg,svg,webp}', { eager: true, as: 'url' });
+  const getAsset = (name) => {
+    for (const ext of ['jpg', 'jpeg', 'png', 'svg', 'webp']) {
+      const key = `../assets/home/${name}.${ext}`;
+      if (homeAssets[key]) return homeAssets[key];
+    }
+    return null;
+  };
+
+  const getPrevIndex = () => (currentImageIndex - 1 + images.length) % images.length;
+  const getNextIndex = () => (currentImageIndex + 1) % images.length;
+
   const profilePhotos = Array.from({ length: 10 }, (_, i) => ({
     id: i + 1,
     src: getAsset(`photo${i + 1}`) || `https://placehold.co/400x800?text=Photo+${i + 1}`,
   }));
-
-
-  // --- 6. Motive Scroll Trigger Logic ---
-  const [isMotiveActive, setIsMotiveActive] = useState(false);
-  const motiveHeadingRef = useRef(null);
-  const motiveEndRef = useRef(null);
-
-  useEffect(() => {
-    if (!motiveHeadingRef.current || !motiveEndRef.current) return;
-
-    // 1. Activate when Heading enters
-    const headingObserver = new IntersectionObserver(
-      ([entry]) => {
-        // Activate if heading is visible
-        if (entry.isIntersecting) {
-          setIsMotiveActive(true);
-        } else {
-          // Deactivate ONLY if we scrolled UP past it (heading is below viewport)
-          if (entry.boundingClientRect.top > 0) {
-            setIsMotiveActive(false);
-          }
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    // 2. Deactivate when End Sentinel enters (scrolling down)
-    const endObserver = new IntersectionObserver(
-      ([entry]) => {
-        // If the end sentinel peeks in from the bottom, we are done.
-        if (entry.isIntersecting) {
-          setIsMotiveActive(false);
-        }
-      },
-      { threshold: 0.0, rootMargin: '0px 0px -100px 0px' } // Adjust for header/visual comfort
-    );
-
-    headingObserver.observe(motiveHeadingRef.current);
-    endObserver.observe(motiveEndRef.current);
-
-    return () => {
-      headingObserver.disconnect();
-      endObserver.disconnect();
-    };
-  }, []);
-
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-gray-800">
@@ -305,7 +267,7 @@ const Home = () => {
         className="relative w-full overflow-hidden py-32 flex items-center justify-center text-center z-10"
         style={{ backgroundColor: isMotiveActive ? 'transparent' : '#0f172a' }} // Fallback bg if image not active
       >
-        <div className="relative z-10 max-w-5xl mx-auto px-4">
+        <div ref={motiveSectionRef} className="relative z-10 max-w-5xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -323,7 +285,7 @@ const Home = () => {
               Our lab is dedicated to pushing the boundaries of materials science through rigorous in-situ deformation studies and advanced microscopy. We aim to bridge the gap between fundamental research and real-world engineering applications, fostering innovation in both modern alloys and the understanding of ancient metallurgical heritage.
             </p>
             {/* SENTINEL FOR DEACTIVATION */}
-            <div ref={motiveEndRef} className="h-1 w-full bg-transparent mt-12 pointer-events-none opacity-0"></div>
+            <div ref={motiveEndRef} className="h-px w-full bg-transparent mt-0 pointer-events-none opacity-0"></div>
           </motion.div>
         </div>
       </section>
