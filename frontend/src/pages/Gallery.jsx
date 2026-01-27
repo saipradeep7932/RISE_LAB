@@ -66,9 +66,9 @@ const Gallery = () => {
   // Helper to render a card
   const GalleryCard = ({ item }) => (
     <div className="group break-inside-avoid mb-6">
-      <div className="relative overflow-hidden rounded-xl shadow-md border border-gray-100 bg-white">
+      <div className="relative overflow-hidden rounded-xl shadow-md border border-rise-ocean/30 bg-rise-frost">
         {/* Fallback placeholder if image missing */}
-        <div className="absolute inset-0 bg-gray-100 flex items-center justify-center text-gray-400 -z-10 h-64">
+        <div className="absolute inset-0 bg-rise-mist flex items-center justify-center text-rise-ocean -z-10 h-64">
           <span className="text-sm italic">Image not found</span>
         </div>
 
@@ -80,20 +80,20 @@ const Gallery = () => {
         />
 
         {/* Overlay on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-rise-deep/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
       </div>
-      <p className="mt-3 text-sm text-slate-700 font-medium leading-relaxed text-center px-2">
+      <p className="mt-3 text-sm text-rise-deep font-medium leading-relaxed text-center px-2">
         {item.caption}
       </p>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
+    <div className="min-h-screen bg-rise-mist font-sans text-rise-deep">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 py-12 shadow-sm">
+      <div className="bg-rise-deep border-b border-rise-ocean py-12 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Gallery</h1>
+          <h1 className="text-4xl font-bold text-white tracking-tight">Gallery</h1>
         </div>
       </div>
 

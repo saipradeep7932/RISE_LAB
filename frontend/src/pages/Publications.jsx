@@ -11,10 +11,10 @@ const AuthorParams = ({ text }) => {
   const parts = text.split(lavaPattern);
 
   return (
-    <span className="font-bold text-gray-900">
+    <span className="font-bold text-rise-deep">
       {parts.map((part, index) => {
         if (part.match(lavaPattern)) {
-          return <span key={index} className="text-blue-700">{part}</span>;
+          return <span key={index} className="text-rise-ocean">{part}</span>;
         }
         return part;
       })}
@@ -34,12 +34,12 @@ const PublicationEntry = ({ id, authors, title, journalInfo, link }) => (
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="italic text-blue-700 hover:underline cursor-pointer"
+          className="italic text-rise-ocean hover:underline hover:text-rise-deep cursor-pointer"
         >
           {title}
         </a>
       ) : (
-        <span className="italic">{title}</span>
+        <span className="italic text-rise-deep">{title}</span>
       )}
       {' '}{journalInfo}
     </div>
@@ -48,7 +48,7 @@ const PublicationEntry = ({ id, authors, title, journalInfo, link }) => (
 
 const Publications = () => {
   return (
-    <div className="min-h-screen bg-gray-50 font-sans text-gray-800">
+    <div className="min-h-screen bg-rise-mist font-sans text-rise-deep">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
 
         {/* --- SECTION 1: PROFILE LINKS ROW (FIXED ASSETS) --- */}
@@ -58,7 +58,7 @@ const Publications = () => {
               href="https://scholar.google.com/citations?user=H_WhrEIAAAAJ&hl=en"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg shadow-sm hover:shadow-md transition-all h-40 flex items-center justify-center p-6 group"
+              className="bg-rise-frost hover:bg-rise-ocean/10 border border-rise-ocean hover:border-rise-deep rounded-lg shadow-md hover:shadow-lg transition-all h-40 flex items-center justify-center p-6 group"
             >
               <img src={scholarLogo} alt="Google Scholar" className="max-h-full max-w-full object-contain" />
             </a>
@@ -67,7 +67,7 @@ const Publications = () => {
               href="https://orcid.org/0000-0001-8287-8607"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg shadow-sm hover:shadow-md transition-all h-40 flex items-center justify-center p-6 group"
+              className="bg-rise-frost hover:bg-rise-ocean/10 border border-rise-ocean hover:border-rise-deep rounded-lg shadow-md hover:shadow-lg transition-all h-40 flex items-center justify-center p-6 group"
             >
               <img src={orcidLogo} alt="ORCID" className="max-h-full max-w-full object-contain" />
             </a>
@@ -76,7 +76,7 @@ const Publications = () => {
               href="https://www.researchgate.net/profile/Avala-Lavakumar"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg shadow-sm hover:shadow-md transition-all h-40 flex items-center justify-center p-6 group"
+              className="bg-rise-frost hover:bg-rise-ocean/10 border border-rise-ocean hover:border-rise-deep rounded-lg shadow-md hover:shadow-lg transition-all h-40 flex items-center justify-center p-6 group"
             >
               <img src={researchgateLogo} alt="ResearchGate" className="max-h-full max-w-full object-contain" />
             </a>
@@ -86,8 +86,8 @@ const Publications = () => {
 
         {/* --- SECTION 2: BOOK(S) --- */}
         <section>
-          <div className="border-b-2 border-gray-200 mb-6 pb-2">
-            <h2 className="text-2xl font-bold text-blue-900 tracking-wide uppercase">BOOK(S)</h2>
+          <div className="border-b-2 border-rise-ocean mb-6 pb-2">
+            <h2 className="text-2xl font-bold text-rise-ocean tracking-wide uppercase">BOOK(S)</h2>
           </div>
           <div className="space-y-8 pl-4 text-lg">
             <div>
@@ -100,7 +100,7 @@ const Publications = () => {
                 href="https://doi.org/10.1088/978-1-6817-4473-5"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="italic text-blue-700 hover:underline"
+                className="italic text-rise-ocean hover:underline hover:text-rise-deep"
               >
                 Concepts in Physical Metallurgy: Concise Lecture Notes,
               </a>{' '}
@@ -112,8 +112,8 @@ const Publications = () => {
 
         {/* --- SECTION 3: JOURNAL PUBLICATIONS (NUMBERING 20 -> 1) --- */}
         <section>
-          <div className="border-b-2 border-gray-200 mb-6 pb-2">
-            <h2 className="text-2xl font-bold text-blue-900 tracking-wide uppercase">JOURNAL PUBLICATIONS</h2>
+          <div className="border-b-2 border-rise-ocean mb-6 pb-2">
+            <h2 className="text-2xl font-bold text-rise-ocean tracking-wide uppercase">JOURNAL PUBLICATIONS</h2>
           </div>
           <div className="space-y-6 pl-4 text-lg">
 
@@ -279,8 +279,8 @@ const Publications = () => {
 
         {/* --- SECTION 4: CONFERENCE PUBLICATIONS --- */}
         <section>
-          <div className="border-b-2 border-gray-200 mb-6 pb-2">
-            <h2 className="text-2xl font-bold text-blue-900 tracking-wide uppercase">CONFERENCE PUBLICATIONS</h2>
+          <div className="border-b-2 border-rise-ocean mb-6 pb-2">
+            <h2 className="text-2xl font-bold text-rise-ocean tracking-wide uppercase">CONFERENCE PUBLICATIONS</h2>
           </div>
           <div className="space-y-6 pl-4 text-lg">
 

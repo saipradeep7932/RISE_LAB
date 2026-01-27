@@ -3,28 +3,28 @@ import { Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
+    <div className="min-h-screen bg-rise-mist font-sans text-rise-deep">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 py-12 shadow-sm">
+      <div className="bg-rise-deep border-b border-rise-ocean py-12 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Contact Us</h1>
+          <h1 className="text-4xl font-bold text-white tracking-tight">Contact Us</h1>
         </div>
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
 
         {/* SECTION 1: FACULTY CONTACT */}
-        <section className="bg-white rounded-xl shadow-md border-t-4 border-indigo-600 overflow-hidden hover:shadow-lg transition-shadow duration-300">
-          <div className="bg-indigo-50 px-8 py-6 border-b border-gray-100">
-            <h2 className="text-2xl font-bold text-indigo-900">Dr. Avala Lavakumar</h2>
+        <section className="bg-rise-frost rounded-xl shadow-md border-t-4 border-rise-ocean overflow-hidden hover:shadow-lg transition-shadow duration-300">
+          <div className="bg-rise-ocean/10 px-8 py-6 border-b border-rise-ocean/20">
+            <h2 className="text-2xl font-bold text-rise-deep">Dr. Avala Lavakumar</h2>
           </div>
           <div className="p-8 space-y-6">
             {/* Address */}
             <div>
-              <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide mb-2 flex items-center gap-2">
+              <h3 className="text-sm font-bold text-rise-ocean uppercase tracking-wide mb-2 flex items-center gap-2">
                 <MapPin size={16} /> Address
               </h3>
-              <p className="text-lg text-slate-800 leading-relaxed">
+              <p className="text-lg text-rise-deep leading-relaxed">
                 Department of Metallurgical and Materials Engineering<br />
                 Indian Institute of Technology Ropar
               </p>
@@ -32,29 +32,29 @@ const Contact = () => {
 
             {/* Office */}
             <div>
-              <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide mb-2">Office</h3>
-              <p className="text-lg text-slate-800">
+              <h3 className="text-sm font-bold text-rise-ocean uppercase tracking-wide mb-2">Office</h3>
+              <p className="text-lg text-rise-deep">
                 B-M05, Har Gobind Khorana Building (SAB Building)
               </p>
             </div>
 
-            <div className="flex flex-col md:flex-row md:gap-12 gap-6 pt-4 border-t border-gray-100">
+            <div className="flex flex-col md:flex-row md:gap-12 gap-6 pt-4 border-t border-rise-ocean/20">
               {/* Email */}
               <div>
-                <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide mb-2 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-rise-ocean uppercase tracking-wide mb-2 flex items-center gap-2">
                   <Mail size={16} /> Email
                 </h3>
-                <a href="mailto:lava@iitrpr.ac.in" className="text-lg text-indigo-600 font-medium hover:underline hover:text-indigo-800">
+                <a href="mailto:lava@iitrpr.ac.in" className="text-lg text-rise-deep font-medium hover:underline hover:text-rise-ocean">
                   lava@iitrpr.ac.in
                 </a>
               </div>
 
               {/* Phone */}
               <div>
-                <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide mb-2 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-rise-ocean uppercase tracking-wide mb-2 flex items-center gap-2">
                   <Phone size={16} /> Phone
                 </h3>
-                <a href="tel:+911881232412" className="text-lg text-indigo-600 font-medium hover:underline hover:text-indigo-800">
+                <a href="tel:+911881232412" className="text-lg text-rise-deep font-medium hover:underline hover:text-rise-ocean">
                   +91-1881-23-2412
                 </a>
               </div>
@@ -63,17 +63,17 @@ const Contact = () => {
         </section>
 
         {/* SECTION 2: RISE LABORATORY */}
-        <section className="bg-white rounded-xl shadow-md border-t-4 border-teal-600 overflow-hidden hover:shadow-lg transition-shadow duration-300">
-          <div className="bg-teal-50 px-8 py-6 border-b border-gray-100">
-            <h2 className="text-2xl font-bold text-teal-900">RISE LABORATORY</h2>
+        <section className="bg-rise-frost rounded-xl shadow-md border-t-4 border-rise-ocean overflow-hidden hover:shadow-lg transition-shadow duration-300">
+          <div className="bg-rise-ocean/10 px-8 py-6 border-b border-rise-ocean/20">
+            <h2 className="text-2xl font-bold text-rise-deep">RISE LABORATORY</h2>
           </div>
           <div className="p-8 space-y-6">
             {/* Address */}
             <div>
-              <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide mb-2 flex items-center gap-2">
+              <h3 className="text-sm font-bold text-rise-ocean uppercase tracking-wide mb-2 flex items-center gap-2">
                 <MapPin size={16} /> Address
               </h3>
-              <p className="text-lg text-slate-800 leading-relaxed">
+              <p className="text-lg text-rise-deep leading-relaxed">
                 B-203, 2nd Floor, Block B, Har Gobind Khorana Building (SAB Building)<br />
                 Department of Metallurgical and Materials Engineering<br />
                 Indian Institute of Technology, Ropar<br />
@@ -81,27 +81,27 @@ const Contact = () => {
               </p>
             </div>
 
-            <div className="flex flex-col md:flex-row md:gap-12 gap-6 pt-4 border-t border-gray-100">
+            <div className="flex flex-col md:flex-row md:gap-12 gap-6 pt-4 border-t border-rise-ocean/20">
               {/* Email */}
               <div>
-                <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide mb-2 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-rise-ocean uppercase tracking-wide mb-2 flex items-center gap-2">
                   <Mail size={16} /> Email
                 </h3>
-                <a href="mailto:riselab@iitrpr.ac.in" className="text-lg text-teal-600 font-medium hover:underline hover:text-teal-800">
+                <a href="mailto:riselab@iitrpr.ac.in" className="text-lg text-rise-deep font-medium hover:underline hover:text-rise-ocean">
                   riselab@iitrpr.ac.in
                 </a>
               </div>
 
               {/* Location */}
               <div>
-                <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide mb-2 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-rise-ocean uppercase tracking-wide mb-2 flex items-center gap-2">
                   <ExternalLink size={16} /> Location
                 </h3>
-                <a 
-                  href="https://www.google.com/maps/place/Process+Metallurgy+Research+Laboratory+(PMR+Lab)/@30.9672193,76.4745956,17z/data=!3m1!4b1!4m6!3m5!1s0x3905550010ecb523:0x53a63c88f6eab8e3!8m2!3d30.9672193!4d76.4745956!16s%2Fg%2F11w25jgg4v?entry=tts&g_ep=EgoyMDI0MDcxMC4wKgBIAVAD" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-lg text-teal-600 font-medium flex items-center gap-1 hover:underline hover:text-teal-800"
+                <a
+                  href="https://www.google.com/maps/place/Process+Metallurgy+Research+Laboratory+(PMR+Lab)/@30.9672193,76.4745956,17z/data=!3m1!4b1!4m6!3m5!1s0x3905550010ecb523:0x53a63c88f6eab8e3!8m2!3d30.9672193!4d76.4745956!16s%2Fg%2F11w25jgg4v?entry=tts&g_ep=EgoyMDI0MDcxMC4wKgBIAVAD"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg text-rise-deep font-medium flex items-center gap-1 hover:underline hover:text-rise-ocean"
                 >
                   Google Maps
                 </a>
@@ -111,9 +111,9 @@ const Contact = () => {
         </section>
 
         {/* SECTION 3: LOCATION MAP */}
-        <section className="bg-white rounded-xl shadow-md border-t-4 border-emerald-600 overflow-hidden hover:shadow-lg transition-shadow duration-300">
-          <div className="bg-emerald-50 px-8 py-6 border-b border-gray-100">
-            <h2 className="text-2xl font-bold text-emerald-900">Location Map</h2>
+        <section className="bg-rise-frost rounded-xl shadow-md border-t-4 border-rise-ocean overflow-hidden hover:shadow-lg transition-shadow duration-300">
+          <div className="bg-rise-ocean/10 px-8 py-6 border-b border-rise-ocean/20">
+            <h2 className="text-2xl font-bold text-rise-deep">Location Map</h2>
           </div>
           <div className="h-[380px] w-full bg-gray-100 relative">
             <iframe

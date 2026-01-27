@@ -149,7 +149,7 @@ const Home = () => {
   }));
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-gray-800">
+    <div className="min-h-screen bg-rise-mist font-sans text-rise-deep">
 
       {/* --- FIXED BACKGROUND IMAGE FOR MOTIVE SECTION --- */}
       {/* Activates only when heading enters, deactivates when section leaves */}
@@ -161,19 +161,19 @@ const Home = () => {
           alt="Motive Background"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-slate-900/80"></div>
+        <div className="absolute inset-0 bg-[#030663]/85"></div>
       </div>
 
       {/* =========================================================================
           SECTION 1: HERO / PROFILE + IMAGE STRIP
       ========================================================================= */}
-      <section className="bg-white border-b border-gray-200 py-12 relative z-10 transition-colors duration-300">
+      <section className="bg-rise-mist border-b border-rose-ocean/20 py-12 relative z-10 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-8 items-stretch">
 
             {/* LEFT: PROFILE (30-35%) */}
             <div className="w-full lg:w-[35%] flex flex-col justify-center">
-              <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden p-8 text-center h-full flex flex-col justify-center">
+              <div className="bg-rise-frost rounded-2xl shadow-xl border border-rise-ocean/30 overflow-hidden p-8 text-center h-full flex flex-col justify-center text-rise-deep">
                 <div className="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-lg relative shrink-0">
                   <div className="absolute inset-0 bg-gray-100 animate-pulse -z-10"></div>
                   <img
@@ -182,8 +182,8 @@ const Home = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">Dr. Avala Lavakumar</h2>
-                <p className="text-indigo-600 font-semibold mb-4">Assistant Professor</p>
+                <h2 className="text-2xl font-bold text-rise-deep mb-2">Dr. Avala Lavakumar</h2>
+                <p className="text-rise-ocean font-semibold mb-4">Assistant Professor</p>
 
                 <div className="space-y-3 text-sm text-slate-600 border-t border-gray-100 pt-6 text-left">
                   <div className="flex items-start gap-3">
@@ -207,7 +207,7 @@ const Home = () => {
             </div>
 
             {/* RIGHT: IMAGE STRIP (65-70%) */}
-            <div className="w-full lg:w-[65%] relative min-h-[500px] bg-gray-50 rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex">
+            <div className="w-full lg:w-[65%] relative min-h-[500px] bg-rise-mist rounded-2xl overflow-hidden shadow-lg border border-rise-ocean/30 flex">
               {profilePhotos.map((photo) => (
                 <div
                   key={photo.id}
@@ -265,7 +265,7 @@ const Home = () => {
       ========================================================================= */}
       <section
         className="relative w-full overflow-hidden py-32 flex items-center justify-center text-center z-10"
-        style={{ backgroundColor: isMotiveActive ? 'transparent' : '#0f172a' }} // Fallback bg if image not active
+        style={{ backgroundColor: isMotiveActive ? 'transparent' : '#030663' }} // Fallback bg if image not active
       >
         <div ref={motiveSectionRef} className="relative z-10 max-w-5xl mx-auto px-4">
           <motion.div
@@ -280,8 +280,8 @@ const Home = () => {
             >
               Motive & Vision
             </h2>
-            <div className="w-24 h-1.5 bg-yellow-400 mx-auto mb-10 rounded-full"></div>
-            <p className="text-xl md:text-2xl font-light leading-relaxed text-blue-50 max-w-4xl mx-auto drop-shadow-md">
+            <div className="w-24 h-1.5 bg-rise-surf mx-auto mb-10 rounded-full"></div>
+            <p className="text-xl md:text-2xl font-light leading-relaxed text-rise-mist max-w-4xl mx-auto drop-shadow-md">
               Our lab is dedicated to pushing the boundaries of materials science through rigorous in-situ deformation studies and advanced microscopy. We aim to bridge the gap between fundamental research and real-world engineering applications, fostering innovation in both modern alloys and the understanding of ancient metallurgical heritage.
             </p>
             {/* SENTINEL FOR DEACTIVATION */}
@@ -294,10 +294,10 @@ const Home = () => {
       {/* =========================================================================
           SECTION 3: RESEARCH HIGHLIGHTS (Existing)
       ========================================================================= */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-rise-mist">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center">
-          <h2 className="text-3xl font-bold text-slate-900">Research Highlights</h2>
-          <div className="w-24 h-1 bg-indigo-500 mx-auto mt-4 rounded-full"></div>
+          <h2 className="text-3xl font-bold text-rise-deep">Research Highlights</h2>
+          <div className="w-24 h-1 bg-rise-ocean mx-auto mt-4 rounded-full"></div>
         </div>
 
         <div className="max-w-6xl mx-auto relative h-[450px] flex items-center justify-center px-4">
@@ -306,14 +306,14 @@ const Home = () => {
               {/* Controls */}
               <button
                 onClick={prevImage}
-                className="absolute left-4 md:left-8 z-20 p-2 rounded-full bg-white/80 text-indigo-900 shadow-md hover:bg-white transition-all disabled:opacity-50"
+                className="absolute left-4 md:left-8 z-20 p-2 rounded-full bg-rise-frost/80 text-rise-deep shadow-md hover:bg-rise-frost transition-all disabled:opacity-50"
                 aria-label="Previous Highlight"
               >
                 <ChevronLeft size={32} />
               </button>
               <button
                 onClick={nextImage}
-                className="absolute right-4 md:right-8 z-20 p-2 rounded-full bg-white/80 text-indigo-900 shadow-md hover:bg-white transition-all disabled:opacity-50"
+                className="absolute right-4 md:right-8 z-20 p-2 rounded-full bg-rise-frost/80 text-rise-deep shadow-md hover:bg-rise-frost transition-all disabled:opacity-50"
                 aria-label="Next Highlight"
               >
                 <ChevronRight size={32} />
@@ -351,9 +351,9 @@ const Home = () => {
       {/* =========================================================================
           SECTION 4: ABOUT US (Existing)
       ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center md:text-left border-t border-gray-100">
-        <h2 className="text-3xl font-bold text-slate-900 inline-block border-b-4 border-indigo-500 pb-1 mb-10">About Us</h2>
-        <div className="prose prose-lg max-w-none text-slate-700 leading-loose text-justify space-y-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center md:text-left border-t border-rise-ocean/20 bg-rise-mist">
+        <h2 className="text-3xl font-bold text-rise-deep inline-block border-b-4 border-rise-ocean pb-1 mb-10">About Us</h2>
+        <div className="prose prose-lg max-w-none text-rise-deep leading-loose text-justify space-y-8">
           <p>
             As researchers in the Department of Metallurgical and Materials Science Engineering at IIT Ropar, we focus on in-situ deformation studies. Utilizing techniques like transmission electron microscopy (TEM), synchrotron X-ray diffraction, and digital image correlation (DIC), we analyze structures and measure deformation across a diverse range of materials to address critical engineering challenges.
           </p>
@@ -370,12 +370,12 @@ const Home = () => {
       {/* =========================================================================
           SECTION 5: LATEST NEWS (Existing)
       ========================================================================= */}
-      <section className="py-16 bg-white border-t border-gray-100 shadow-inner">
+      <section className="py-16 bg-rise-mist border-t border-rise-deep/10 shadow-inner">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12 flex items-center justify-center gap-3">
-            <span className="w-2 h-2 bg-indigo-600 rounded-full"></span>
+          <h2 className="text-3xl font-bold text-center text-rise-deep mb-12 flex items-center justify-center gap-3">
+            <span className="w-2 h-2 bg-rise-ocean rounded-full"></span>
             Latest News
-            <span className="w-2 h-2 bg-indigo-600 rounded-full"></span>
+            <span className="w-2 h-2 bg-rise-ocean rounded-full"></span>
           </h2>
 
           <div className="flex flex-col md:flex-row items-center gap-6">
@@ -383,14 +383,14 @@ const Home = () => {
             <div className="flex md:flex-col gap-2 order-2 md:order-1">
               <button
                 onClick={prevNews}
-                className="p-3 rounded-full bg-slate-100 text-indigo-600 hover:bg-indigo-50 transition-colors shadow-sm"
+                className="p-3 rounded-full bg-rise-ocean text-white hover:bg-rise-deep transition-colors shadow-sm"
                 aria-label="Previous News"
               >
                 <ChevronUp size={24} />
               </button>
               <button
                 onClick={nextNews}
-                className="p-3 rounded-full bg-slate-100 text-indigo-600 hover:bg-indigo-50 transition-colors shadow-sm"
+                className="p-3 rounded-full bg-rise-ocean text-white hover:bg-rise-deep transition-colors shadow-sm"
                 aria-label="Next News"
               >
                 <ChevronDown size={24} />
@@ -398,7 +398,7 @@ const Home = () => {
             </div>
 
             {/* News Display */}
-            <div className="relative flex-1 h-32 md:h-44 bg-white rounded-xl shadow-md border-l-4 border-indigo-500 flex items-center justify-center p-8 overflow-hidden order-1 md:order-2 w-full">
+            <div className="relative flex-1 h-32 md:h-44 bg-rise-frost rounded-xl shadow-md border-l-4 border-rise-ocean flex items-center justify-center p-8 overflow-hidden order-1 md:order-2 w-full">
               <AnimatePresence mode='wait'>
                 <motion.div
                   key={currentNewsIndex}
@@ -408,7 +408,7 @@ const Home = () => {
                   transition={{ duration: 0.4 }}
                   className="absolute w-full px-6 text-center"
                 >
-                  <p className="text-lg font-medium text-slate-800 leading-relaxed">
+                  <p className="text-lg font-medium text-rise-deep leading-relaxed">
                     {newsItems[currentNewsIndex]}
                   </p>
                 </motion.div>
@@ -425,7 +425,7 @@ const Home = () => {
                   pauseNewsTicker();
                   setCurrentNewsIndex(idx);
                 }}
-                className={`h-2 rounded-full transition-all duration-300 ${idx === currentNewsIndex ? 'w-8 bg-indigo-600' : 'w-2 bg-gray-300 hover:bg-gray-400'}`}
+                className={`h-2 rounded-full transition-all duration-300 ${idx === currentNewsIndex ? 'w-8 bg-rise-deep' : 'w-2 bg-rise-frost/50 hover:bg-rise-frost'}`}
                 aria-label={`Go to news item ${idx + 1}`}
               />
             ))}

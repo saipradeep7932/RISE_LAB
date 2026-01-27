@@ -29,25 +29,25 @@ const ProjectsFunded = () => {
   ];
 
   const ProjectCard = ({ project }) => (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-      <h3 className="text-xl font-bold text-blue-900 mb-2 leading-snug">
+    <div className="bg-rise-frost rounded-lg shadow-sm border border-rise-ocean p-6 hover:shadow-md transition-shadow">
+      <h3 className="text-xl font-bold text-rise-deep mb-2 leading-snug">
         {project.title}
       </h3>
-      <p className="text-lg text-gray-800 font-medium mb-1">
+      <p className="text-lg text-rise-ocean font-medium mb-1">
         {project.agency}
       </p>
-      <p className="text-base text-gray-600 font-medium">
+      <p className="text-base text-rise-deep/80 font-medium">
         {project.details}
       </p>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans text-gray-800">
+    <div className="min-h-screen bg-rise-mist font-sans text-rise-deep">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 py-10">
+      <div className="bg-rise-deep border-b border-rise-ocean py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-blue-900 tracking-tight">Projects Funded</h1>
+          <h1 className="text-4xl font-bold text-white tracking-tight">Projects Funded</h1>
         </div>
       </div>
 
@@ -55,7 +55,7 @@ const ProjectsFunded = () => {
 
         {/* Section 1: Sponsored Projects */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 border-l-4 border-blue-600 pl-3 mb-6 uppercase">
+          <h2 className="text-2xl font-bold text-rise-deep border-l-4 border-rise-ocean pl-3 mb-6 uppercase">
             Sponsored Projects
           </h2>
           <div className="flex flex-col gap-6">
@@ -67,7 +67,7 @@ const ProjectsFunded = () => {
 
         {/* Section 2: Consultancy Projects */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 border-l-4 border-blue-600 pl-3 mb-6 uppercase">
+          <h2 className="text-2xl font-bold text-rise-deep border-l-4 border-rise-ocean pl-3 mb-6 uppercase">
             Consultancy Projects
           </h2>
           <div className="flex flex-col gap-6">

@@ -168,7 +168,10 @@ const Navbar = () => {
       {/* =========================================================================
           PART 1: TOP HEADER (New)
       ========================================================================= */}
-      <div className="bg-slate-50 border-b border-gray-200 py-2 hidden md:block">
+      {/* =========================================================================
+           PART 1: TOP HEADER (New)
+       ========================================================================= */}
+      <div className="bg-rise-deep border-b border-rise-ocean py-2 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-12">
 
           {/* LEFT: Logo */}
@@ -180,37 +183,37 @@ const Navbar = () => {
                 e.target.src = "https://placehold.co/150x50?text=LOGO"; // Fallback
               }}
               alt="Institute Logo"
-              className="h-10 w-auto object-contain mr-4"
+              className="h-10 w-auto object-contain mr-4 bg-white/10 rounded"
             />
           </div>
 
           {/* RIGHT: Socials, Email, Search */}
           <div className="flex items-center gap-6">
             {/* Social Icons (Placeholders) */}
-            <div className="flex items-center gap-3 text-gray-500">
-              <a href="#" className="hover:text-blue-600 transition-colors"><Linkedin size={18} /></a>
-              <a href="#" className="hover:text-pink-600 transition-colors"><Instagram size={18} /></a>
-              <a href="#" className="hover:text-emerald-600 transition-colors"><Globe size={18} /></a>
+            <div className="flex items-center gap-3 text-rise-surf">
+              <a href="#" className="hover:text-rise-frost transition-colors"><Linkedin size={18} /></a>
+              <a href="#" className="hover:text-rise-frost transition-colors"><Instagram size={18} /></a>
+              <a href="#" className="hover:text-rise-frost transition-colors"><Globe size={18} /></a>
             </div>
 
             {/* Email Button */}
-            <a href="mailto:lava@iitrpr.ac.in" className="flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1.5 rounded-full text-xs font-bold hover:bg-blue-200 transition-colors">
+            <a href="mailto:lava@iitrpr.ac.in" className="flex items-center gap-2 bg-rise-ocean text-rise-mist px-3 py-1.5 rounded-full text-xs font-bold hover:bg-rise-surf hover:text-rise-deep transition-colors">
               <Mail size={14} /> Email Us
             </a>
 
             {/* Search Bar */}
             <div className="relative">
-              <div className="flex items-center bg-white border border-gray-300 rounded-full px-3 py-1 focus-within:ring-2 focus-within:ring-blue-400 focus-within:border-transparent w-64">
+              <div className="flex items-center bg-rise-deep border border-rise-ocean rounded-full px-3 py-1 focus-within:ring-2 focus-within:ring-rise-surf focus-within:border-transparent w-64">
                 <input
                   type="text"
                   placeholder="Search site..."
-                  className="bg-transparent border-none outline-none text-sm w-full text-gray-700 placeholder-gray-400"
+                  className="bg-transparent border-none outline-none text-sm w-full text-rise-mist placeholder-rise-mist/50 placeholder:text-xs"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setIsSearchFocused(true)}
                   onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)} // Delay for click handling
                 />
-                <button className="text-gray-400 hover:text-blue-600">
+                <button className="text-rise-surf hover:text-rise-frost">
                   <Search size={16} />
                 </button>
               </div>
@@ -222,21 +225,21 @@ const Navbar = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full right-0 mt-2 w-72 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50 max-h-64 overflow-y-auto"
+                    className="absolute top-full right-0 mt-2 w-72 bg-rise-frost rounded-lg shadow-xl border border-rise-ocean py-2 z-50 max-h-64 overflow-y-auto"
                   >
                     {filteredResults.length > 0 ? (
                       filteredResults.map((result, idx) => (
                         <div
                           key={idx}
-                          className="px-4 py-2 hover:bg-blue-50 cursor-pointer text-sm text-gray-700 flex flex-col"
+                          className="px-4 py-2 hover:bg-rise-ocean hover:text-rise-mist cursor-pointer text-sm text-rise-deep flex flex-col"
                           onMouseDown={() => handleSearchNavigate(result.path)} // Changed to onMouseDown to fire before blur
                         >
                           <span className="font-medium">{result.title}</span>
-                          <span className="text-xs text-gray-400">{result.path}</span>
+                          <span className="text-xs text-rise-deep/70 group-hover:text-rise-mist/70">{result.path}</span>
                         </div>
                       ))
                     ) : (
-                      <div className="px-4 py-2 text-sm text-gray-400 text-center">No results found</div>
+                      <div className="px-4 py-2 text-sm text-rise-deep/50 text-center">No results found</div>
                     )}
                   </motion.div>
                 )}
@@ -249,14 +252,14 @@ const Navbar = () => {
       {/* =========================================================================
           PART 2: MAIN NAVIGATION (Existing, updated routes)
       ========================================================================= */}
-      <nav className="bg-iitrpr-blue text-white shadow-lg sticky top-0 z-40 bg-[#1e3a8a]"> {/* Added explicit bg color code fallback/tailwind class */}
+      <nav className="bg-rise-deep text-white shadow-lg sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20">
             {/* Logo/Title */}
             <div className="flex items-center flex-shrink-0">
-              <Link to="/" className="flex flex-col">
-                <span className="text-2xl font-bold tracking-wide">RISE LAB</span>
-                <span className="text-xs font-light text-gray-300 tracking-wider">IIT ROPAR</span>
+              <Link to="/" className="flex flex-col group">
+                <span className="text-2xl font-bold tracking-wide group-hover:text-rise-surf transition-colors">RISE LAB</span>
+                <span className="text-xs font-light text-rise-frost tracking-wider">IIT ROPAR</span>
               </Link>
             </div>
 
@@ -272,8 +275,8 @@ const Navbar = () => {
                   <Link
                     to={link.path}
                     className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center ${isActive(link.path)
-                      ? 'bg-blue-900 text-white'
-                      : 'text-gray-200 hover:bg-blue-800 hover:text-white'
+                      ? 'text-rise-surf font-bold bg-white/5'
+                      : 'text-gray-100 hover:text-rise-surf hover:bg-white/5'
                       }`}
                   >
                     {link.name}
@@ -289,7 +292,7 @@ const Navbar = () => {
                         <Link
                           key={dropItem.name}
                           to={dropItem.path}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                          className="block px-4 py-2 text-sm text-slate-700 hover:bg-rise-mist hover:text-rise-deep"
                         >
                           {dropItem.name}
                         </Link>
@@ -310,7 +313,7 @@ const Navbar = () => {
                 type="button"
                 aria-label="Toggle menu"
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 rounded-md text-gray-200 hover:text-white hover:bg-blue-800 focus:outline-none"
+                className="p-2 rounded-md text-gray-200 hover:text-rise-surf hover:bg-white/10 focus:outline-none"
               >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -320,23 +323,23 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="xl:hidden bg-blue-900 border-t border-blue-800">
+          <div className="xl:hidden bg-rise-deep border-t border-rise-surf">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {/* Mobile Search Input */}
               <div className="px-3 pb-2">
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full px-3 py-2 rounded text-gray-900 text-sm"
+                  className="w-full px-3 py-2 rounded bg-rise-ocean text-rise-mist placeholder-rise-mist/50 text-sm border-none focus:ring-1 focus:ring-rise-surf"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 {searchQuery && (
-                  <div className="bg-white mt-1 rounded shadow-lg max-h-40 overflow-y-auto">
+                  <div className="bg-rise-frost mt-1 rounded shadow-lg max-h-40 overflow-y-auto">
                     {filteredResults.map((result, idx) => (
                       <div
                         key={idx}
-                        className="px-3 py-2 text-sm text-gray-800 border-b border-gray-100"
+                        className="px-3 py-2 text-sm text-rise-deep border-b border-rise-ocean last:border-0"
                         onClick={() => { handleSearchNavigate(result.path); setIsOpen(false); }}
                       >
                         {result.title}
@@ -352,8 +355,8 @@ const Navbar = () => {
                     to={link.path}
                     onClick={() => !link.dropdown && setIsOpen(false)}
                     className={`block px-3 py-2 rounded-md text-base font-medium ${isActive(link.path)
-                      ? 'bg-blue-950 text-white'
-                      : 'text-gray-300 hover:bg-blue-800 hover:text-white'
+                      ? 'bg-rise-ocean text-white'
+                      : 'text-rise-mist hover:bg-rise-ocean hover:text-white'
                       }`}
                   >
                     {link.name}
@@ -366,7 +369,7 @@ const Navbar = () => {
                           key={dropItem.name}
                           to={dropItem.path}
                           onClick={() => setIsOpen(false)}
-                          className="block px-3 py-2 rounded-md text-sm font-medium text-blue-200 hover:text-white hover:bg-blue-800"
+                          className="block px-3 py-2 rounded-md text-sm font-medium text-rise-surf hover:text-white hover:bg-rise-ocean"
                         >
                           - {dropItem.name}
                         </Link>
