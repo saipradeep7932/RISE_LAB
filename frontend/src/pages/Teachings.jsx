@@ -235,19 +235,19 @@ const Teachings = () => {
                   {item.title}
                 </span>
                 <div className="flex gap-4 flex-shrink-0 self-start md:self-center">
-                  {/* View: Teal/Cyan Outline */}
+                  {/* View: Orange Button */}
                   <a
                     href={item.view}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-5 py-2 border border-rise-ocean text-rise-ocean rounded-lg text-sm font-semibold hover:bg-gray-50 transition-all shadow-sm"
+                    className="flex items-center gap-2 px-5 py-2 bg-orange-500 text-white rounded-lg text-sm font-semibold hover:bg-orange-600 transition-all shadow-sm"
                   >
                     <Eye size={16} /> View
                   </a>
-                  {/* Download: Solid Rise Ocean */}
+                  {/* Download: Blue Button */}
                   <a
                     href={item.download}
-                    className="flex items-center gap-2 px-5 py-2 bg-rise-ocean text-white rounded-lg text-sm font-semibold hover:opacity-90 hover:shadow-md transition-all shadow-sm"
+                    className="flex items-center gap-2 px-5 py-2 bg-rise-surf text-white rounded-lg text-sm font-semibold hover:bg-[#0099bb] transition-all shadow-sm"
                   >
                     <Download size={16} /> Download
                   </a>

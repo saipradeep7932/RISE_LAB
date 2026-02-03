@@ -249,7 +249,7 @@ const Navbar = () => {
       {/* =========================================================================
           PART 2: MAIN NAVIGATION (Updated)
       ========================================================================= */}
-      <nav className="bg-rise-surf text-white shadow-lg sticky top-0 z-40">
+      <nav className="bg-rise-surf text-white shadow-sm sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20">
             {/* Logo/Title */}

@@ -28,17 +28,29 @@ const ProjectsFunded = () => {
     }
   ];
 
+  /* Updated Project Card for Boxed Layout */
   const ProjectCard = ({ project }) => (
-    <div className="bg-white rounded-lg shadow-sm border border-rise-frost p-6 hover:shadow-md transition-shadow">
-      <h3 className="text-xl font-bold text-rise-deep mb-2 leading-snug">
+    <div className="bg-white rounded-xl shadow-md p-8 border border-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+      <h3 className="text-xl font-bold text-rise-deep mb-3 leading-snug">
         {project.title}
       </h3>
-      <p className="text-lg text-gray-800 font-medium mb-1">
-        {project.agency}
-      </p>
-      <p className="text-base text-gray-600 font-medium">
-        {project.details}
-      </p>
+
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3 text-sm font-medium mb-3">
+        <span className="bg-rise-mist text-rise-ocean px-2 py-1 rounded border border-rise-frost">
+          Principal Investigator (P.I)
+        </span>
+        <span className="text-gray-500 hidden sm:inline">•</span>
+        <span className="text-gray-700">{project.agency}</span>
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-4 mt-4 pt-4 border-t border-gray-100 text-gray-700">
+        <div className="flex items-center gap-2">
+          <span className="font-semibold text-gray-900">Amount:</span> {project.details.match(/₹[^)]+/)?.[0] || "N/A"}
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="font-semibold text-gray-900">Duration:</span> {project.details.match(/\[([^\]]+)\]/)?.[1] || "N/A"}
+        </div>
+      </div>
     </div>
   );
 

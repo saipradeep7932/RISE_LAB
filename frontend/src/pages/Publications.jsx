@@ -51,37 +51,7 @@ const Publications = () => {
     <div className="min-h-screen bg-rise-mist font-sans text-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
 
-        {/* --- SECTION 1: PROFILE LINKS ROW (FIXED ASSETS) --- */}
-        <section>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <a
-              href="https://scholar.google.com/citations?user=H_WhrEIAAAAJ&hl=en"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white hover:bg-rise-mist border border-rise-frost hover:border-rise-surf rounded-lg shadow-sm hover:shadow-md transition-all h-40 flex items-center justify-center p-6 group"
-            >
-              <img src={scholarLogo} alt="Google Scholar" className="max-h-full max-w-full object-contain" />
-            </a>
 
-            <a
-              href="https://orcid.org/0000-0001-8287-8607"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white hover:bg-rise-mist border border-rise-frost hover:border-rise-surf rounded-lg shadow-sm hover:shadow-md transition-all h-40 flex items-center justify-center p-6 group"
-            >
-              <img src={orcidLogo} alt="ORCID" className="max-h-full max-w-full object-contain" />
-            </a>
-
-            <a
-              href="https://www.researchgate.net/profile/Avala-Lavakumar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white hover:bg-rise-mist border border-rise-frost hover:border-rise-surf rounded-lg shadow-sm hover:shadow-md transition-all h-40 flex items-center justify-center p-6 group"
-            >
-              <img src={researchgateLogo} alt="ResearchGate" className="max-h-full max-w-full object-contain" />
-            </a>
-          </div>
-        </section>
 
 
         {/* --- SECTION 2: BOOK(S) --- */}
@@ -354,6 +324,41 @@ const Publications = () => {
               journalInfo={<>in: Proceedings of the PSRC International Conference on Innovations in Civil, Water, Materials and Geo-Environmental Engineering (ICIWMGEE'13), Johannesburg, South Africa, April 15-16, 2013.</>}
             />
 
+          </div>
+        </section>
+
+        {/* --- SECTION 5: PROFILES & REFERENCE LINKS (Moved to Bottom) --- */}
+        <section>
+          <div className="border-b-2 border-rise-frost mb-6 pb-2">
+            <h2 className="text-2xl font-bold text-rise-deep tracking-wide uppercase">Researcher Profiles</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <a
+              href="https://scholar.google.com/citations?user=H_WhrEIAAAAJ&hl=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white hover:bg-rise-mist border border-rise-frost hover:border-rise-surf rounded-lg shadow-sm hover:shadow-md transition-all h-40 flex items-center justify-center p-6 group"
+            >
+              <img src={scholarLogo} alt="Google Scholar" className="max-h-full max-w-full object-contain" />
+            </a>
+
+            <a
+              href="https://orcid.org/0000-0001-8287-8607"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white hover:bg-rise-mist border border-rise-frost hover:border-rise-surf rounded-lg shadow-sm hover:shadow-md transition-all h-40 flex items-center justify-center p-6 group"
+            >
+              <img src={orcidLogo} alt="ORCID" className="max-h-full max-w-full object-contain" />
+            </a>
+
+            <a
+              href="https://www.researchgate.net/profile/Avala-Lavakumar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white hover:bg-rise-mist border border-rise-frost hover:border-rise-surf rounded-lg shadow-sm hover:shadow-md transition-all h-40 flex items-center justify-center p-6 group"
+            >
+              <img src={researchgateLogo} alt="ResearchGate" className="max-h-full max-w-full object-contain" />
+            </a>
           </div>
         </section>
 

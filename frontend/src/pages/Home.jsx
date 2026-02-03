@@ -173,8 +173,8 @@ const Home = () => {
 
             {/* LEFT: PROFILE (30-35%) */}
             <div className="w-full lg:w-[35%] flex flex-col justify-center">
-              <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden p-8 text-center h-full flex flex-col justify-center">
-                <div className="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-lg relative shrink-0">
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 border-l-4 border-l-rise-ocean overflow-hidden p-8 text-center h-full flex flex-col justify-center transform transition-transform hover:-translate-y-1 duration-300">
+                <div className="w-56 h-56 mx-auto mb-6 rounded-2xl overflow-hidden shadow-md relative shrink-0">
                   <div className="absolute inset-0 bg-gray-100 animate-pulse -z-10"></div>
                   <img
                     src={getAsset('profile') || "https://placehold.co/400x400?text=Profile"}
@@ -182,25 +182,25 @@ const Home = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h2 className="text-2xl font-bold text-rise-deep mb-2">Dr. Avala Lavakumar</h2>
-                <p className="text-rise-ocean font-semibold mb-4">Assistant Professor</p>
+                <h2 className="text-3xl font-bold text-rise-deep mb-2">Dr. Avala Lavakumar</h2>
+                <p className="text-rise-ocean font-semibold text-lg mb-4">Assistant Professor</p>
 
-                <div className="space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-6 text-left">
+                <div className="space-y-4 text-sm text-gray-700 border-t border-gray-100 pt-6 text-left">
                   <div className="flex items-start gap-3">
-                    <MapPin size={18} className="text-rise-ocean mt-0.5 shrink-0" />
+                    <MapPin size={20} className="text-rise-ocean mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-medium text-gray-800">Dept. of Metallurgical and Materials Eng.</p>
+                      <p className="font-semibold text-gray-900">Dept. of Metallurgical and Materials Eng.</p>
                       <p>Indian Institute of Technology Ropar</p>
                       <p className="text-xs text-gray-500 mt-1">B-M05, Har Gobind Khorana Building</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Mail size={18} className="text-rise-ocean shrink-0" />
-                    <a href="mailto:lava@iitrpr.ac.in" className="hover:text-rise-ocean transition-colors">lava@iitrpr.ac.in</a>
+                    <a href="mailto:lava@iitrpr.ac.in" className="hover:text-rise-ocean transition-colors font-medium">lava@iitrpr.ac.in</a>
                   </div>
                   <div className="flex items-center gap-3">
                     <Phone size={18} className="text-rise-ocean shrink-0" />
-                    <a href="tel:+911881232412" className="hover:text-rise-ocean transition-colors">+91-1881-23-2412</a>
+                    <a href="tel:+911881232412" className="hover:text-rise-ocean transition-colors font-medium">+91-1881-23-2412</a>
                   </div>
                 </div>
               </div>
