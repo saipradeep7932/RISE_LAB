@@ -18,7 +18,7 @@ const Home = () => {
   const newsTimeoutRef = useRef(null);
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
 
-  const [selectedProfileImage, setSelectedProfileImage] = useState(null);
+  const [hoveredStripIndex, setHoveredStripIndex] = useState(null);
 
   // Motive Section Refs
   const motiveSectionRef = useRef(null);
@@ -143,9 +143,13 @@ const Home = () => {
   const getPrevIndex = () => (currentImageIndex - 1 + images.length) % images.length;
   const getNextIndex = () => (currentImageIndex + 1) % images.length;
 
+  // Load Deck Images
+  const deckAssets = import.meta.glob('../assets/home-deck/*.{png,jpg,jpeg,svg,webp}', { eager: true, as: 'url' });
+  const getDeckAsset = (i) => deckAssets[`../assets/home-deck/deck${i}.jpg`] || `https://placehold.co/400x800?text=Deck+${i}`;
+
   const profilePhotos = Array.from({ length: 10 }, (_, i) => ({
     id: i + 1,
-    src: getAsset(`photo${i + 1}`) || `https://placehold.co/400x800?text=Photo+${i + 1}`,
+    src: getDeckAsset(i + 1),
   }));
 
   return (
@@ -207,57 +211,90 @@ const Home = () => {
             </div>
 
             {/* RIGHT: IMAGE STRIP (65-70%) */}
-            <div className="w-full lg:w-[65%] relative min-h-[500px] bg-gray-50 rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex">
-              {profilePhotos.map((photo) => (
-                <div
-                  key={photo.id}
-                  className="relative flex-1 h-[500px] group cursor-pointer border-r border-white/50 last:border-r-0 overflow-hidden"
-                  onClick={() => setSelectedProfileImage(photo)}
-                >
-                  <img
-                    src={photo.src}
-                    alt={`Strip ${photo.id}`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-                </div>
-              ))}
+            <div className="w-full lg:w-[65%] min-h-[500px] flex flex-col md:flex-row relative">
+
+              {/* DESKTOP: DECK LAYOUT (Linear Forward Stacking) */}
+              <div
+                className="hidden md:block w-full h-[500px] relative bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 shadow-inner"
+                onMouseLeave={() => setHoveredStripIndex(null)}
+              >
+                {profilePhotos.map((photo, index) => {
+                  const isHovered = hoveredStripIndex === index;
+                  const isAnyHovered = hoveredStripIndex !== null;
+
+                  // Z-INDEX: Strict Forward Stacking (1 is top, 10 is bottom)
+                  // If hovered, it jumps to 50.
+                  const zIndex = isHovered ? 50 : (20 - index);
+
+                  // VISIBILITY (The Fix):
+                  // If ANY image is hovered:
+                  //   - The hovered one is fully visible.
+                  //   - ALL others are hidden (opacity-0) and non-interactive (pointer-events-none).
+                  // Default: All visible (opacity-100).
+                  const isVisible = !isAnyHovered || isHovered;
+                  const opacityClass = isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none';
+
+                  // POSITION: 
+                  // Default: Staggered by 8% (0%, 8%, 16%...).
+                  // Hovered: Full width (100%), Left aligned (0).
+                  const leftPos = isHovered ? '0%' : `${index * 8}%`;
+                  const width = isHovered ? '100%' : '24%';
+
+                  // SHADOWS:
+                  // Default: Decreasing intensity (Image 1 is strongest).
+                  // Hovered: Soft but distinct shadow.
+                  const defaultShadowOpacity = 0.4 - (index * 0.03); // 0.4 -> 0.13
+                  const shadowStyle = {
+                    boxShadow: isHovered
+                      ? '0 25px 50px -12px rgba(0, 0, 0, 0.4)'
+                      : `-5px 0 15px -3px rgba(0, 0, 0, ${Math.max(0.1, defaultShadowOpacity)})`
+                  };
+
+                  return (
+                    <div
+                      key={photo.id}
+                      className={`absolute top-0 h-full transition-all duration-500 ease-out cursor-pointer rounded-xl overflow-hidden bg-white border-l border-white/20 ${opacityClass}`}
+                      style={{
+                        zIndex,
+                        left: leftPos,
+                        width,
+                        ...shadowStyle,
+                      }}
+                      onMouseEnter={() => setHoveredStripIndex(index)}
+                    >
+                      <img
+                        src={photo.src}
+                        alt={`Deck ${photo.id}`}
+                        className="w-full h-full object-cover"
+                      />
+                      {/* Gradient Overlay only in Default state */}
+                      {!isAnyHovered && (
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent pointer-events-none"></div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* MOBILE: VERTICAL LIST / GRID */}
+              <div className="md:hidden grid grid-cols-2 gap-4">
+                {profilePhotos.map((photo) => (
+                  <div key={photo.id} className="aspect-[3/4] rounded-lg overflow-hidden shadow-md border border-gray-100">
+                    <img
+                      src={photo.src}
+                      alt={`Mobile Strip ${photo.id}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+
             </div>
           </div>
         </div>
       </section>
 
-      {/* STRIP IMAGE PREVIEW MODAL */}
-      <AnimatePresence>
-        {selectedProfileImage && (
-          <motion.div
-            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedProfileImage(null)}
-          >
-            <div className="relative max-w-5xl max-h-[90vh] w-full flex items-center justify-center">
-              <button
-                onClick={() => setSelectedProfileImage(null)}
-                className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors p-2"
-              >
-                <X size={32} />
-              </button>
-              <motion.img
-                src={selectedProfileImage.src}
-                alt="Zoomed View"
-                className="rounded shadow-2xl max-h-[85vh] object-contain"
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                onClick={(e) => e.stopPropagation()}
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
 
 
       {/* =========================================================================
