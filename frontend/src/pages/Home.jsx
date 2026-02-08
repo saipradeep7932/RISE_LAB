@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Mail, Phone, MapPin, X } from 'lucide-react';
 
 import { newsItems, motiveText, aboutText } from '../data/homeData';
+import motiveBg from "../assets/home/motive-bg.svg";
 
 const Home = () => {
   // --- 1. Dynamic Image Loading ---
@@ -161,11 +162,11 @@ const Home = () => {
         className={`fixed inset-0 z-0 transition-opacity duration-700 ease-out pointer-events-none ${isMotiveActive ? 'opacity-100' : 'opacity-0'}`}
       >
         <img
-          src={getAsset('motive') || "https://placehold.co/1920x1080?text=Motive+Background"}
+          src={motiveBg}
           alt="Motive Background"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gray-900/80"></div>
+
       </div>
 
       {/* =========================================================================
@@ -177,7 +178,7 @@ const Home = () => {
 
             {/* LEFT: PROFILE (30-35%) */}
             <div className="w-full lg:w-[35%] flex flex-col justify-center">
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 border-l-4 border-l-rise-ocean overflow-hidden p-8 text-center h-full flex flex-col justify-center transform transition-transform hover:-translate-y-1 duration-300">
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 border-l-4 border-l-[#F97316] overflow-hidden p-8 text-center h-full flex flex-col justify-center transform transition-transform hover:-translate-y-1 duration-300">
                 <div className="w-56 h-56 mx-auto mb-6 rounded-2xl overflow-hidden shadow-md relative shrink-0">
                   <div className="absolute inset-0 bg-gray-100 animate-pulse -z-10"></div>
                   <img

@@ -168,7 +168,7 @@ const Navbar = () => {
       {/* =========================================================================
           PART 1: TOP HEADER (New)
       ========================================================================= */}
-      <div className="bg-rise-surf border-b border-white/20 py-2 hidden md:block">
+      <div className="bg-[#186F97] border-b border-white/10 py-2 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-12">
 
           {/* LEFT: Logo */}
@@ -188,9 +188,9 @@ const Navbar = () => {
           <div className="flex items-center gap-6">
             {/* Social Icons */}
             <div className="flex items-center gap-3 text-white">
-              <a href="#" className="hover:opacity-80 transition-opacity"><Linkedin size={18} /></a>
-              <a href="#" className="hover:opacity-80 transition-opacity"><Instagram size={18} /></a>
-              <a href="#" className="hover:opacity-80 transition-opacity"><Globe size={18} /></a>
+              <a href="#" className="hover:text-rise-frost transition-colors"><Linkedin size={18} /></a>
+              <a href="#" className="hover:text-rise-frost transition-colors"><Instagram size={18} /></a>
+              <a href="#" className="hover:text-rise-frost transition-colors"><Globe size={18} /></a>
             </div>
 
             {/* Email Button */}
@@ -200,17 +200,17 @@ const Navbar = () => {
 
             {/* Search Bar */}
             <div className="relative">
-              <div className="flex items-center bg-white border border-gray-300 rounded-full px-3 py-1 focus-within:ring-2 focus-within:ring-blue-400 focus-within:border-transparent w-64">
+              <div className="flex items-center bg-white/10 border border-white/20 rounded-full px-3 py-1 focus-within:ring-2 focus-within:ring-rise-frost focus-within:border-transparent w-64 transition-all">
                 <input
                   type="text"
                   placeholder="Search site..."
-                  className="bg-transparent border-none outline-none text-sm w-full text-gray-700 placeholder-gray-400"
+                  className="bg-transparent border-none outline-none text-sm w-full text-white placeholder-gray-300"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setIsSearchFocused(true)}
                   onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)} // Delay for click handling
                 />
-                <button className="text-gray-400 hover:text-blue-600">
+                <button className="text-white hover:text-rise-frost transition-colors">
                   <Search size={16} />
                 </button>
               </div>
@@ -249,7 +249,7 @@ const Navbar = () => {
       {/* =========================================================================
           PART 2: MAIN NAVIGATION (Updated)
       ========================================================================= */}
-      <nav className="bg-rise-surf text-white shadow-sm sticky top-0 z-40">
+      <nav className="bg-[#186F97] text-white shadow-md sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20">
             {/* Logo/Title */}
@@ -272,8 +272,8 @@ const Navbar = () => {
                   <Link
                     to={link.path}
                     className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center ${isActive(link.path)
-                      ? 'text-white underline decoration-2 underline-offset-4 font-bold'
-                      : 'text-white/90 hover:text-white hover:underline hover:decoration-1 hover:underline-offset-4'
+                      ? 'text-white underline decoration-2 underline-offset-4 font-bold decoration-rise-surf'
+                      : 'text-white/90 hover:text-rise-frost hover:underline hover:decoration-1 hover:underline-offset-4'
                       }`}
                   >
                     {link.name}
@@ -320,7 +320,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="xl:hidden bg-rise-surf border-t border-white/20">
+          <div className="xl:hidden bg-[#186F97] border-t border-white/20">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {/* Mobile Search Input */}
               <div className="px-3 pb-2">
