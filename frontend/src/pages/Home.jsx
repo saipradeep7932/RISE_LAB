@@ -1,16 +1,19 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Mail, Phone, MapPin, X } from 'lucide-react';
+import { useInView } from 'react-intersection-observer'; // Added useInView
 
 import { newsItems, motiveText, aboutText } from '../data/homeData';
 import motiveBg from "../assets/home/motive-bg.svg";
 
 const Home = () => {
   // --- 1. Dynamic Image Loading ---
-  const [images, setImages] = useState([]);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  // Highlights
+  const highlightImages = import.meta.glob('../assets/highlights/*.{png,jpg,jpeg,webp}', { eager: true });
+  const images = Object.values(highlightImages).map(img => img.default);
 
-  // --- 2. Refs & State ---
+  // --- 2. State & Hooks ---
   const carouselIntervalRef = useRef(null);
   const carouselTimeoutRef = useRef(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -19,32 +22,13 @@ const Home = () => {
   const newsTimeoutRef = useRef(null);
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
 
-  const [hoveredStripIndex, setHoveredStripIndex] = useState(null);
-
-  // Motive Section Refs
-  const motiveSectionRef = useRef(null);
-  const motiveHeadingRef = useRef(null);
-  const motiveEndRef = useRef(null);
-  const [isMotiveActive, setIsMotiveActive] = useState(false);
+  // Motive Section Scroll Reveal (using react-intersection-observer)
+  const { ref: motiveSectionRef, inView: isMotiveActive } = useInView({ threshold: 0.2 });
+  const { ref: motiveHeadingRef, inView: isHeadingVisible } = useInView({ threshold: 0.5, triggerOnce: true }); // isHeadingVisible not used, but kept for consistency if needed later
+  const { ref: motiveEndRef, inView: isMotiveEnd } = useInView({ threshold: 0.1 }); // isMotiveEnd not used, but kept for consistency if needed later
 
 
   // --- 3. Effects ---
-  useEffect(() => {
-    const loadImages = async () => {
-      const modules = import.meta.glob('../assets/highlights/*.{png,jpg,jpeg,svg,webp}');
-      const loadedImages = [];
-      for (const path in modules) {
-        const mod = await modules[path]();
-        loadedImages.push(mod.default);
-      }
-      if (loadedImages.length > 0) {
-        setImages(loadedImages);
-        setImagesLoaded(true);
-      }
-    };
-    loadImages();
-  }, []);
-
   // Carousel Logic
   const startCarousel = () => {
     if (carouselIntervalRef.current) clearInterval(carouselIntervalRef.current);
@@ -113,24 +97,6 @@ const Home = () => {
     };
   }, []);
 
-  // Motive Observer
-  useEffect(() => {
-    if (!motiveSectionRef.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsMotiveActive(entry.isIntersecting);
-      },
-      { threshold: 0, rootMargin: "-80px 0px 0px 0px" } // Exclude sticky header height (80px)
-    );
-
-    observer.observe(motiveSectionRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   // --- Helpers ---
   const homeAssets = import.meta.glob('../assets/home/*.{png,jpg,jpeg,svg,webp}', { eager: true, as: 'url' });
   const getAsset = (name) => {
@@ -143,15 +109,6 @@ const Home = () => {
 
   const getPrevIndex = () => (currentImageIndex - 1 + images.length) % images.length;
   const getNextIndex = () => (currentImageIndex + 1) % images.length;
-
-  // Load Deck Images
-  const deckAssets = import.meta.glob('../assets/home-deck/*.{png,jpg,jpeg,svg,webp}', { eager: true, as: 'url' });
-  const getDeckAsset = (i) => deckAssets[`../assets/home-deck/deck${i}.jpg`] || `https://placehold.co/400x800?text=Deck+${i}`;
-
-  const profilePhotos = Array.from({ length: 10 }, (_, i) => ({
-    id: i + 1,
-    src: getDeckAsset(i + 1),
-  }));
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-800">
@@ -170,7 +127,7 @@ const Home = () => {
       </div>
 
       {/* =========================================================================
-          SECTION 1: HERO / PROFILE + IMAGE STRIP
+          SECTION 1: HERO / PROFILE + ABOUT US (New Layout)
       ========================================================================= */}
       <section className="bg-white border-b border-gray-200 py-12 relative z-10 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -178,7 +135,7 @@ const Home = () => {
 
             {/* LEFT: PROFILE (30-35%) */}
             <div className="w-full lg:w-[35%] flex flex-col justify-center">
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 border-l-4 border-l-[#F97316] overflow-hidden p-8 text-center h-full flex flex-col justify-center transform transition-transform hover:-translate-y-1 duration-300">
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 border-l-4 border-l-[#FF6600] overflow-hidden p-8 text-center h-full flex flex-col justify-center transform transition-transform hover:-translate-y-1 duration-300">
                 <div className="w-56 h-56 mx-auto mb-6 rounded-2xl overflow-hidden shadow-md relative shrink-0">
                   <div className="absolute inset-0 bg-gray-100 animate-pulse -z-10"></div>
                   <img
@@ -187,12 +144,12 @@ const Home = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h2 className="text-3xl font-bold text-rise-deep mb-2">Dr. Avala Lavakumar</h2>
-                <p className="text-rise-ocean font-semibold text-lg mb-4">Assistant Professor</p>
+                <h2 className="text-3xl font-bold text-[#0E4057] mb-2">Dr. Avala Lavakumar</h2>
+                <p className="text-[#FF6600] font-semibold text-lg mb-4">Assistant Professor</p>
 
                 <div className="space-y-4 text-sm text-gray-700 border-t border-gray-100 pt-6 text-left">
                   <div className="flex items-start gap-3">
-                    <MapPin size={20} className="text-rise-ocean mt-0.5 shrink-0" />
+                    <MapPin size={20} className="text-[#FF6600] mt-0.5 shrink-0" />
                     <div>
                       <p className="font-semibold text-gray-900">Dept. of Metallurgical and Materials Eng.</p>
                       <p>Indian Institute of Technology Ropar</p>
@@ -200,142 +157,46 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Mail size={18} className="text-rise-ocean shrink-0" />
-                    <a href="mailto:lava@iitrpr.ac.in" className="hover:text-rise-ocean transition-colors font-medium">lava@iitrpr.ac.in</a>
+                    <Mail size={18} className="text-[#FF6600] shrink-0" />
+                    <a href="mailto:lava@iitrpr.ac.in" className="hover:text-[#FF6600] transition-colors font-medium">lava@iitrpr.ac.in</a>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Phone size={18} className="text-rise-ocean shrink-0" />
-                    <a href="tel:+911881232412" className="hover:text-rise-ocean transition-colors font-medium">+91-1881-23-2412</a>
+                    <Phone size={18} className="text-[#FF6600] shrink-0" />
+                    <a href="tel:+911881232412" className="hover:text-[#FF6600] transition-colors font-medium">+91-1881-23-2412</a>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* RIGHT: IMAGE STRIP (65-70%) */}
-            <div className="w-full lg:w-[65%] min-h-[500px] flex flex-col md:flex-row relative">
-
-              {/* DESKTOP: DECK LAYOUT (Linear Forward Stacking) */}
-              <div
-                className="hidden md:block w-full h-[500px] relative bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 shadow-inner"
-                onMouseLeave={() => setHoveredStripIndex(null)}
-              >
-                {profilePhotos.map((photo, index) => {
-                  const isHovered = hoveredStripIndex === index;
-                  const isAnyHovered = hoveredStripIndex !== null;
-
-                  // Z-INDEX: Strict Forward Stacking (1 is top, 10 is bottom)
-                  // If hovered, it jumps to 50.
-                  const zIndex = isHovered ? 50 : (20 - index);
-
-                  // VISIBILITY (The Fix):
-                  // If ANY image is hovered:
-                  //   - The hovered one is fully visible.
-                  //   - ALL others are hidden (opacity-0) and non-interactive (pointer-events-none).
-                  // Default: All visible (opacity-100).
-                  const isVisible = !isAnyHovered || isHovered;
-                  const opacityClass = isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none';
-
-                  // POSITION: 
-                  // Default: Staggered by 8% (0%, 8%, 16%...).
-                  // Hovered: Full width (100%), Left aligned (0).
-                  const leftPos = isHovered ? '0%' : `${index * 8}%`;
-                  const width = isHovered ? '100%' : '24%';
-
-                  // SHADOWS:
-                  // Default: Decreasing intensity (Image 1 is strongest).
-                  // Hovered: Soft but distinct shadow.
-                  const defaultShadowOpacity = 0.4 - (index * 0.03); // 0.4 -> 0.13
-                  const shadowStyle = {
-                    boxShadow: isHovered
-                      ? '0 25px 50px -12px rgba(0, 0, 0, 0.4)'
-                      : `-5px 0 15px -3px rgba(0, 0, 0, ${Math.max(0.1, defaultShadowOpacity)})`
-                  };
-
-                  return (
-                    <div
-                      key={photo.id}
-                      className={`absolute top-0 h-full transition-all duration-500 ease-out cursor-pointer rounded-xl overflow-hidden bg-white border-l border-white/20 ${opacityClass}`}
-                      style={{
-                        zIndex,
-                        left: leftPos,
-                        width,
-                        ...shadowStyle,
-                      }}
-                      onMouseEnter={() => setHoveredStripIndex(index)}
-                    >
-                      <img
-                        src={photo.src}
-                        alt={`Deck ${photo.id}`}
-                        className="w-full h-full object-cover"
-                      />
-                      {/* Gradient Overlay only in Default state */}
-                      {!isAnyHovered && (
-                        <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent pointer-events-none"></div>
-                      )}
-                    </div>
-                  );
-                })}
+            {/* RIGHT: ABOUT US (New Box Layout) */}
+            <div className="w-full lg:w-[65%] min-h-[500px] flex flex-col justify-center">
+              <div className="bg-[#B8B8B8] rounded-2xl shadow-md p-10 h-full flex flex-col justify-center">
+                <h2 className="text-3xl font-bold text-[#FF6600] mb-6 inline-block">About Us</h2>
+                <div className="text-black text-lg leading-relaxed text-justify space-y-6">
+                  <p>
+                    As researchers in the Department of Metallurgical and Materials Science Engineering at IIT Ropar, we focus on in-situ deformation studies. Utilizing techniques like transmission electron microscopy (TEM), synchrotron X-ray diffraction, and digital image correlation (DIC), we analyze structures and measure deformation across a diverse range of materials to address critical engineering challenges.
+                  </p>
+                  <p>
+                    Our research spans from traditional steel, aluminum, copper, and titanium alloys with well-established properties to complex high/medium entropy alloys (HEA/MEA) and transformation/twin-induced plasticity (TRIP/TWIP) alloys that offer unique combinations of strength and ductility, with applications ranging from advanced automotive components to cutting-edge tools for the petrochemical industry.
+                  </p>
+                  <p>
+                    In contrast to this modern approach, we also delve into archaeometallurgy, analyzing ancient metal artifacts and techniques to understand the evolution of metals and their properties.
+                  </p>
+                </div>
               </div>
-
-              {/* MOBILE: VERTICAL LIST / GRID */}
-              <div className="md:hidden grid grid-cols-2 gap-4">
-                {profilePhotos.map((photo) => (
-                  <div key={photo.id} className="aspect-[3/4] rounded-lg overflow-hidden shadow-md border border-gray-100">
-                    <img
-                      src={photo.src}
-                      alt={`Mobile Strip ${photo.id}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-
             </div>
+
           </div>
         </div>
       </section>
 
-
-
-
       {/* =========================================================================
-          SECTION 2: MOTIVE / VISION (Scroll Reveal BG)
-      ========================================================================= */}
-      <section
-        className="relative w-full overflow-hidden py-32 flex items-center justify-center text-center z-10"
-        style={{ backgroundColor: isMotiveActive ? 'transparent' : '#0f172a' }} // Fallback bg if image not active
-      >
-        <div ref={motiveSectionRef} className="relative z-10 max-w-5xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h2
-              ref={motiveHeadingRef}
-              className="text-4xl md:text-5xl font-bold mb-8 text-white tracking-tight leading-tight"
-            >
-              Motive & Vision
-            </h2>
-            <div className="w-24 h-1.5 bg-rise-ocean mx-auto mb-10 rounded-full"></div>
-            <p className="text-xl md:text-2xl font-light leading-relaxed text-rise-mist max-w-4xl mx-auto drop-shadow-md">
-              Our lab is dedicated to pushing the boundaries of materials science through rigorous in-situ deformation studies and advanced microscopy. We aim to bridge the gap between fundamental research and real-world engineering applications, fostering innovation in both modern alloys and the understanding of ancient metallurgical heritage.
-            </p>
-            {/* SENTINEL FOR DEACTIVATION */}
-            <div ref={motiveEndRef} className="h-px w-full bg-transparent mt-0 pointer-events-none opacity-0"></div>
-          </motion.div>
-        </div>
-      </section>
-
-
-      {/* =========================================================================
-          SECTION 3: RESEARCH HIGHLIGHTS (Existing)
+          SECTION 2: RESEARCH HIGHLIGHTS (Moved Up)
       ========================================================================= */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center">
-          <h2 className="text-3xl font-bold text-rise-deep">Research Highlights</h2>
-          <div className="w-24 h-1 bg-rise-ocean mx-auto mt-4 rounded-full"></div>
+          <h2 className="text-3xl font-bold text-[#0E4057]">Research Highlights</h2>
+          <div className="w-24 h-1 bg-[#FF6600] mx-auto mt-4 rounded-full"></div>
         </div>
 
         <div className="max-w-6xl mx-auto relative h-[450px] flex items-center justify-center px-4">
@@ -344,14 +205,14 @@ const Home = () => {
               {/* Controls */}
               <button
                 onClick={prevImage}
-                className="absolute left-4 md:left-8 z-20 p-2 rounded-full bg-white/90 text-rise-ocean shadow-sm border border-rise-frost hover:bg-rise-surf hover:text-white transition-all disabled:opacity-50"
+                className="absolute left-4 md:left-8 z-20 p-2 rounded-full bg-white/90 text-[#0E4057] shadow-sm border border-gray-200 hover:bg-[#0E4057] hover:text-white transition-all disabled:opacity-50"
                 aria-label="Previous Highlight"
               >
                 <ChevronLeft size={32} />
               </button>
               <button
                 onClick={nextImage}
-                className="absolute right-4 md:right-8 z-20 p-2 rounded-full bg-white/90 text-rise-ocean shadow-sm border border-rise-frost hover:bg-rise-surf hover:text-white transition-all disabled:opacity-50"
+                className="absolute right-4 md:right-8 z-20 p-2 rounded-full bg-white/90 text-[#0E4057] shadow-sm border border-gray-200 hover:bg-[#0E4057] hover:text-white transition-all disabled:opacity-50"
                 aria-label="Next Highlight"
               >
                 <ChevronRight size={32} />
@@ -372,7 +233,7 @@ const Home = () => {
                   >
                     <img
                       src={images[currentImageIndex]}
-                      alt={`Highlight ${currentImageIndex + 1}`}
+                      alt={`Highlight ${currentImageIndex + 1} `}
                       className="w-full h-full object-cover"
                     />
                   </motion.div>
@@ -387,33 +248,45 @@ const Home = () => {
 
 
       {/* =========================================================================
-          SECTION 4: ABOUT US (Existing)
+          SECTION 3: MOTIVE / VISION (Moved Down)
       ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center md:text-left border-t border-gray-100 bg-rise-mist rounded-3xl my-12 mx-auto shadow-sm">
-        <h2 className="text-3xl font-bold text-rise-deep inline-block border-b-4 border-rise-ocean pb-1 mb-10">About Us</h2>
-        <div className="prose prose-lg max-w-none text-gray-700 leading-loose text-justify space-y-8">
-          <p>
-            As researchers in the Department of Metallurgical and Materials Science Engineering at IIT Ropar, we focus on in-situ deformation studies. Utilizing techniques like transmission electron microscopy (TEM), synchrotron X-ray diffraction, and digital image correlation (DIC), we analyze structures and measure deformation across a diverse range of materials to address critical engineering challenges.
-          </p>
-          <p>
-            Our research spans from traditional steel, aluminum, copper, and titanium alloys with well-established properties to complex high/medium entropy alloys (HEA/MEA) and transformation/twin-induced plasticity (TRIP/TWIP) alloys that offer unique combinations of strength and ductility, with applications ranging from advanced automotive components to cutting-edge tools for the petrochemical industry.
-          </p>
-          <p>
-            In contrast to this modern approach, we also delve into archaeometallurgy, analyzing ancient metal artifacts and techniques to understand the evolution of metals and their properties.
-          </p>
+      <section
+        className="relative w-full overflow-hidden py-32 flex items-center justify-center text-center z-10"
+        style={{ backgroundColor: isMotiveActive ? 'transparent' : '#0f172a' }}
+      >
+        <div ref={motiveSectionRef} className="relative z-10 max-w-5xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <h2
+              ref={motiveHeadingRef}
+              className="text-4xl md:text-5xl font-bold mb-8 text-white tracking-tight leading-tight"
+            >
+              Motive & Vision
+            </h2>
+            <div className="w-24 h-1.5 bg-[#FF6600] mx-auto mb-10 rounded-full"></div>
+            <p className="text-xl md:text-2xl font-light leading-relaxed text-gray-100 max-w-4xl mx-auto drop-shadow-md">
+              Our lab is dedicated to pushing the boundaries of materials science through rigorous in-situ deformation studies and advanced microscopy. We aim to bridge the gap between fundamental research and real-world engineering applications, fostering innovation in both modern alloys and the understanding of ancient metallurgical heritage.
+            </p>
+            {/* SENTINEL FOR DEACTIVATION */}
+            <div ref={motiveEndRef} className="h-px w-full bg-transparent mt-0 pointer-events-none opacity-0"></div>
+          </motion.div>
         </div>
       </section>
 
 
       {/* =========================================================================
-          SECTION 5: LATEST NEWS (Existing)
+          SECTION 4: LATEST NEWS (Was 5)
       ========================================================================= */}
       <section className="py-16 bg-white border-t border-gray-100 shadow-inner">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-rise-deep mb-12 flex items-center justify-center gap-3">
-            <span className="w-2 h-2 bg-rise-ocean rounded-full"></span>
+          <h2 className="text-3xl font-bold text-center text-[#0E4057] mb-12 flex items-center justify-center gap-3">
+            <span className="w-2 h-2 bg-[#FF6600] rounded-full"></span>
             Latest News
-            <span className="w-2 h-2 bg-rise-ocean rounded-full"></span>
+            <span className="w-2 h-2 bg-[#FF6600] rounded-full"></span>
           </h2>
 
           <div className="flex flex-col md:flex-row items-center gap-6">
@@ -421,14 +294,14 @@ const Home = () => {
             <div className="flex md:flex-col gap-2 order-2 md:order-1">
               <button
                 onClick={prevNews}
-                className="p-3 rounded-full bg-white border border-gray-200 text-rise-ocean hover:bg-gray-50 transition-colors shadow-sm"
+                className="p-3 rounded-full bg-white border border-gray-200 text-[#0E4057] hover:bg-gray-50 transition-colors shadow-sm"
                 aria-label="Previous News"
               >
                 <ChevronUp size={24} />
               </button>
               <button
                 onClick={nextNews}
-                className="p-3 rounded-full bg-white border border-gray-200 text-rise-ocean hover:bg-gray-50 transition-colors shadow-sm"
+                className="p-3 rounded-full bg-white border border-gray-200 text-[#0E4057] hover:bg-gray-50 transition-colors shadow-sm"
                 aria-label="Next News"
               >
                 <ChevronDown size={24} />
@@ -436,7 +309,7 @@ const Home = () => {
             </div>
 
             {/* News Display */}
-            <div className="relative flex-1 h-32 md:h-44 bg-white rounded-xl shadow-md border-l-4 border-rise-ocean flex items-center justify-center p-8 overflow-hidden order-1 md:order-2 w-full">
+            <div className="relative flex-1 h-32 md:h-44 bg-white rounded-xl shadow-md border-l-4 border-l-[#FF6600] flex items-center justify-center p-8 overflow-hidden order-1 md:order-2 w-full">
               <AnimatePresence mode='wait'>
                 <motion.div
                   key={currentNewsIndex}

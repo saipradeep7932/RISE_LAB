@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-slate-300 pt-16 pb-8 border-t border-gray-800 font-sans">
+    <footer className="bg-[#0B3446] text-slate-300 pt-16 pb-8 border-t border-gray-800 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 mb-12">
@@ -12,16 +12,16 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold text-white mb-6 border-b border-gray-700 pb-2 inline-block">Quick Links</h3>
             <ul className="grid grid-cols-2 gap-x-8 gap-y-3 text-sm">
-              <li><Link to="/" className="hover:text-rise-ocean transition-colors">Home</Link></li>
-              <li><Link to="/team" className="hover:text-rise-ocean transition-colors">Team</Link></li>
-              <li><Link to="/research" className="hover:text-rise-ocean transition-colors">Research</Link></li>
-              <li><Link to="/publications" className="hover:text-rise-ocean transition-colors">Publications</Link></li>
-              <li><Link to="/projects-funded" className="hover:text-rise-ocean transition-colors">Projects Funded</Link></li>
-              <li><Link to="/teachings" className="hover:text-rise-ocean transition-colors">Resources</Link></li>
-              <li><Link to="/positions" className="hover:text-rise-ocean transition-colors">Positions</Link></li>
-              <li><Link to="/equipment" className="hover:text-rise-ocean transition-colors">Equipment</Link></li>
-              <li><Link to="/gallery" className="hover:text-rise-ocean transition-colors">Gallery</Link></li>
-              <li><Link to="/contact" className="hover:text-rise-ocean transition-colors">Contact Us</Link></li>
+              <li><Link to="/" className="hover:text-[#FF6600] transition-colors">Home</Link></li>
+              <li><Link to="/team" className="hover:text-[#FF6600] transition-colors">Team</Link></li>
+              <li><Link to="/research" className="hover:text-[#FF6600] transition-colors">Research</Link></li>
+              <li><Link to="/publications" className="hover:text-[#FF6600] transition-colors">Publications</Link></li>
+              <li><Link to="/projects-funded" className="hover:text-[#FF6600] transition-colors">Projects Funded</Link></li>
+              <li><Link to="/teachings" className="hover:text-[#FF6600] transition-colors">Resources</Link></li>
+              <li><Link to="/positions" className="hover:text-[#FF6600] transition-colors">Positions</Link></li>
+              <li><Link to="/equipment" className="hover:text-[#FF6600] transition-colors">Equipment</Link></li>
+              <li><Link to="/gallery" className="hover:text-[#FF6600] transition-colors">Gallery</Link></li>
+              <li><Link to="/contact" className="hover:text-[#FF6600] transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 
