@@ -185,15 +185,11 @@ const Navbar = () => {
                   alt="Rise Lab Logo"
                   className="h-12 w-auto object-contain bg-white/10 rounded-md p-1"
                 />
-                <div className="flex flex-col">
-                  <span className="text-2xl font-bold tracking-wide">RISE LAB</span>
-                  <span className="text-xs font-light text-gray-300 tracking-wider">IIT ROPAR</span>
-                </div>
               </Link>
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden xl:flex items-center space-x-1">
+            <div className="hidden xl:flex items-end space-x-1 h-full pb-0">
               {links.map((link) => (
                 <div
                   key={link.path}
@@ -203,8 +199,8 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.path}
-                    className={`px-6 py-3 text-sm font-bold transition-all duration-200 relative flex items-center h-full rounded-t-lg border-2 ${isActive(link.path)
-                      ? 'bg-white text-[#0B5472] border-[#0B5472] border-b-0'
+                    className={`px-4 py-1.5 text-sm font-bold transition-all duration-200 relative flex items-center rounded-t-lg z-10 mb-0 ${isActive(link.path)
+                      ? 'bg-white text-[#0B5472] border-2 border-[#0B5472] border-b-0'
                       : 'border-transparent text-white/90 hover:bg-white/10 hover:text-white'
                       }`}
                   >

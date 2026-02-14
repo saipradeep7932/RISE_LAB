@@ -5,7 +5,8 @@ import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Mail, Phone, MapPin,
 import { useInView } from 'react-intersection-observer'; // Added useInView
 
 import { newsItems, motiveText, aboutText } from '../data/homeData';
-import motiveBg from "../assets/home/motive-bg.svg";
+import motiveBg from "../assets/mission-bg.png";
+import profileImg from '../assets/team/Dr_Avala_Lavakumar.jpg';
 
 const Home = () => {
   // --- 1. Dynamic Image Loading ---
@@ -152,7 +153,7 @@ const Home = () => {
                 <div className="w-56 h-56 mx-auto mb-6 rounded-2xl overflow-hidden shadow-md relative shrink-0">
                   <div className="absolute inset-0 bg-gray-100 animate-pulse -z-10"></div>
                   <img
-                    src={getAsset('profile') || "https://placehold.co/400x400?text=Profile"}
+                    src={profileImg}
                     alt="Dr. Avala Lavakumar"
                     className="w-full h-full object-cover"
                   />
