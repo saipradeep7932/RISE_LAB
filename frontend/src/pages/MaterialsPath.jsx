@@ -27,7 +27,7 @@ const MaterialsPath = () => {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div className="w-full h-80 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-                <img src={archaeoImg} alt="Archaeometallurgy" className="w-full h-full object-contain" />
+                <img src={archaeoImg} alt="Archaeometallurgy" className="w-full h-full object-contain shadow-[0_4px_12px_rgba(0,0,0,0.15)] rounded-lg" />
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@ const MaterialsPath = () => {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div className="w-full h-80 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-                <img src={steelImg} alt="Univariant Steels" className="w-full h-full object-contain" />
+                <img src={steelImg} alt="Univariant Steels" className="w-full h-full object-contain shadow-[0_4px_12px_rgba(0,0,0,0.15)] rounded-lg" />
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ const MaterialsPath = () => {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div className="w-full h-80 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-                <img src={copperImg} alt="High Strength & High Conductivity Copper" className="w-full h-full object-contain" />
+                <img src={copperImg} alt="High Strength & High Conductivity Copper" className="w-full h-full object-contain shadow-[0_4px_12px_rgba(0,0,0,0.15)] rounded-lg" />
               </div>
             </div>
           </div>

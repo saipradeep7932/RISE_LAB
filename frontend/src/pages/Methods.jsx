@@ -30,7 +30,7 @@ const Methods = () => {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div className="w-full h-80 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-                <img src={tensileImg} alt="Tensile and Compression Stage" className="w-full h-full object-contain" />
+                <img src={tensileImg} alt="Tensile and Compression Stage" className="w-full h-full object-contain shadow-[0_4px_12px_rgba(0,0,0,0.15)] rounded-lg" />
               </div>
             </div>
           </div>
@@ -47,7 +47,7 @@ const Methods = () => {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div className="w-full h-80 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-                <img src={recyclingImg} alt="Solid State Recycling Machine" className="w-full h-full object-contain" />
+                <img src={recyclingImg} alt="Solid State Recycling Machine" className="w-full h-full object-contain shadow-[0_4px_12px_rgba(0,0,0,0.15)] rounded-lg" />
               </div>
             </div>
           </div>

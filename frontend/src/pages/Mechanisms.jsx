@@ -22,7 +22,7 @@ const Mechanisms = () => {
             {researchMechanisms[0].content}
           </p>
           <div className="w-full bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-            <img src={tripTwipImg} alt="TRIP & TWIP mechanisms" className="w-full h-auto object-cover max-h-[600px]" />
+            <img src={tripTwipImg} alt="TRIP & TWIP mechanisms" className="w-full h-auto object-cover max-h-[600px] shadow-[0_4px_12px_rgba(0,0,0,0.15)] rounded-lg" />
           </div>
         </section>
 
@@ -37,7 +37,7 @@ const Mechanisms = () => {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div className="w-full h-80 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-                <img src={misfitImg} alt="Misfit Volume" className="w-full h-full object-contain" />
+                <img src={misfitImg} alt="Misfit Volume" className="w-full h-full object-contain shadow-[0_4px_12px_rgba(0,0,0,0.15)] rounded-lg" />
               </div>
             </div>
           </div>

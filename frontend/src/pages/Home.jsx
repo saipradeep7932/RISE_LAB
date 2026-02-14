@@ -129,7 +129,7 @@ const Home = () => {
       {/* --- FIXED BACKGROUND IMAGE FOR MOTIVE SECTION --- */}
       {/* Activates only when heading enters, deactivates when section leaves */}
       <div
-        className={`fixed inset-0 z-0 transition-opacity duration-700 ease-out pointer-events-none ${isMotiveActive ? 'opacity-100' : 'opacity-0'}`}
+        className={`fixed inset-0 z-0 transition-opacity duration-[800ms] ease-in-out pointer-events-none ${isMotiveActive ? 'opacity-100' : 'opacity-0'}`}
       >
         <img
           src={motiveBg}

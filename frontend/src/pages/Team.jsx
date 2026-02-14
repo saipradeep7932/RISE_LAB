@@ -54,7 +54,7 @@ const Team = () => {
         {/* --- SECTION 1: GROUP HEAD --- */}
         <section>
           <h2 className="text-2xl font-bold text-[#0B5472] border-l-4 border-rise-ocean pl-3 mb-8 uppercase">Group Head</h2>
-          <div className="bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.08)] border border-[#F5F5F5] overflow-hidden flex flex-col md:flex-row">
+          <div className="bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border border-[#F5F5F5] overflow-hidden flex flex-col md:flex-row">
             {/* 1:1 Aspect Ratio or properly contained */}
             <div className="md:w-1/3 flex-shrink-0 bg-gray-200 relative">
               <div className="w-full h-full min-h-[300px] md:min-h-full">
@@ -65,14 +65,14 @@ const Team = () => {
                 />
               </div>
             </div>
-            <div className="md:w-2/3 p-8 flex flex-col justify-center border-l-4 border-[#FF6600]">
+            <div className="md:w-2/3 px-6 py-5 flex flex-col justify-center border-l-4 border-[#FF6600]">
               <h3 className="text-3xl font-bold text-[#0B5472] mb-2">{groupHead.name}</h3>
               <p className="text-xl font-medium text-[#0B5472] mb-1">{groupHead.title}</p>
               <p className="text-black mb-6">{groupHead.dept}</p>
 
               <div>
                 <h4 className="text-sm font-bold text-[#FF6600] uppercase tracking-wide mb-2">Research Interest</h4>
-                <p className="text-black leading-relaxed">{groupHead.interest}</p>
+                <p className="text-black leading-relaxed text-sm">{groupHead.interest}</p>
               </div>
 
               {/* BOTTOM ACCENT WAVE */}
@@ -90,7 +90,7 @@ const Team = () => {
           <h2 className="text-2xl font-bold text-[#0B5472] border-l-4 border-rise-ocean pl-3 mb-8 uppercase">Research Staff</h2>
           <div className="flex flex-col gap-8">
             {researchStaff.map((staff, idx) => (
-              <div key={idx} className="bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.08)] border border-[#F5F5F5] p-8 flex flex-col md:flex-row gap-8 items-start border-l-4 border-l-[#FF6600]">
+              <div key={idx} className="bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border border-[#F5F5F5] px-6 py-5 flex flex-col md:flex-row gap-8 items-start border-l-4 border-l-[#FF6600]">
                 <div className="md:w-1/3 flex-shrink-0 flex justify-center md:justify-start">
                   {/* Large Avatar 1:1 */}
                   <div className="w-64 h-64 bg-gray-200 rounded-lg overflow-hidden border-4 border-white shadow-sm relative">
@@ -107,9 +107,9 @@ const Team = () => {
 
                   <div className="mb-4">
                     <span className="font-bold text-[#FF6600]">Research area:</span>
-                    <p className="text-black inline ml-2">{staff.area}</p>
+                    <p className="text-black inline ml-2 text-sm">{staff.area}</p>
                   </div>
-                  <p className="text-black leading-relaxed text-justify">{staff.bio}</p>
+                  <p className="text-black leading-relaxed text-justify text-sm">{staff.bio}</p>
 
                   {/* BOTTOM ACCENT WAVE */}
                   <div className="w-full mt-4 opacity-40 group-hover:opacity-70 transition-opacity duration-500">
@@ -134,7 +134,7 @@ const Team = () => {
               return (
                 <div
                   key={idx}
-                  className={`w-full md:w-[85%] bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.08)] border-l-4 border-l-[#FF6600] flex flex-col md:flex-row gap-8 items-center ${alignmentClass}`}
+                  className={`w-full md:w-[85%] bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border-l-4 border-l-[#FF6600] flex flex-col md:flex-row gap-8 items-center px-6 py-5 ${alignmentClass}`}
                 >
                   {/* Photo Side */}
                   <div className="w-full md:w-1/3 flex-shrink-0 flex justify-center">
@@ -154,10 +154,10 @@ const Team = () => {
 
                     <div className="mb-4 bg-white/50 px-4 py-2 rounded-lg border-l-4 border-[#FF6600] w-full">
                       <span className="font-bold text-[#FF6600] text-sm uppercase tracking-wide">Research Area</span>
-                      <p className="text-black mt-1">{student.area}</p>
+                      <p className="text-black mt-1 text-sm">{student.area}</p>
                     </div>
 
-                    <p className="text-black leading-relaxed text-justify">
+                    <p className="text-black leading-relaxed text-justify text-sm">
                       {student.bio}
                     </p>
 
@@ -180,7 +180,7 @@ const Team = () => {
           {/* Grid Layout - Larger Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {btechStudents.map((student, idx) => (
-              <div key={idx} className="bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.08)] border border-[#F5F5F5] border-l-4 border-l-[#FF6600] overflow-hidden flex flex-col h-full hover:shadow-md transition group">
+              <div key={idx} className="bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border border-[#F5F5F5] border-l-4 border-l-[#FF6600] overflow-hidden flex flex-col h-full hover:shadow-md transition group">
                 {/* Image Area */}
                 <div className="w-full aspect-square bg-gray-200 relative">
                   <img
@@ -217,7 +217,7 @@ const Team = () => {
           {/* Using similar Grid Layout as B.Tech for consistent visual size */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {alumni.map((member, idx) => (
-              <div key={idx} className="bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.08)] border border-[#F5F5F5] border-l-4 border-l-[#FF6600] overflow-hidden flex flex-col h-full hover:shadow-md transition group">
+              <div key={idx} className="bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border border-[#F5F5F5] border-l-4 border-l-[#FF6600] overflow-hidden flex flex-col h-full hover:shadow-md transition group">
                 {/* Size: 1:1 Aspect ratio image */}
                 <div className="w-full aspect-square bg-gray-200 relative">
                   <img

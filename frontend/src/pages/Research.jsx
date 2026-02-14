@@ -10,11 +10,11 @@ import materialsIllu from '../assets/research/materials-path-illustration.png';
 const Research = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
-      <div className="max-w-4xl text-center space-y-12">
+      <div className="max-w-6xl text-center space-y-12">
 
         {/* Quote Block */}
         <div className="space-y-6">
-          <p className="text-3xl md:text-5xl font-serif text-rise-deep leading-tight italic">
+          <p className="text-xl md:text-3xl font-serif text-rise-deep leading-tight italic">
             "A bad process with a good outcome is luck. <br className="hidden md:block" />
             A good process with a bad outcome might be a smart experiment."
           </p>

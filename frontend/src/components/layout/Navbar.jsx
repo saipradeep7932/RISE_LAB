@@ -203,13 +203,13 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.path}
-                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center ${isActive(link.path)
-                      ? 'text-white underline decoration-2 underline-offset-4 font-bold decoration-[#FF6600]'
-                      : 'text-white/90 hover:text-[#FF6600] hover:underline hover:decoration-1 hover:underline-offset-4'
+                    className={`px-6 py-3 text-sm font-bold transition-all duration-200 relative flex items-center h-full rounded-t-lg border-2 ${isActive(link.path)
+                      ? 'bg-white text-[#0B5472] border-[#0B5472] border-b-0'
+                      : 'border-transparent text-white/90 hover:bg-white/10 hover:text-white'
                       }`}
                   >
                     {link.name}
-                    {link.dropdown && <ChevronDown size={14} className="ml-1 mt-0.5" />}
+                    {link.dropdown && <ChevronDown size={14} className={`ml-1 mt-0.5 ${isActive(link.path) ? 'text-[#0B5472]' : 'opacity-70'}`} />}
                   </Link>
 
                   {/* Dropdown Menu */}
@@ -234,56 +234,7 @@ const Navbar = () => {
 
             {/* Desktop Search (Hidden per request) */}
             {/* <div className="hidden xl:flex items-center ml-4"> ... </div> */}
-            <div className="relative flex items-center h-full ml-1">
-              <button
-                onClick={() => setIsSearchFocused(!isSearchFocused)}
-                className="text-white hover:text-[#FF6600] transition-colors p-2"
-                aria-label="Search"
-              >
-                <Search size={20} />
-              </button>
-
-              {/* Search Overlay/Dropdown */}
-              <AnimatePresence>
-                {isSearchFocused && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                    className="absolute right-0 top-full mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-100 p-2 z-50"
-                  >
-                    <div className="flex items-center border-b border-gray-100 pb-2 mb-2">
-                      <Search size={16} className="text-gray-400 ml-2" />
-                      <input
-                        type="text"
-                        autoFocus
-                        placeholder="Search..."
-                        className="w-full px-3 py-1 outline-none text-gray-700 text-sm"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        onBlur={() => !searchQuery && setTimeout(() => setIsSearchFocused(false), 200)}
-                      />
-                    </div>
-                    <div className="max-h-60 overflow-y-auto">
-                      {searchQuery && filteredResults.length > 0 ? (
-                        filteredResults.map((result, idx) => (
-                          <div
-                            key={idx}
-                            className="px-3 py-2 hover:bg-blue-50 cursor-pointer text-sm text-gray-700 flex flex-col rounded"
-                            onMouseDown={() => handleSearchNavigate(result.path)}
-                          >
-                            <span className="font-medium text-[#0B5472]">{result.title}</span>
-                            <span className="text-xs text-gray-400 truncate">{result.content.substring(0, 50)}...</span>
-                          </div>
-                        ))
-                      ) : searchQuery ? (
-                        <div className="px-3 py-2 text-sm text-gray-400 text-center">No results found</div>
-                      ) : null}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            {/* Desktop Search Removed as per request */}
 
             {/* Mobile Menu Button - Also includes Search Toggle for Mobile */}
             <div className="xl:hidden flex items-center space-x-4">
