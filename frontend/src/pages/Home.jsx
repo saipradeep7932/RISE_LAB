@@ -7,6 +7,7 @@ import { useInView } from 'react-intersection-observer'; // Added useInView
 import { newsItems, motiveText, aboutText } from '../data/homeData';
 import motiveBg from "../assets/mission-bg.png";
 import profileImg from '../assets/team/Dr_Avala_Lavakumar.jpg';
+import homeSignature from '../assets/team/home-signature.png';
 
 const Home = () => {
   // --- 1. Dynamic Image Loading ---
@@ -150,12 +151,11 @@ const Home = () => {
             {/* LEFT: PROFILE (30-35%) */}
             <div className="w-full lg:w-[35%] flex flex-col justify-center">
               <div className="bg-white rounded-2xl shadow-lg border border-gray-100 border-l-4 border-l-[#FF6600] overflow-hidden p-8 text-center h-full flex flex-col justify-center transform transition-transform hover:-translate-y-1 duration-300">
-                <div className="w-56 h-56 mx-auto mb-6 rounded-2xl overflow-hidden shadow-md relative shrink-0">
-                  <div className="absolute inset-0 bg-gray-100 animate-pulse -z-10"></div>
+                <div className="w-56 h-56 mx-auto mb-6 rounded-2xl overflow-hidden shadow-md relative shrink-0 bg-gray-50">
                   <img
                     src={profileImg}
                     alt="Dr. Avala Lavakumar"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain object-center"
                   />
                 </div>
                 <h2 className="text-3xl font-bold text-[#0B5472] mb-2">Dr. Avala Lavakumar</h2>
@@ -179,33 +179,38 @@ const Home = () => {
                     <a href="tel:+911881232412" className="hover:text-[#FF6600] transition-colors font-medium">+91-1881-23-2412</a>
                   </div>
                 </div>
+
               </div>
             </div>
-
-            {/* RIGHT: ABOUT US (New Box Layout) */}
-            <div className="w-full lg:w-[65%] min-h-[500px] flex flex-col justify-center">
-              <div className="bg-[#F5F5F5] rounded-2xl shadow-md p-10 h-full flex flex-col justify-center">
-                <h2 className="text-3xl font-bold text-[#FF6600] mb-6 inline-block">About Us</h2>
-                <div className="text-black text-lg leading-relaxed text-justify space-y-6">
-                  <p>
-                    As researchers in the Department of Metallurgical and Materials Science Engineering at IIT Ropar, we focus on in-situ deformation studies. Utilizing techniques like transmission electron microscopy (TEM), synchrotron X-ray diffraction, and digital image correlation (DIC), we analyze structures and measure deformation across a diverse range of materials to address critical engineering challenges.
-                  </p>
-                  <p>
-                    Our research spans from traditional steel, aluminum, copper, and titanium alloys with well-established properties to complex high/medium entropy alloys (HEA/MEA) and transformation/twin-induced plasticity (TRIP/TWIP) alloys that offer unique combinations of strength and ductility, with applications ranging from advanced automotive components to cutting-edge tools for the petrochemical industry.
-                  </p>
-                  <p>
-                    In contrast to this modern approach, we also delve into archaeometallurgy, analyzing ancient metal artifacts and techniques to understand the evolution of metals and their properties.
-                  </p>
-                </div>
-
-                {/* Signature */}
-                <div className="mt-8 flex justify-end">
-                  <img src="../assets/signature.svg" alt="Signature" className="h-12 w-auto opacity-80" />
-                </div>
-              </div>
-            </div>
-
           </div>
+
+          {/* RIGHT: ABOUT US (New Box Layout) */}
+          <div className="w-full lg:w-[65%] min-h-[500px] flex flex-col justify-center">
+            <div className="bg-[#F5F5F5] rounded-2xl shadow-md p-10 h-full flex flex-col justify-center">
+              <h2 className="text-3xl font-bold text-[#FF6600] mb-6 inline-block">About Us</h2>
+              <div className="text-black text-lg leading-relaxed text-justify space-y-6">
+                <p>
+                  As researchers in the Department of Metallurgical and Materials Science Engineering at IIT Ropar, we focus on in-situ deformation studies. Utilizing techniques like transmission electron microscopy (TEM), synchrotron X-ray diffraction, and digital image correlation (DIC), we analyze structures and measure deformation across a diverse range of materials to address critical engineering challenges.
+                </p>
+                <p>
+                  Our research spans from traditional steel, aluminum, copper, and titanium alloys with well-established properties to complex high/medium entropy alloys (HEA/MEA) and transformation/twin-induced plasticity (TRIP/TWIP) alloys that offer unique combinations of strength and ductility, with applications ranging from advanced automotive components to cutting-edge tools for the petrochemical industry.
+                </p>
+                <p>
+                  In contrast to this modern approach, we also delve into archaeometallurgy, analyzing ancient metal artifacts and techniques to understand the evolution of metals and their properties.
+                </p>
+              </div>
+
+              {/* Signature */}
+              <div className="mt-8 flex justify-start">
+                <img
+                  src={homeSignature}
+                  alt="Signature"
+                  className="w-full max-w-[320px] h-auto mt-4 block opacity-90"
+                />
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
