@@ -50,10 +50,10 @@ const Publications = () => {
   return (
     <div className="min-h-screen bg-white font-sans text-gray-800 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#F5F5F5] rounded-2xl shadow-md p-8 md:p-12">
+        <div className="space-y-12">
 
           {/* --- SECTION 2: BOOK(S) --- */}
-          <section className="mb-12">
+          <section className="bg-[#CCCCCC] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
             <h2 className="text-3xl font-bold text-[#FF6600] mb-6 border-b-2 border-[#FF6600] inline-block pb-2">BOOK(S)</h2>
             <div className="space-y-6 pl-4 text-lg">
               <div>
@@ -77,7 +77,7 @@ const Publications = () => {
 
 
           {/* --- SECTION 3: JOURNAL PUBLICATIONS (NUMBERING 20 -> 1) --- */}
-          <section className="mb-12">
+          <section className="bg-[#CCCCCC] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
             <h2 className="text-3xl font-bold text-[#FF6600] mb-6 border-b-2 border-[#FF6600] inline-block pb-2">JOURNAL PUBLICATIONS</h2>
             <div className="space-y-6 pl-4 text-lg">
               {/* Entries... */}
@@ -242,7 +242,7 @@ const Publications = () => {
           </section>
 
           {/* --- SECTION 4: CONFERENCE PUBLICATIONS --- */}
-          <section className="mb-12">
+          <section className="bg-[#CCCCCC] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
             <h2 className="text-3xl font-bold text-[#FF6600] mb-6 border-b-2 border-[#FF6600] inline-block pb-2">CONFERENCE PUBLICATIONS</h2>
             <div className="space-y-6 pl-4 text-lg">
 
@@ -255,8 +255,8 @@ const Publications = () => {
               />
 
               {/* ... (Keeping other conference entries essentially same structure but just ensuring they are inside the box) ... */}
-              {/* I will truncate some of the middle conference entries in this replacement to save tokens if they are identical, 
-                  but the tool instructions say "complete drop-in replacement". 
+              {/* I will truncate some of the middle conference entries in this replacement to save tokens if they are identical,
+                  but the tool instructions say "complete drop-in replacement".
                   I must include ALL content. I will try to include all of them. */}
 
               <PublicationEntry
@@ -325,7 +325,7 @@ const Publications = () => {
           </section>
 
           {/* --- SECTION 5: PROFILES & REFERENCE LINKS --- */}
-          <section>
+          <section className="bg-[#CCCCCC] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
             <h2 className="text-3xl font-bold text-[#FF6600] mb-6 border-b-2 border-[#FF6600] inline-block pb-2">Researcher Profiles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <a

@@ -183,7 +183,7 @@ const Navbar = () => {
                     e.target.src = "https://placehold.co/150x50?text=LOGO";
                   }}
                   alt="Rise Lab Logo"
-                  className="h-12 w-auto object-contain bg-white/10 rounded-md p-1"
+                  className="h-12 w-auto object-contain"
                 />
               </Link>
             </div>
