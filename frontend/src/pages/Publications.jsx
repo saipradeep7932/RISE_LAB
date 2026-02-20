@@ -53,7 +53,7 @@ const Publications = () => {
         <div className="space-y-12">
 
           {/* --- SECTION 2: BOOK(S) --- */}
-          <section className="bg-[#CCCCCC] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
+          <section className="bg-[#F5F5F5] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
             <h2 className="text-3xl font-bold text-[#FF6600] mb-6 border-b-2 border-[#FF6600] inline-block pb-2">BOOK(S)</h2>
             <div className="space-y-6 pl-4 text-lg">
               <div>
@@ -77,7 +77,7 @@ const Publications = () => {
 
 
           {/* --- SECTION 3: JOURNAL PUBLICATIONS (NUMBERING 20 -> 1) --- */}
-          <section className="bg-[#CCCCCC] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
+          <section className="bg-[#F5F5F5] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
             <h2 className="text-3xl font-bold text-[#FF6600] mb-6 border-b-2 border-[#FF6600] inline-block pb-2">JOURNAL PUBLICATIONS</h2>
             <div className="space-y-6 pl-4 text-lg">
               {/* Entries... */}
@@ -242,7 +242,7 @@ const Publications = () => {
           </section>
 
           {/* --- SECTION 4: CONFERENCE PUBLICATIONS --- */}
-          <section className="bg-[#CCCCCC] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
+          <section className="bg-[#F5F5F5] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
             <h2 className="text-3xl font-bold text-[#FF6600] mb-6 border-b-2 border-[#FF6600] inline-block pb-2">CONFERENCE PUBLICATIONS</h2>
             <div className="space-y-6 pl-4 text-lg">
 
@@ -301,7 +301,7 @@ const Publications = () => {
 
               <PublicationEntry
                 id="7"
-                authors="A. Lavakumar, M. Bheema, P.K. Singh, R.K. Rai, S.K. Srivastava,"
+                authors="Aval Lavakumar, M. Bheema, P.K. Singh, R.K. Rai, S.K. Srivastava,"
                 title="Measurement of thermo physical properties of nickel based superalloys,"
                 journalInfo={<>in: Proceedings of the International Conference on Advances in Manufacturing and Materials Engineering (AMME 2013), 2013.</>}
                 link="https://api.semanticscholar.org/CorpusID:212748817"
@@ -309,7 +309,7 @@ const Publications = () => {
 
               <PublicationEntry
                 id="8"
-                authors="A. Lavakumar, Ch.V.S. Murthy, R. Chkravorty, N. Eswara Prasad,"
+                authors="Avala Lavakumar, Ch.V.S. Murthy, R. Chkravorty, N. Eswara Prasad,"
                 title="Effect of microstructure on the ambient tensile deformation behavior of nickel-based superalloy Supercast 247A,"
                 journalInfo={<>in: Proceedings of the PSRC International Conference on Advances in Manufacturing and Materials Engineering (ICMMME'13), Johannesburg, South Africa, April 15-16, 2013</>}
               />
@@ -325,34 +325,34 @@ const Publications = () => {
           </section>
 
           {/* --- SECTION 5: PROFILES & REFERENCE LINKS --- */}
-          <section className="bg-[#CCCCCC] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
+          <section className="bg-[#F5F5F5] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
             <h2 className="text-3xl font-bold text-[#FF6600] mb-6 border-b-2 border-[#FF6600] inline-block pb-2">Researcher Profiles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <a
                 href="https://scholar.google.com/citations?user=H_WhrEIAAAAJ&hl=en"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white hover:bg-gray-100 border border-gray-200 hover:border-[#FF6600] rounded-lg shadow-sm hover:shadow-md transition-all h-40 flex items-center justify-center p-6 group"
+                className="bg-white hover:bg-gray-100 border border-gray-200 hover:border-[#FF6600] rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-2 h-40 flex items-center justify-center p-6 group"
               >
-                <img src={scholarLogo} alt="Google Scholar" className="max-h-full max-w-full object-contain" />
+                <img src={scholarLogo} alt="Google Scholar" className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105" />
               </a>
 
               <a
                 href="https://orcid.org/0000-0001-8287-8607"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white hover:bg-gray-100 border border-gray-200 hover:border-[#FF6600] rounded-lg shadow-sm hover:shadow-md transition-all h-40 flex items-center justify-center p-6 group"
+                className="bg-white hover:bg-gray-100 border border-gray-200 hover:border-[#FF6600] rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-2 h-40 flex items-center justify-center p-6 group"
               >
-                <img src={orcidLogo} alt="ORCID" className="max-h-full max-w-full object-contain" />
+                <img src={orcidLogo} alt="ORCID" className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105" />
               </a>
 
               <a
                 href="https://www.researchgate.net/profile/Avala-Lavakumar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white hover:bg-gray-100 border border-gray-200 hover:border-[#FF6600] rounded-lg shadow-sm hover:shadow-md transition-all h-40 flex items-center justify-center p-6 group"
+                className="bg-white hover:bg-gray-100 border border-gray-200 hover:border-[#FF6600] rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-2 h-40 flex items-center justify-center p-6 group"
               >
-                <img src={researchgateLogo} alt="ResearchGate" className="max-h-full max-w-full object-contain" />
+                <img src={researchgateLogo} alt="ResearchGate" className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105" />
               </a>
             </div>
           </section>

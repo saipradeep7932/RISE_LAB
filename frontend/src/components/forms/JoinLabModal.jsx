@@ -9,9 +9,6 @@ const JoinLabModal = ({ isOpen, onClose, defaultPosition = "Ph.D. Student" }) =>
     position: defaultPosition,
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-
   // Update position if default changes (e.g. user clicks different Apply button)
   React.useEffect(() => {
     setFormData(prev => ({ ...prev, position: defaultPosition }));
@@ -19,19 +16,25 @@ const JoinLabModal = ({ isOpen, onClose, defaultPosition = "Ph.D. Student" }) =>
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      // Reset after 2 seconds
-      setTimeout(() => {
-        setIsSuccess(false);
-        onClose();
-        setFormData({ name: '', email: '', position: 'Ph.D. Student', message: '' });
-      }, 2000);
-    }, 1500);
+    const { name, position, message } = formData;
+    const recipient = "lava@iitrpr.ac.in";
+    
+    // Refined, professional subject line
+    const subject = `Application: ${position} at RISE Lab - ${name}`;
+    
+    // Professionally formatted email body focusing on "interest"
+    const body = `Dear Dr. Avala Lavakumar,\r\n\r\nMy name is ${name} and I am writing to express my strong interest in the ${position} opening at the RISE Lab.\r\n\r\nHere is a brief overview of my research interests and background:\r\n${message}\r\n\r\n[Please remember to attach your CV and other required documents before sending.]\r\n\r\nThank you for your time and consideration.\r\n\r\nSincerely,\r\n${name}`;
+
+    // This specific URL forces Gmail to open a new draft in the browser
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Open the Gmail draft in a new tab
+    window.open(gmailLink, '_blank');
+
+    // Close modal and reset
+    onClose();
+    setFormData({ name: '', email: '', position: defaultPosition, message: '' });
   };
 
   if (!isOpen) return null;
@@ -65,84 +68,69 @@ const JoinLabModal = ({ isOpen, onClose, defaultPosition = "Ph.D. Student" }) =>
 
           {/* Body */}
           <div className="p-8">
-            {isSuccess ? (
-              <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
-                <CheckCircle size={64} className="text-green-500 animate-bounce" />
-                <h4 className="text-2xl font-bold text-slate-800">Application Sent!</h4>
-                <p className="text-slate-600">Thank you for your interest. We will get back to you soon.</p>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                <input
+                  type="text"
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow"
+                  placeholder="Dr. Jane Doe"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow"
-                    placeholder="Dr. Jane Doe"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  />
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
-                  <input
-                    type="email"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow"
-                    placeholder="jane@example.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                <input
+                  type="email"
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow"
+                  placeholder="jane@example.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                />
+              </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Position of Interest</label>
-                  <select
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow bg-white"
-                    value={formData.position}
-                    onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-                  >
-                    <option value="Post-Doctoral Fellow">Post-Doctoral Fellow</option>
-                    <option value="Ph.D. Student">Ph.D. Student</option>
-                    <option value="M.Tech. Thesis">M.Tech. Thesis</option>
-                    <option value="B.Tech. Thesis">B.Tech. Thesis</option>
-                    <option value="Summer Trainee">Summer Trainee</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Position of Interest</label>
+                <select
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow bg-white"
+                  value={formData.position}
+                  onChange={(e) => setFormData({ ...formData, position: e.target.value })}
+                >
+                  <option value="Post-Doctoral Fellow">Post-Doctoral Fellow</option>
+                  <option value="Ph.D. Student">Ph.D. Student</option>
+                  <option value="M.Tech. Thesis">M.Tech. Thesis</option>
+                  <option value="B.Tech. Thesis">B.Tech. Thesis</option>
+                  <option value="Summer Trainee">Summer Trainee</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Message / Cover Letter</label>
-                  <textarea
-                    rows="4"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow resize-none"
-                    placeholder="Briefly describe your research interests and motivation..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  ></textarea>
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Message / Cover Letter</label>
+                <textarea
+                  rows="4"
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow resize-none"
+                  placeholder="Briefly describe your research interests and motivation..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                ></textarea>
+              </div>
 
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-indigo-500/30"
-                  >
-                    {isSubmitting ? (
-                      <span className="animate-pulse">Sending...</span>
-                    ) : (
-                      <>
-                        <Send size={18} />
-                        Submit Application
-                      </>
-                    )}
-                  </button>
-                </div>
-              </form>
-            )}
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  className="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg hover:shadow-indigo-500/30"
+                >
+                  <Send size={18} />
+                  Submit Application
+                </button>
+              </div>
+            </form>
           </div>
         </motion.div>
       </div>

@@ -19,18 +19,25 @@ const EquipmentRequestModal = ({ isOpen, onClose, equipmentList = [], defaultEqu
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      setTimeout(() => {
-        setIsSuccess(false);
-        onClose();
-        setFormData({ name: '', email: '', equipment: '', purpose: '', date: '' });
-      }, 2500);
-    }, 1500);
+    const { name, email, equipment, purpose, date } = formData;
+    const recipient = "lava@iitrpr.ac.in";
+    
+    // Professional subject line for equipment
+    const subject = `Equipment Access Request: ${equipment} - ${name}`;
+    
+    // Formatted email body including the date and purpose
+    const body = `Dear Dr. Avala Lavakumar,\r\n\r\nMy name is ${name} and I would like to request access to the lab equipment.\r\n\r\nDetails of my request:\r\n- Equipment: ${equipment}\r\n- Preferred Date: ${date}\r\n- Contact Email: ${email}\r\n\r\nPurpose of Usage:\r\n${purpose}\r\n\r\nThank you for your time and consideration.\r\n\r\nSincerely,\r\n${name}`;
+
+    // This specific URL forces Gmail to open a new draft in the browser
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Open the Gmail draft in a new tab
+    window.open(gmailLink, '_blank');
+
+    // Close modal and reset form
+    onClose();
+    setFormData({ name: '', email: '', equipment: defaultEquipment, purpose: '', date: '' });
   };
 
   if (!isOpen) return null;

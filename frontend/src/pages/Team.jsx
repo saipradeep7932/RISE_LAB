@@ -105,9 +105,9 @@ const Team = () => {
                   <h3 className="text-2xl font-bold text-[#0B5472] mb-1">{staff.name}</h3>
                   <p className="text-lg font-medium text-[#0B5472] mb-4">{staff.role}</p>
 
-                  <div className="mb-4">
-                    <span className="font-bold text-[#FF6600]">Research area:</span>
-                    <p className="text-black inline ml-2 text-sm">{staff.area}</p>
+                  <div className="mb-4 bg-white/50 px-4 py-2 rounded-lg border-l-4 border-[#FF6600] w-full">
+                    <span className="font-bold text-[#FF6600] text-sm uppercase tracking-wide">Research Area</span>
+                    <p className="text-black mt-1 text-sm">{staff.area}</p>
                   </div>
                   <p className="text-black leading-relaxed text-justify text-sm">{staff.bio}</p>
 

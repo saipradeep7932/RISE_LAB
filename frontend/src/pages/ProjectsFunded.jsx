@@ -59,7 +59,7 @@ const ProjectsFunded = () => {
         <div className="space-y-12">
 
           {/* Section 1: Sponsored Projects */}
-          <section className="bg-[#CCCCCC] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
+          <section className="bg-[#F5F5F5] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
             <h2 className="text-3xl font-bold text-[#FF6600] mb-8 border-b-2 border-[#FF6600] inline-block pb-2">
               Sponsored Projects
             </h2>
@@ -71,7 +71,7 @@ const ProjectsFunded = () => {
           </section>
 
           {/* Section 2: Consultancy Projects */}
-          <section className="bg-[#CCCCCC] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
+          <section className="bg-[#F5F5F5] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
             <h2 className="text-3xl font-bold text-[#FF6600] mb-8 border-b-2 border-[#FF6600] inline-block pb-2">
               Consultancy Projects
             </h2>

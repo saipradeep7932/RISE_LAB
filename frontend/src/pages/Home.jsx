@@ -146,6 +146,8 @@ const Home = () => {
       ========================================================================= */}
       <section className="bg-white border-b border-gray-200 py-12 relative z-10 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* This is the Flex Container that holds BOTH left and right sides */}
           <div className="flex flex-col lg:flex-row gap-8 items-stretch">
 
             {/* LEFT: PROFILE (30-35%) */}
@@ -182,35 +184,32 @@ const Home = () => {
 
               </div>
             </div>
-          </div>
 
-          {/* RIGHT: ABOUT US (New Box Layout) */}
-          <div className="w-full lg:w-[65%] min-h-[500px] flex flex-col justify-center">
-            <div className="bg-[#F5F5F5] rounded-2xl shadow-md p-10 h-full flex flex-col justify-center">
-              <h2 className="text-3xl font-bold text-[#FF6600] mb-6 inline-block">About Us</h2>
-              <div className="text-black text-lg leading-relaxed text-justify space-y-6">
-                <p>
-                  As researchers in the Department of Metallurgical and Materials Science Engineering at IIT Ropar, we focus on in-situ deformation studies. Utilizing techniques like transmission electron microscopy (TEM), synchrotron X-ray diffraction, and digital image correlation (DIC), we analyze structures and measure deformation across a diverse range of materials to address critical engineering challenges.
-                </p>
-                <p>
-                  Our research spans from traditional steel, aluminum, copper, and titanium alloys with well-established properties to complex high/medium entropy alloys (HEA/MEA) and transformation/twin-induced plasticity (TRIP/TWIP) alloys that offer unique combinations of strength and ductility, with applications ranging from advanced automotive components to cutting-edge tools for the petrochemical industry.
-                </p>
-                <p>
-                  In contrast to this modern approach, we also delve into archaeometallurgy, analyzing ancient metal artifacts and techniques to understand the evolution of metals and their properties.
-                </p>
-              </div>
+            {/* RIGHT: ABOUT US (New Box Layout) */}
+            <div className="w-full lg:w-[65%] min-h-[500px] flex flex-col justify-center">
+              <div className="bg-[#F5F5F5] rounded-2xl shadow-md p-10 h-full flex flex-col justify-center">
+                <h2 className="text-3xl font-bold text-[#FF6600] mb-6 inline-block">About Us</h2>
+                <div className="text-black text-lg leading-relaxed text-justify space-y-6">
+                  <p>
+                    As researchers in the Department of Metallurgical and Materials Science Engineering at IIT Ropar, we focus on in-situ deformation studies. Utilizing techniques like transmission electron microscopy (TEM), synchrotron X-ray diffraction, and digital image correlation (DIC), we analyze structures and measure deformation across a diverse range of materials to address critical engineering challenges.
+                  </p>
+                  <p>
+                    Our research spans from traditional steel, aluminum, copper, and titanium alloys with well-established properties to complex high/medium entropy alloys (HEA/MEA) and transformation/twin-induced plasticity (TRIP/TWIP) alloys that offer unique combinations of strength and ductility, with applications ranging from advanced automotive components to cutting-edge tools for the petrochemical industry. In contrast to this modern approach, we also delve into archaeometallurgy, analyzing ancient metal artifacts and techniques to understand the evolution of metals and their properties.
+                  </p>
+                </div>
 
-              {/* Signature */}
-              <div className="mt-8 flex justify-start">
-                <img
-                  src={homeSignature}
-                  alt="Signature"
-                  className="w-full max-w-[320px] h-auto mt-4 block opacity-90"
-                />
+                {/* Banner Image */}
+                <div className="mt-8 w-full">
+                  <img
+                    src={homeSignature}
+                    alt="IIT Ropar Banner"
+                    className="w-full h-auto mt-4 block rounded-md shadow-sm"
+                  />
+                </div>
               </div>
             </div>
-          </div>
 
+          </div> {/* <-- THIS is where the Flex Container should close */}
         </div>
       </section>
 
