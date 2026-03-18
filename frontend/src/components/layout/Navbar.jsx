@@ -77,7 +77,7 @@ const Navbar = () => {
     researchMaterials.forEach(item => {
       index.push({
         title: `Research - ${item.title}`,
-        path: '/research/materials-path',
+        path: '/research/materials',
         content: `${item.title} ${item.content}`
       });
     });
@@ -141,7 +141,7 @@ const Navbar = () => {
       dropdown: [
         { name: 'Methods', path: '/research/methods' },
         { name: 'Mechanisms', path: '/research/mechanisms' },
-        { name: 'Materials', path: '/research/materials-path' },
+        { name: 'Materials', path: '/research/materials' },
       ]
     },
     { name: 'Publications', path: '/publications' },
@@ -170,7 +170,7 @@ const Navbar = () => {
       {/* =========================================================================
           PART 2: MAIN NAVIGATION (Updated)
       ========================================================================= */}
-      <nav className="bg-[#0B5472] text-white shadow-md sticky top-0 z-40">
+      <nav className="bg-[linear-gradient(to_right,#F5F5F5_0%,#0B5472_25%,#0B5472_100%)] text-white shadow-md sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20">
             {/* Logo/Title */}

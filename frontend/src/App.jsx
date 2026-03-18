@@ -15,7 +15,7 @@ import Contact from './pages/Contact';
 import Research from './pages/Research';
 import Methods from './pages/Methods';
 import Mechanisms from './pages/Mechanisms';
-import MaterialsPath from './pages/MaterialsPath';
+import Materials from './pages/Materials';
 import Publications from './pages/Publications';
 import ProjectsFunded from './pages/ProjectsFunded';
 import Teachings from './pages/Teachings';
@@ -37,7 +37,7 @@ function App() {
             <Route path="/research" element={<Research />} />
             <Route path="/research/methods" element={<Methods />} />
             <Route path="/research/mechanisms" element={<Mechanisms />} />
-            <Route path="/research/materials-path" element={<MaterialsPath />} />
+            <Route path="/research/materials" element={<Materials />} />
 
             <Route path="/publications" element={<Publications />} />
             <Route path="/projects-funded" element={<ProjectsFunded />} />

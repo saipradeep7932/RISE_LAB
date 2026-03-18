@@ -66,12 +66,12 @@ const Team = () => {
               </div>
             </div>
             <div className="md:w-2/3 px-6 py-5 flex flex-col justify-center border-l-4 border-[#FF6600]">
-              <h3 className="text-3xl font-bold text-[#0B5472] mb-2">{groupHead.name}</h3>
+              <h3 className="text-3xl font-bold text-[#FF6600] mb-2">{groupHead.name}</h3>
               <p className="text-xl font-medium text-[#0B5472] mb-1">{groupHead.title}</p>
               <p className="text-black mb-6">{groupHead.dept}</p>
 
               <div>
-                <h4 className="text-sm font-bold text-[#FF6600] uppercase tracking-wide mb-2">Research Interest</h4>
+                <h4 className="text-sm font-bold text-[#0B5472] uppercase tracking-wide mb-2">Research Interest</h4>
                 <p className="text-black leading-relaxed text-sm">{groupHead.interest}</p>
               </div>
 
@@ -88,38 +88,43 @@ const Team = () => {
         {/* --- SECTION 2: RESEARCH STAFF --- */}
         <section className="bg-white rounded-3xl">
           <h2 className="text-2xl font-bold text-[#0B5472] border-l-4 border-rise-ocean pl-3 mb-8 uppercase">Research Staff</h2>
-          <div className="flex flex-col gap-8">
-            {researchStaff.map((staff, idx) => (
-              <div key={idx} className="bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border border-[#F5F5F5] px-6 py-5 flex flex-col md:flex-row gap-8 items-start border-l-4 border-l-[#FF6600]">
-                <div className="md:w-1/3 flex-shrink-0 flex justify-center md:justify-start">
-                  {/* Large Avatar 1:1 */}
-                  <div className="w-64 h-64 bg-gray-200 rounded-lg overflow-hidden border-4 border-white shadow-sm relative">
-                    <img
-                      src={getImagePath(staff.image) || PLACEHOLDER_IMG}
-                      alt={staff.name}
-                      className="absolute inset-0 w-full h-full object-cover object-top"
-                    />
+          <div className="flex flex-col gap-12">
+            {researchStaff.map((staff, idx) => {
+              // 1st (idx 0) -> Left (self-start), 2nd (idx 1) -> Right (self-end)
+              const alignmentClass = idx % 2 === 0 ? 'self-start' : 'self-end';
+
+              return (
+                <div key={idx} className={`w-full md:w-[85%] bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border border-[#F5F5F5] px-6 py-5 flex flex-col md:flex-row gap-8 items-center border-l-4 border-l-[#FF6600] ${alignmentClass}`}>
+                  <div className="w-full md:w-1/3 flex-shrink-0 flex justify-center">
+                    {/* Large Avatar 1:1 */}
+                    <div className="w-64 h-64 bg-gray-200 rounded-lg overflow-hidden border-4 border-white shadow-sm relative">
+                      <img
+                        src={getImagePath(staff.image) || PLACEHOLDER_IMG}
+                        alt={staff.name}
+                        className="absolute inset-0 w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full md:w-2/3 flex flex-col justify-center text-left">
+                    <h3 className="text-3xl font-bold text-[#FF6600] mb-1">{staff.name}</h3>
+                    <p className="text-xl font-medium text-[#0B5472] mb-4">{staff.role}</p>
+
+                    <div className="mb-4 bg-white/50 px-4 py-2 rounded-lg border-l-4 border-[#FF6600] w-full">
+                      <span className="font-bold text-[#0B5472] text-sm uppercase tracking-wide">Research Area</span>
+                      <p className="text-black mt-1 text-sm">{staff.area}</p>
+                    </div>
+                    <p className="text-black leading-relaxed text-justify text-sm">{staff.bio}</p>
+
+                    {/* BOTTOM ACCENT WAVE */}
+                    <div className="w-full mt-6 opacity-40 group-hover:opacity-70 transition-opacity duration-500">
+                      <svg className="w-full h-3 text-orange-400 fill-none stroke-current stroke-[3]" viewBox="0 0 100 12" preserveAspectRatio="none">
+                        <path d="M0,6 C30,12 70,0 100,6" strokeLinecap="round" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
-                <div className="md:w-2/3">
-                  <h3 className="text-2xl font-bold text-[#0B5472] mb-1">{staff.name}</h3>
-                  <p className="text-lg font-medium text-[#0B5472] mb-4">{staff.role}</p>
-
-                  <div className="mb-4 bg-white/50 px-4 py-2 rounded-lg border-l-4 border-[#FF6600] w-full">
-                    <span className="font-bold text-[#FF6600] text-sm uppercase tracking-wide">Research Area</span>
-                    <p className="text-black mt-1 text-sm">{staff.area}</p>
-                  </div>
-                  <p className="text-black leading-relaxed text-justify text-sm">{staff.bio}</p>
-
-                  {/* BOTTOM ACCENT WAVE */}
-                  <div className="w-full mt-4 opacity-40 group-hover:opacity-70 transition-opacity duration-500">
-                    <svg className="w-full h-3 text-orange-400 fill-none stroke-current stroke-[3]" viewBox="0 0 100 12" preserveAspectRatio="none">
-                      <path d="M0,6 C30,12 70,0 100,6" strokeLinecap="round" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -149,11 +154,11 @@ const Team = () => {
 
                   {/* Content Side */}
                   <div className="w-full md:w-2/3 flex flex-col justify-center text-left">
-                    <h3 className="text-3xl font-bold text-[#0B5472] mb-1">{student.name}</h3>
+                    <h3 className="text-3xl font-bold text-[#FF6600] mb-1">{student.name}</h3>
                     <p className="text-xl font-medium text-[#0B5472] mb-6">{student.role}</p>
 
                     <div className="mb-4 bg-white/50 px-4 py-2 rounded-lg border-l-4 border-[#FF6600] w-full">
-                      <span className="font-bold text-[#FF6600] text-sm uppercase tracking-wide">Research Area</span>
+                      <span className="font-bold text-[#0B5472] text-sm uppercase tracking-wide">Research Area</span>
                       <p className="text-black mt-1 text-sm">{student.area}</p>
                     </div>
 
@@ -191,7 +196,7 @@ const Team = () => {
                 </div>
 
                 <div className="p-5 flex flex-col flex-grow">
-                  <h3 className="font-bold text-[#0B5472] text-lg mb-1">{student.name}</h3>
+                  <h3 className="font-bold text-[#FF6600] text-lg mb-1">{student.name}</h3>
                   <p className="text-sm font-semibold text-gray-700">{student.timeline}</p>
 
                   {/* BOTTOM ACCENT WAVE */}
@@ -222,7 +227,7 @@ const Team = () => {
                   />
                 </div>
                 <div className="p-5 flex flex-col flex-grow bg-[#F5F5F5]">
-                  <span className="text-base font-bold text-[#0B5472] mb-1">{member.name}</span>
+                  <span className="text-base font-bold text-[#FF6600] mb-1">{member.name}</span>
                   <span className="text-sm text-black italic">{member.timeline}</span>
 
                   {/* BOTTOM ACCENT WAVE */}

@@ -213,10 +213,39 @@ const Home = () => {
         </div>
       </section>
 
+
       {/* =========================================================================
-          SECTION 2: RESEARCH HIGHLIGHTS (Moved Up)
+          SECTION 2: MOTIVE / VISION (Moved Down)
       ========================================================================= */}
-      <section className="py-20 bg-white">
+      <section
+        className="relative w-full overflow-hidden py-32 flex items-center justify-center text-center z-10"
+        style={{ backgroundColor: isMotiveActive ? 'transparent' : '#0f172a' }}
+      >
+        <div ref={motiveSectionRef} className="relative z-10 max-w-5xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <h2
+              className="text-4xl md:text-5xl font-bold mb-8 text-white tracking-tight leading-tight"
+            >
+              Motive & Vision
+            </h2>
+            <div className="w-24 h-1.5 bg-[#FF6600] mx-auto mb-10 rounded-full"></div>
+            <p ref={motiveTextRef} className="text-xl md:text-2xl font-light leading-relaxed text-gray-100 max-w-4xl mx-auto drop-shadow-md">
+              Our lab is dedicated to pushing the boundaries of materials science through rigorous in-situ deformation studies and advanced microscopy. We aim to bridge the gap between fundamental research and real-world engineering applications, fostering innovation in both modern alloys and the understanding of ancient metallurgical heritage.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+
+      {/* =========================================================================
+          SECTION 3: RESEARCH HIGHLIGHTS (Moved Up)
+      ========================================================================= */}
+      <section className="py-20 bg-[#F5F5F5] border-y-2 border-[#FF6600]/30 relative shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center">
           <h2 className="text-3xl font-bold text-[#0B5472]">Research Highlights</h2>
           <div className="w-24 h-1 bg-[#FF6600] mx-auto mt-4 rounded-full"></div>
@@ -248,7 +277,7 @@ const Home = () => {
                   {/* Active Image (Center) */}
                   <motion.div
                     key={currentImageIndex}
-                    className="relative z-10 w-full md:w-3/5 h-[350px] md:h-[400px] shadow-2xl rounded-xl overflow-hidden border-4 border-white"
+                    className="relative z-10 w-full md:w-3/5 h-[350px] md:h-[450px] shadow-2xl rounded-xl overflow-hidden border-4 border-white flex items-center justify-center bg-white"
                     initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.9, opacity: 0 }}
@@ -257,7 +286,7 @@ const Home = () => {
                     <img
                       src={images[currentImageIndex]}
                       alt={`Highlight ${currentImageIndex + 1} `}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain bg-white"
                     />
                   </motion.div>
                 </AnimatePresence>
@@ -270,32 +299,7 @@ const Home = () => {
       </section>
 
 
-      {/* =========================================================================
-          SECTION 3: MOTIVE / VISION (Moved Down)
-      ========================================================================= */}
-      <section
-        className="relative w-full overflow-hidden py-32 flex items-center justify-center text-center z-10"
-        style={{ backgroundColor: isMotiveActive ? 'transparent' : '#0f172a' }}
-      >
-        <div ref={motiveSectionRef} className="relative z-10 max-w-5xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h2
-              className="text-4xl md:text-5xl font-bold mb-8 text-white tracking-tight leading-tight"
-            >
-              Motive & Vision
-            </h2>
-            <div className="w-24 h-1.5 bg-[#FF6600] mx-auto mb-10 rounded-full"></div>
-            <p ref={motiveTextRef} className="text-xl md:text-2xl font-light leading-relaxed text-gray-100 max-w-4xl mx-auto drop-shadow-md">
-              Our lab is dedicated to pushing the boundaries of materials science through rigorous in-situ deformation studies and advanced microscopy. We aim to bridge the gap between fundamental research and real-world engineering applications, fostering innovation in both modern alloys and the understanding of ancient metallurgical heritage.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      
 
 
       {/* =========================================================================
@@ -303,11 +307,10 @@ const Home = () => {
       ========================================================================= */}
       <section className="py-16 bg-white border-t border-gray-100 shadow-inner">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-[#0B5472] mb-12 flex items-center justify-center gap-3">
-            <span className="w-2 h-2 bg-[#FF6600] rounded-full"></span>
+          <h2 className="text-3xl font-bold text-center text-[#0B5472] mb-4">
             Latest News
-            <span className="w-2 h-2 bg-[#FF6600] rounded-full"></span>
           </h2>
+          <div className="w-24 h-1 bg-[#FF6600] mx-auto mb-10 rounded-full"></div>
 
           <div className="flex flex-col md:flex-row items-center gap-6">
             {/* Controls */}

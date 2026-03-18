@@ -23,7 +23,7 @@ const Research = () => {
                   className="w-full h-full object-contain drop-shadow-sm group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 group-hover:text-rise-ocean mt-auto">Methods</h3>
+              <h3 className="text-2xl font-bold text-[#FF6600] mt-auto">Methods</h3>
             </div>
           </Link>
 
@@ -36,20 +36,20 @@ const Research = () => {
                   className="w-full h-full object-contain drop-shadow-sm group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 group-hover:text-rise-ocean mt-auto">Mechanisms</h3>
+              <h3 className="text-2xl font-bold text-[#FF6600] mt-auto">Mechanisms</h3>
             </div>
           </Link>
 
-          <Link to="/research/materials-path" className="group">
+          <Link to="/research/materials" className="group">
             <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl hover:border-rise-ocean transition-all duration-300 transform hover:-translate-y-2 h-full flex flex-col items-center text-center">
               <div className="w-48 h-48 mb-6 flex items-center justify-center">
                 <img
                   src={materialsIllu}
-                  alt="Materials Path"
+                  alt="Materials"
                   className="w-full h-full object-contain drop-shadow-sm group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 group-hover:text-rise-ocean mt-auto">Materials Path</h3>
+              <h3 className="text-2xl font-bold text-[#FF6600] mt-auto">Materials</h3>
             </div>
           </Link>
         </div>

@@ -13,6 +13,13 @@ export const researchStaff = [
     area: "Solid state recycling of Copper and Copper alloys",
     bio: "Kolli Venkatesh, a graduate in Metallurgical and Materials Engineering, has garnered significant research experience. His work spans the utilization of metallurgical waste for foundry applications and the metallographic examination of archeological samples. He has also investigated brazing interfaces for the petrochemical sector, demonstrating strong analytical skills using Excel and Origin. Beyond his professional endeavors, Venkatesh finds enjoyment in narrating stories and actively participates in sports like cricket and badminton. This blend of technical expertise and diverse interests defines his promising early career.",
     image: "Kolli_Venkatesh.jpg"
+  },
+  {
+    name: "Mr. DHARAMVEER GEHLOT",
+    role: "Project Staff",
+    area: "Brazing and joining of dissimilar metals for advanced engineering applications",
+    bio: "Dharamveer Gehlot completed his B.Tech in Metallurgical and Materials Engineering from the National Institute of Advanced Manufacturing Technology (NIAMT), Ranchi. He is currently working as Project Staff on a research project focused on brazing and joining of dissimilar metals, aimed at developing reliable joining strategies for advanced structural and industrial applications. He has prior industrial experience as Assistant Manager – Design & Development at Pradeep Metals Ltd., Mumbai, where he worked on forging yield improvement, weight reduction of automotive components, and process optimization using design and simulation tools such as AutoCAD, SolidWorks, and Deform. He also gained research experience at IIT Indore, where he worked on the synthesis of Mg–Zn–TiO₂ biodegradable composites using powder metallurgy, involving phase analysis, thermal studies, and microstructural characterization. He is skilled in materials characterization techniques such as SEM, XRD, mechanical testing, and thermal analysis, and is interested in advanced materials processing and joining technologies.",
+    image: "Dharamveer_Gehlot.png"
   }
 ];
 
@@ -25,6 +32,13 @@ export const phdStudents = [
     image: "Sushree_Priyadarshini_Mohapatra.jpg"
   },
   {
+    name: "Mr. GEDELA SANTHOSH KUMAR",
+    role: "Ph.D. Student: 2025 July ~",
+    area: "Strategic design of Transformation-Induced Plasticity (TRIP) and Twinning-Induced Plasticity (TWIP) mechanisms in medium-manganese steels.",
+    bio: "Santhosh completed his B.Tech in Metallurgical and Materials Engineering from the National Institute of Advanced Manufacturing Technology, Ranchi. He brings hands-on industrial experience from JSW’s Ayena Innovation, where he co-authored a granted patent and contributed to several others focused on sustainable materials. His training at Rashtriya Ispat Nigam Limited (RINL) involved leading teams and studying steel plant operations and rolling processes. His academic work includes research on heat treatment effects in F55 super duplex steel and pioneering studies on self-healing metals. Proficient in SEM, XRD, corrosion testing, and process optimization, he is passionate about applying advanced metallurgical techniques to real-world challenges. He is committed to contributing to the advancement of materials science through rigorous research and industry-aligned innovation.",
+    image: "Gedela_Santhosh_Kumar.jpg"
+  },
+  {
     name: "Mr. VIKRAM TIRUKKOVELUR",
     role: "Ph.D. Student (ERP): 2024 January ~",
     area: "Developing brazing techniques for Metal to Metal, Metal to Cermet, and Metal to Ceramics",
@@ -32,11 +46,18 @@ export const phdStudents = [
     image: "Vikram_Tirukkovelur.jpg"
   },
   {
-    name: "Mr. GEDELA SANTHOSH KUMAR",
-    role: "Ph.D. Student: 2025 July ~",
-    area: "Strategic design of Transformation-Induced Plasticity (TRIP) and Twinning-Induced Plasticity (TWIP) mechanisms in medium-manganese steels.",
-    bio: "Santhosh completed his B.Tech in Metallurgical and Materials Engineering from the National Institute of Advanced Manufacturing Technology, Ranchi. He brings hands-on industrial experience from JSW’s Ayena Innovation, where he co-authored a granted patent and contributed to several others focused on sustainable materials. His training at Rashtriya Ispat Nigam Limited (RINL) involved leading teams and studying steel plant operations and rolling processes. His academic work includes research on heat treatment effects in F55 super duplex steel and pioneering studies on self-healing metals. Proficient in SEM, XRD, corrosion testing, and process optimization, he is passionate about applying advanced metallurgical techniques to real-world challenges. He is committed to contributing to the advancement of materials science through rigorous research and industry-aligned innovation.",
-    image: "Gedela_Santhosh_Kumar.jpg"
+    name: "Sappioi Sanjay",
+    role: "Ph.D. Student (ERP): 2024 January ~",
+    area: "Developing brazing techniques for Metal to Metal, Metal to Cermet, and Metal to Ceramics",
+    bio: "Vikram is a seasoned scientist with over 15 years of experience working at the Defence Research and Development Organisation (DRDO). He holds a Master’s degree from the prestigious Indian Institute of Technology Madras (IITM) and a Bachelor’s degree from Jawaharlal Nehru Technological University Hyderabad (JNTUH). His work primarily revolves around cutting-edge defense technologies, with expertise in materials science, advanced propulsion systems, and strategic research projects that enhance national security. He is proficient in advanced research techniques, project management, and data analysis tools such as MATLAB, ANSYS, and Origin. His analytical acumen and technical insights have been instrumental in successfully completing high-impact projects. Beyond his scientific pursuits, he enjoys exploring interests like long-distance cycling, hiking, and participating in community-driven initiatives, reflecting his dynamic and well-rounded personality.",
+    image: "Vikram_Tirukkovelur.jpg"
+  },
+   {
+    name: "Sima srinivasa rao",
+    role: "Ph.D. Student (ERP): 2024 January ~",
+    area: "Developing brazing techniques for Metal to Metal, Metal to Cermet, and Metal to Ceramics",
+    bio: "Vikram is a seasoned scientist with over 15 years of experience working at the Defence Research and Development Organisation (DRDO). He holds a Master’s degree from the prestigious Indian Institute of Technology Madras (IITM) and a Bachelor’s degree from Jawaharlal Nehru Technological University Hyderabad (JNTUH). His work primarily revolves around cutting-edge defense technologies, with expertise in materials science, advanced propulsion systems, and strategic research projects that enhance national security. He is proficient in advanced research techniques, project management, and data analysis tools such as MATLAB, ANSYS, and Origin. His analytical acumen and technical insights have been instrumental in successfully completing high-impact projects. Beyond his scientific pursuits, he enjoys exploring interests like long-distance cycling, hiking, and participating in community-driven initiatives, reflecting his dynamic and well-rounded personality.",
+    image: "Vikram_Tirukkovelur.jpg"
   }
 ];
 
