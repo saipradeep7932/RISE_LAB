@@ -1,4 +1,0 @@
-<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-  <path d="M10,40 Q30,10 50,40 T90,40 T130,40 T170,40" stroke="#000" stroke-width="2" fill="none" />
-  <text x="100" y="55" font-family="script" font-size="14" text-anchor="middle" fill="#000">Signature</text>
-</svg>
