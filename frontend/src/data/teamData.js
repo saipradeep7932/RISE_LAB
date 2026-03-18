@@ -39,6 +39,13 @@ export const phdStudents = [
     image: "Gedela_Santhosh_Kumar.jpg"
   },
   {
+    name: "Mr. MAHINDERDEEP SINGH",
+    role: "Ph.D. Student: 2026 January ~",
+    area: "Development of High-Strength Nickel-Free Stainless Steel for Extreme Temperature Applications.",
+    bio: "Mahinderdeep Singh holds a B.Tech. in Mechanical Engineering and an M.Tech in Manufacturing Engineering from Sant Longowal Institute of Engineering and Technology. His research focuses on alloy design and development of high-strength nickel-free stainless steels for extreme temperature applications. His work involves detailed investigation of microstructural evolution, phase transformations, deformation mechanisms, and temperature-dependent mechanical performance under cryogenic and elevated temperature conditions, with the objective of developing sustainable and high-performance structural materials.",
+    image: "Mahinderdeep_Singh.jpg"
+  },
+  {
     name: "Mr. VIKRAM TIRUKKOVELUR",
     role: "Ph.D. Student (ERP): 2024 January ~",
     area: "Developing brazing techniques for Metal to Metal, Metal to Cermet, and Metal to Ceramics",
@@ -46,26 +53,27 @@ export const phdStudents = [
     image: "Vikram_Tirukkovelur.jpg"
   },
   {
-    name: "Sappioi Sanjay",
-    role: "Ph.D. Student (ERP): 2024 January ~",
-    area: "Developing brazing techniques for Metal to Metal, Metal to Cermet, and Metal to Ceramics",
-    bio: "Vikram is a seasoned scientist with over 15 years of experience working at the Defence Research and Development Organisation (DRDO). He holds a Master’s degree from the prestigious Indian Institute of Technology Madras (IITM) and a Bachelor’s degree from Jawaharlal Nehru Technological University Hyderabad (JNTUH). His work primarily revolves around cutting-edge defense technologies, with expertise in materials science, advanced propulsion systems, and strategic research projects that enhance national security. He is proficient in advanced research techniques, project management, and data analysis tools such as MATLAB, ANSYS, and Origin. His analytical acumen and technical insights have been instrumental in successfully completing high-impact projects. Beyond his scientific pursuits, he enjoys exploring interests like long-distance cycling, hiking, and participating in community-driven initiatives, reflecting his dynamic and well-rounded personality.",
-    image: "Vikram_Tirukkovelur.jpg"
-  },
+    "name": "Sappioi Sanjay",
+    "role": "Ph.D. Student (ERP): 2024 January ~",
+    "area": "Developing brazing techniques for Metal to Metal, Metal to Cermet, and Metal to Ceramics",
+    "bio": "Sanjay is a Scientist-B at the Defence Research and Development Organisation (DRDO), where he specializes in asymmetric technologies. He earned his Integrated M.Sc. in Physics from the University of Hyderabad, a foundation that continues to inform his strategic research and application of physics fundamentals. Prior to his current role, he served as a Junior Research Fellow within the DRDO's camouflage division. Beyond his professional research, Sanjay leads a disciplined lifestyle and enjoys exploring diverse ideologies, engaging in social life, watching movies, and following sports. His curiosity for both science and human thought reflects a well-rounded and analytical perspective.",
+    "image": "Sappioi_Sanjay.jpg"
+   },
    {
     name: "Sima srinivasa rao",
     role: "Ph.D. Student (ERP): 2024 January ~",
     area: "Developing brazing techniques for Metal to Metal, Metal to Cermet, and Metal to Ceramics",
-    bio: "Vikram is a seasoned scientist with over 15 years of experience working at the Defence Research and Development Organisation (DRDO). He holds a Master’s degree from the prestigious Indian Institute of Technology Madras (IITM) and a Bachelor’s degree from Jawaharlal Nehru Technological University Hyderabad (JNTUH). His work primarily revolves around cutting-edge defense technologies, with expertise in materials science, advanced propulsion systems, and strategic research projects that enhance national security. He is proficient in advanced research techniques, project management, and data analysis tools such as MATLAB, ANSYS, and Origin. His analytical acumen and technical insights have been instrumental in successfully completing high-impact projects. Beyond his scientific pursuits, he enjoys exploring interests like long-distance cycling, hiking, and participating in community-driven initiatives, reflecting his dynamic and well-rounded personality.",
-    image: "Vikram_Tirukkovelur.jpg"
+    bio: "Sima is a seasoned scientist with over 15 years of experience working at the Defence Research and Development Organisation (DRDO). He holds a Master’s degree from the prestigious Indian Institute of Technology Madras (IITM) and a Bachelor’s degree from Jawaharlal Nehru Technological University Hyderabad (JNTUH). His work primarily revolves around cutting-edge defense technologies, with expertise in materials science, advanced propulsion systems, and strategic research projects that enhance national security. He is proficient in advanced research techniques, project management, and data analysis tools such as MATLAB, ANSYS, and Origin. His analytical acumen and technical insights have been instrumental in successfully completing high-impact projects. Beyond his scientific pursuits, he enjoys exploring interests like long-distance cycling, hiking, and participating in community-driven initiatives, reflecting his dynamic and well-rounded personality.",
+    image: "Sima_srinivasa_rao.jpg"
   }
 ];
 
 export const btechStudents = [
   { name: "Prerana", timeline: "2022 – 2026", image: "prerana.jpg" },
   { name: "Paidi Sathwika", timeline: "2022 – 2026", image: "paidi_sathwika.jpg" },
-  { name: "Mudu Narendra Nayak", timeline: "2022 – 2026", image: "mudu_narendra_nayak.jpg" },
-  { name: "Banoth Deepak Teja", timeline: "2022 – 2026", image: "banoth_deepak_teja.jpg" }
+  { name: "Banoth Deepak Teja", timeline: "2022 – 2026", image: "banoth_deepak_teja.jpg" },
+  { name: "Kota Lohith", timeline: "2022 – 2026", image: "kota_lohith.jpg" },
+  { name: "Mudu Narendra Nayak", timeline: "2022 – 2026", image: "mudu_narendra_nayak.jpg" }
 ];
 
 export const alumni = [

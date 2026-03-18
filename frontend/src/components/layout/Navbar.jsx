@@ -12,10 +12,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [researchDropdownOpen, setResearchDropdownOpen] = useState(false);
 
-
-
-  // ...
-
   // --- Search Logic ---
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -23,7 +19,6 @@ const Navbar = () => {
   const location = useLocation();
 
   // --- DYNAMIC SEARCH INDEX BUILDER ---
-  // Memoize this if performance becomes an issue, but for this size it's fine.
   const buildSearchIndex = () => {
     const index = [];
 
@@ -99,7 +94,7 @@ const Navbar = () => {
       });
     });
 
-    // 5. Static Pages (Content not yet extracted to data files, but essential for navigation)
+    // 5. Static Pages
     const staticPages = [
       { title: 'Publications', path: '/publications', content: 'Journal Papers, Conference Proceedings, Patents' },
       { title: 'Projects Funded', path: '/projects-funded', content: 'Sponsored Research, Consultancy, Grants' },
@@ -159,22 +154,28 @@ const Navbar = () => {
   };
 
   const getLogo = () => {
-    // Attempt dynamic load or fallback
     return new URL('../../assets/header/logo.png', import.meta.url).href;
   };
 
   return (
     <>
-
-
       {/* =========================================================================
-          PART 2: MAIN NAVIGATION (Updated)
+          PART 2: MAIN NAVIGATION
       ========================================================================= */}
-      <nav className="bg-[linear-gradient(to_right,#F5F5F5_0%,#0B5472_25%,#0B5472_100%)] text-white shadow-md sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-20">
+      <nav className="bg-[#0B5472] text-white shadow-md sticky top-0 z-40 overflow-hidden">
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          
+          <div className="absolute top-0 right-full w-[100vw] h-full bg-[#FFFFFF] z-0"></div>
+          
+          {/* UPDATED: White stops earlier at 220px, finishes transition to pure blue by 290px completely */}
+          <div className="absolute top-0 left-0 w-[350px] h-full bg-[linear-gradient(to_right,#FFFFFF_0px,#FFFFFF_220px,#0B5472_290px)] z-0"></div>
+
+          <div className="flex justify-between h-20 relative z-10">
+            
             {/* Logo/Title */}
-            <div className="flex items-center flex-shrink-0 mr-6">
+            {/* UPDATED: mr-20 guarantees empty space for the transition to happen before Home starts */}
+            <div className="flex items-center flex-shrink-0 mr-20"> 
               <Link to="/" className="flex items-center gap-3">
                 <img
                   src={getLogo()}
@@ -183,7 +184,7 @@ const Navbar = () => {
                     e.target.src = "https://placehold.co/150x50?text=LOGO";
                   }}
                   alt="Rise Lab Logo"
-                  className="h-12 w-auto object-contain"
+                  className="h-16 w-auto object-contain" 
                 />
               </Link>
             </div>
@@ -199,7 +200,7 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.path}
-                    className={`px-4 py-2 text-sm font-bold transition-all duration-200 relative flex items-center rounded-t-lg z-10 ${isActive(link.path)
+                    className={`whitespace-nowrap px-3 py-2 text-sm font-bold transition-all duration-200 relative flex items-center rounded-t-lg z-10 ${isActive(link.path)
                       ? 'bg-white text-[#0B5472] -mb-[3px] z-50'
                       : 'text-white/90 hover:bg-white/10 hover:text-white mb-0'
                       }`}
@@ -228,16 +229,8 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Desktop Search (Hidden per request) */}
-            {/* <div className="hidden xl:flex items-center ml-4"> ... </div> */}
-            {/* Desktop Search Removed as per request */}
-
-            {/* Mobile Menu Button - Also includes Search Toggle for Mobile */}
+            {/* Mobile Menu Button */}
             <div className="xl:hidden flex items-center space-x-4">
-              {/* Mobile Search is complicated with double headers, keeping it simple inside menu or separate toggle if needed. 
-                   For now, removing the pure search toggle as desktop has it in top bar. 
-                   Mobile users might need access to it. Adding a simple search link in mobile menu is easier.
-               */}
               <button
                 type="button"
                 aria-label="Toggle menu"

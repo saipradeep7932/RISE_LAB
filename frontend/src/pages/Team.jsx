@@ -5,21 +5,29 @@ import React from 'react';
 const teamImages = import.meta.glob('../assets/team/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
 
 const getImagePath = (filename) => {
-  const key = `../assets/team/${filename}`;
+  if (!filename) return null;
 
-  if (teamImages[key]) {
-    return teamImages[key];
+  // 1. Try an exact match first (fastest)
+  const exactKey = `../assets/team/${filename}`;
+  if (teamImages[exactKey]) {
+    return teamImages[exactKey];
   }
 
-  // Silent fallback for case-insensitivity
-  const lowerKey = key.toLowerCase();
-  const foundKey = Object.keys(teamImages).find(k => k.toLowerCase() === lowerKey);
+  // 2. Extension-Agnostic Fallback
+  // If data says "Kolli.jpg" but file is "Kolli.png", this finds it by matching just "kolli"
+  const baseNameRequested = filename.split('.')[0].toLowerCase();
+
+  const foundKey = Object.keys(teamImages).find(k => {
+    // Extract the filename from the path, then chop off its extension
+    const fileBaseName = k.split('/').pop().split('.')[0].toLowerCase();
+    return fileBaseName === baseNameRequested;
+  });
 
   return foundKey ? teamImages[foundKey] : null;
 };
 
-// Fallback image path (make sure this exists or use a robust fallback)
-const PLACEHOLDER_IMG = teamImages['../assets/team/placeholder.jpg'] || null;
+// Fallback image path (Now safely uses the function so placeholder.png works too!)
+const PLACEHOLDER_IMG = getImagePath('placeholder') || null;
 
 import { groupHead, researchStaff, phdStudents, btechStudents, alumni } from '../data/teamData';
 
