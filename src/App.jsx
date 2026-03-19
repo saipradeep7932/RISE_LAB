@@ -24,7 +24,7 @@ import Gallery from './pages/Gallery';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/riselab">
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-grow">
