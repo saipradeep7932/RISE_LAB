@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Mail, Phone, MapPin, X } from 'lucide-react';
-import { useInView } from 'react-intersection-observer'; // Added useInView
+import { useInView } from 'react-intersection-observer'; 
 
 import { newsItems, motiveText, aboutText } from '../data/homeData';
 import motiveBg from "../assets/mission-bg.png";
@@ -32,16 +31,7 @@ const Home = () => {
     triggerOnce: false
   });
 
-  // Logic: Active if text is in view OR if it was active and we are still in section? 
-  // User said: "Background image must appear ONLY when this paragraph enters ... Keep current closing logic"
-  // Current closing logic was: based on section visibility.
-  // Let's make it: Visible if isTextActive is true. 
-  // Wait, if text leaves, bg might disappear. 
-  // Let's stick to the user's specific request: "Trigger only when this text block becomes visible."
-  // If "Keep current closing logic" means "don't change how it generally works", then maybe just the trigger.
-  // I will use isTextActive to drive the opacity.
   const isMotiveActive = isTextActive;
-
 
   // --- 3. Effects ---
   // Carousel Logic
@@ -129,7 +119,6 @@ const Home = () => {
     <div className="min-h-screen bg-white font-sans text-gray-800">
 
       {/* --- FIXED BACKGROUND IMAGE FOR MOTIVE SECTION --- */}
-      {/* Activates only when heading enters, deactivates when section leaves */}
       <div
         className={`fixed inset-0 z-0 transition-opacity duration-[800ms] ease-in-out pointer-events-none ${isMotiveActive ? 'opacity-100' : 'opacity-0'}`}
       >
@@ -138,7 +127,6 @@ const Home = () => {
           alt="Motive Background"
           className="w-full h-full object-cover"
         />
-
       </div>
 
       {/* =========================================================================
@@ -147,15 +135,12 @@ const Home = () => {
       <section className="bg-white border-b border-gray-200 py-12 relative z-10 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* This is the Flex Container that holds BOTH left and right sides */}
           <div className="flex flex-col lg:flex-row gap-8 items-stretch">
 
             {/* LEFT: PROFILE (30-35%) */}
             <div className="w-full lg:w-[35%] flex flex-col justify-center">
-              {/* Parent card: flex flex-col items-center ensures horizontal centering for children */}
               <div className="bg-white rounded-2xl shadow-lg border border-gray-100 border-l-4 border-l-[#FF6600] overflow-hidden p-8 flex flex-col items-center h-full transform transition-transform hover:-translate-y-1 duration-300">
                 
-                {/* Photo: mx-auto centers it horizontally */}
                 <div className="w-56 h-56 mx-auto mb-6 rounded-2xl overflow-hidden shadow-md relative shrink-0 bg-gray-50">
                   <img
                     src={profileImg}
@@ -164,16 +149,11 @@ const Home = () => {
                   />
                 </div>
                 
-                {/* Text lines centered below the image */}
                 <h2 className="text-3xl font-bold text-[#0B5472] mb-2 text-center">Dr. Avala Lavakumar</h2>
                 <p className="text-[#FF6600] font-semibold text-lg mb-4 text-center">Assistant Professor</p>
 
-                {/* --- CONTACT BLOCK --- */}
-                {/* Main contact container: text-center ensures horizontal centering of the inline block below */}
                 <div className="space-y-4 text-sm text-gray-700 border-t border-gray-100 pt-6 text-center w-full">
                   
-                  {/* Inline-Block sub-container: Groups the contact lines into a centered box.
-                      text-left ensures that within this centered box, icons and text start from a single vertical line. */}
                   <div className="inline-block text-left space-y-4">
                     <div className="flex items-start gap-3">
                       <MapPin size={20} className="text-[#FF6600] mt-0.5 shrink-0" />
@@ -183,21 +163,50 @@ const Home = () => {
                         <p className="text-xs text-gray-500 mt-1">B-M05, Har Gobind Khorana Building</p>
                       </div>
                     </div>
+                    {/* UPDATED EMAIL LINK: Opens Gmail properly in the browser now! */}
                     <div className="flex items-center gap-3">
                       <Mail size={18} className="text-[#FF6600] shrink-0" />
-                      <a href="mailto:lava@iitrpr.ac.in" className="hover:text-[#FF6600] transition-colors font-medium">lava@iitrpr.ac.in</a>
+                      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lava@iitrpr.ac.in" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF6600] transition-colors font-medium">lava@iitrpr.ac.in</a>
                     </div>
                     <div className="flex items-center gap-3">
                       <Phone size={18} className="text-[#FF6600] shrink-0" />
                       <a href="tel:+911881232412" className="hover:text-[#FF6600] transition-colors font-medium">+91-1881-23-2412</a>
                     </div>
+
+                    {/* --- NEW SOCIAL LOGOS SECTION (JUST 4, MASSIVE SIZE) --- */}
+                    {/* Increased gap so they don't crash into each other now that they are huge */}
+                    <div className="flex items-center gap-6 pt-6 mt-2 justify-center">
+                      {[
+                        { name: 'Google Scholar', url: 'https://scholar.google.com/citations?user=H_WhrEIAAAAJ', icon: 'scholar' },
+                        { name: 'ResearchGate', url: 'https://www.researchgate.net/profile/Avala-Lavakumar', icon: 'researchgate' },
+                        { name: 'LinkedIn', url: 'https://www.linkedin.com/in/avala-lavakumar/', icon: 'linkedin' },
+                        { name: 'ORCID', url: 'https://orcid.org/0000-0001-8287-8607', icon: 'orcid' }
+                      ].map((social) => (
+                        <a 
+                          key={social.name} 
+                          href={social.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="hover:scale-110 hover:-translate-y-2 transition-all duration-300 flex items-center justify-center"
+                          title={social.name}
+                        >
+                          <img 
+                            src={getAsset(social.icon) || `https://placehold.co/80x80/0B5472/FFFFFF?text=${social.name.charAt(0)}`} 
+                            alt={social.name} 
+                            // Forced to 80px by 80px using raw values to bypass Tailwind caps
+                            className="w-[80px] h-[80px] object-contain"
+                          />
+                        </a>
+                      ))}
+                    </div>
+
                   </div>
                 </div>
 
               </div>
             </div>
 
-            {/* RIGHT: ABOUT US (New Box Layout) */}
+            {/* RIGHT: ABOUT US */}
             <div className="w-full lg:w-[65%] min-h-[500px] flex flex-col justify-center">
               <div className="bg-[#F5F5F5] rounded-2xl shadow-md p-10 h-full flex flex-col justify-center">
                 <h2 className="text-3xl font-bold text-[#FF6600] mb-6 inline-block">About Us</h2>
@@ -210,7 +219,6 @@ const Home = () => {
                   </p>
                 </div>
 
-                {/* Banner Image */}
                 <div className="mt-8 w-full">
                   <img
                     src={homeSignature}
@@ -221,13 +229,12 @@ const Home = () => {
               </div>
             </div>
 
-          </div> {/* <-- THIS is where the Flex Container should close */}
+          </div>
         </div>
       </section>
 
-
       {/* =========================================================================
-          SECTION 2: MOTIVE / VISION (Moved Down)
+          SECTION 2: MOTIVE / VISION
       ========================================================================= */}
       <section
         className="relative w-full overflow-hidden py-32 flex items-center justify-center text-center z-10"
@@ -253,9 +260,8 @@ const Home = () => {
         </div>
       </section>
 
-
       {/* =========================================================================
-          SECTION 3: RESEARCH HIGHLIGHTS (Moved Up)
+          SECTION 3: RESEARCH HIGHLIGHTS
       ========================================================================= */}
       <section className="py-20 bg-[#F5F5F5] border-y-2 border-[#FF6600]/30 relative shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center">
@@ -266,7 +272,6 @@ const Home = () => {
         <div className="max-w-6xl mx-auto relative h-[450px] flex items-center justify-center px-4">
           {images.length > 0 ? (
             <>
-              {/* Controls */}
               <button
                 onClick={prevImage}
                 className="absolute left-4 md:left-8 z-20 p-2 rounded-full bg-white/90 text-[#0B5472] shadow-sm border border-gray-200 hover:bg-[#0B5472] hover:text-white transition-all disabled:opacity-50"
@@ -282,11 +287,8 @@ const Home = () => {
                 <ChevronRight size={32} />
               </button>
 
-              {/* Images Container */}
               <div className="relative w-full h-full flex items-center justify-center">
                 <AnimatePresence mode='popLayout'>
-
-                  {/* Active Image (Center) */}
                   <motion.div
                     key={currentImageIndex}
                     className="relative z-10 w-full md:w-3/5 h-[350px] md:h-[450px] shadow-2xl rounded-xl overflow-hidden border-4 border-white flex items-center justify-center bg-white"
@@ -310,12 +312,8 @@ const Home = () => {
         </div>
       </section>
 
-
-      
-
-
       {/* =========================================================================
-          SECTION 4: LATEST NEWS (Was 5)
+          SECTION 4: LATEST NEWS
       ========================================================================= */}
       <section className="py-16 bg-white border-t border-gray-100 shadow-inner">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -325,7 +323,6 @@ const Home = () => {
           <div className="w-24 h-1 bg-[#FF6600] mx-auto mb-10 rounded-full"></div>
 
           <div className="flex flex-col md:flex-row items-center gap-6">
-            {/* Controls */}
             <div className="flex md:flex-col gap-2 order-2 md:order-1">
               <button
                 onClick={prevNews}
@@ -343,7 +340,6 @@ const Home = () => {
               </button>
             </div>
 
-            {/* News Display */}
             <div className="relative flex-1 h-32 md:h-44 bg-white rounded-xl shadow-md border-l-4 border-l-[#FF6600] flex items-center justify-center p-8 overflow-hidden order-1 md:order-2 w-full">
               <AnimatePresence mode='wait'>
                 <motion.div
@@ -362,7 +358,6 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Dots */}
           <div className="flex justify-center mt-8 space-x-2">
             {newsItems.map((_, idx) => (
               <button
