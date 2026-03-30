@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 
@@ -26,6 +27,15 @@ function App() {
   return (
     <Router basename="/riselab">
       <div className="flex flex-col min-h-screen">
+        <Helmet>
+          <title>RISE Lab | Metallurgical & Materials Engineering | IIT Ropar</title>
+          <meta name="description" content="RISE Lab at IIT Ropar focuses on in-situ deformation studies using TEM, synchrotron X-ray diffraction, and digital image correlation. Research includes alloys like steel, aluminum, HEA/MEA, and TRIP/TWIP materials." />
+          <meta name="keywords" content="IIT Ropar RISE Lab, Metallurgical Engineering IIT Ropar, in-situ deformation, TEM research India, HEA alloys, TRIP TWIP alloys, materials science IIT Ropar" />
+          <meta property="og:title" content="RISE Lab | Metallurgical & Materials Engineering | IIT Ropar" />
+          <meta property="og:description" content="RISE Lab at IIT Ropar focuses on in-situ deformation studies using TEM, synchrotron X-ray diffraction, and digital image correlation. Research includes alloys like steel, aluminum, HEA/MEA, and TRIP/TWIP materials." />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://iitrpr.ac.in/riselab/" />
+        </Helmet>
         <Navbar />
         <main className="flex-grow">
           <Routes>
