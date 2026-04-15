@@ -31,6 +31,11 @@ const GALLERY_ITEMS = [
   { id: 9, category: 'conferences_lectures_talks', image: "gallery9.jpg", caption: "Sharing RISE Lab teaching material with Professor Rajesh Prasad" },
   { id: 10, category: 'life_at_rise', image: "gallery10.jpg", caption: "Farewell to Mr. Arun - Wishing him the best!" },
 
+  // NCM4-2026 Keynote at VSSUT
+  { id: 17, category: 'conferences_lectures_talks', image: "vssut_keynote_1.jpeg", caption: "Dr. Avala Lavakumar delivering engaging insights during a panel discussion following his keynote address at the NCM4-2026 Conference, VSSUT Burla, highlighting the evolving landscape of contemporary materials science." },
+  { id: 18, category: 'conferences_lectures_talks', image: "vssut_keynote_2.jpeg", caption: "A commemorative group photograph capturing the vibrant industry-academia interaction at the NCM4-2026 Conference at VSSUT, Burla, joined by fellow researchers, academicians, and industry professionals." },
+  { id: 19, category: 'conferences_lectures_talks', image: "vssut_keynote_3.jpeg", caption: "Receiving a memento of appreciation for the keynote address on advanced materials and sustainable manufacturing at the NCM4-2026 Conference hosted by VSSUT, Burla." },
+
   // Lab Activities
   { id: 11, category: 'rise_lab_activities', image: "gallery_lab_1.jpg", caption: "Researchers conducting experiments in the lab" },
   { id: 12, category: 'rise_lab_activities', image: "gallery_lab_2.jpg", caption: "Researcher working on software in the lab" },

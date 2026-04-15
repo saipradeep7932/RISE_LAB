@@ -55,5 +55,45 @@ export const equipmentList = [
     category: "Sample Preparation",
     description: "Electrolytic polishing and etching setup utilized for producing deformation-free, highly reflective surfaces required for electron backscatter diffraction (EBSD) and advanced microscopy.",
     images: ["electro_polishing"]
+  },
+  {
+    id: 9,
+    name: "AFM-Atomic Force Microscope (AFM) Model: Multimode 8 SPM (Bruker)",
+    category: "Central Research Facility (CRF)",
+    description: "The Atomic Force Microscope (AFM) is a powerful instrument for nanometer scale science and technology.",
+    externalLink: "https://www.iitrpr.ac.in/crf/facility/43",
+    images: ["afm_microscope"]
+  },
+  {
+    id: 10,
+    name: "HR-TEM-High-Resolution Transmission Electron Microscopy",
+    category: "Central Research Facility (CRF)",
+    description: "High-Resolution Transmission Electron Microscopy (HRTEM) is an advanced imaging technique that provides atomic-scale resolution for analyzing the structural properties of materials. By utilizing electron wave interference, HRTEM enables detailed visualization of crystalline structures, defects, and interfaces, making it indispensable for nanotechnology, materials science, and biological research.",
+    externalLink: "https://www.iitrpr.ac.in/crf/facility/50",
+    images: ["hrtem"]
+  },
+  {
+    id: 11,
+    name: "FSCECM-JSM-7610F FESEM",
+    category: "Central Research Facility (CRF)",
+    description: "An ultra-high-resolution Schottky Field Emission Scanning Electron Microscope (FESEM). It features a semi-in-lens objective, an advanced r-filter, and GENTLEBEAM™ mode, delivering exceptional imaging resolution (up to 0.8 nm) and high-performance surface analysis.",
+    externalLink: "https://www.iitrpr.ac.in/crf/facility/53",
+    images: ["fscecm_jsm"]
+  },
+  {
+    id: 12,
+    name: "XPS–Thermo Scientific ESCALAB XI+ X-ray Photoelectron Spectrometer (XPS) Microprobe",
+    category: "Central Research Facility (CRF)",
+    description: "A multi-technique X-ray Photoelectron Spectrometer (XPS) Microprobe combining high sensitivity with high-resolution quantitative imaging. Equipped with a micro-focusing X-ray monochromator, it ensures maximum sample throughput for comprehensive surface analysis.",
+    externalLink: "https://www.iitrpr.ac.in/crf/facility/51",
+    images: ["xps_thermo"]
+  },
+  {
+    id: 13,
+    name: "Nanoindenter",
+    category: "Central Research Facility (CRF)",
+    description: "A precision depth-sensing instrument used to determine mechanical properties such as Young's modulus, hardness, and fracture toughness. It supports advanced testing modes including Quasistatic Nanoindentation, Scratch Testing, Nanowear, and in-situ SPM Imaging.",
+    externalLink: "https://www.iitrpr.ac.in/crf/facility/45",
+    images: ["nanoindenter"]
   }
 ];

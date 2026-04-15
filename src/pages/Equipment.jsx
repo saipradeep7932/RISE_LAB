@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, ArrowRight } from 'lucide-react';
+import { Mail, ArrowRight, ExternalLink } from 'lucide-react';
 import { equipmentList } from '../data/equipmentData';
 
 // Dynamically import equipment images (if they exist)
@@ -51,12 +51,23 @@ const Equipment = () => {
           <h2 className={`text-2xl font-bold text-[#0B5472]`}>
             {equipment.category || "Equipments"}
           </h2>
-          <button
-            onClick={() => onApply(equipment.name)}
-            className={`bg-[#FF6600] hover:bg-[#CC5200] text-white px-5 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 transition-transform active:scale-95 shadow-md`}
-          >
-            Request Equipment <ArrowRight size={16} />
-          </button>
+          {equipment.externalLink ? (
+            <a
+              href={equipment.externalLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`bg-[#FF6600] hover:bg-[#CC5200] text-white px-5 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 transition-transform active:scale-95 shadow-md`}
+            >
+              Book via CRF Portal <ExternalLink size={16} />
+            </a>
+          ) : (
+            <button
+              onClick={() => onApply(equipment.name)}
+              className={`bg-[#FF6600] hover:bg-[#CC5200] text-white px-5 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 transition-transform active:scale-95 shadow-md`}
+            >
+              Request Equipment <ArrowRight size={16} />
+            </button>
+          )}
         </div>
 
         {/* CARD CONTENT BODY */}
