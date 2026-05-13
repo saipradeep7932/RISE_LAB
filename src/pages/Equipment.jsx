@@ -118,7 +118,7 @@ const Equipment = () => {
                 <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-sm text-center">
                     <h1 className="text-3xl md:text-4xl font-bold text-[#0B5472] mb-4">Equipment Inventory</h1>
                     <p className="text-xl font-medium text-slate-800 italic leading-relaxed">
-                        "Browse our state-of-the-art laboratory equipment. Click 'Request Equipment' to send an email inquiry for access or collaboration details."
+                        "Explore the cutting-edge instruments and laboratory facilities available at RISE Lab. Use the 'Request Equipment' option to connect with our team for access, collaboration, or technical information."
                     </p>
                 </div>
             </div>
