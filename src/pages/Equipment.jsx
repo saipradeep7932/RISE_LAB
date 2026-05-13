@@ -49,7 +49,7 @@ const Equipment = () => {
         {/* TOP COLORED STRIP / HEADER (Like Positions px-8 py-4 border-b) */}
         <div className={`${topStripBg} px-8 py-4 border-b border-gray-300 flex justify-between items-center flex-wrap gap-4`}>
           <h2 className={`text-2xl font-bold text-[#0B5472]`}>
-            {equipment.category || "Equipments"}
+            {equipment.category === "Central Research Facility (CRF)" ? equipment.name : (equipment.category || "Equipments")}
           </h2>
           {equipment.externalLink ? (
             <a
@@ -93,9 +93,11 @@ const Equipment = () => {
                 <img src={getImg(equipment.images[0])} alt={equipment.name} className="w-full h-full object-contain" />
               </div>
               <div className="w-full md:w-2/3 flex flex-col justify-center space-y-4">
-                <h3 className="text-2xl font-bold text-[#0B5472]">
-                  {equipment.name}
-                </h3>
+                {equipment.category !== "Central Research Facility (CRF)" && (
+                  <h3 className="text-2xl font-bold text-[#0B5472]">
+                    {equipment.name}
+                  </h3>
+                )}
                 {equipment.description && (
                   <p className="text-black text-lg leading-relaxed whitespace-pre-wrap">
                     {equipment.description}

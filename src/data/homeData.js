@@ -1,6 +1,9 @@
 export const newsItems = [
+  "Successful trial production of our developed Bi-Metallic Blade, completed under an industrial collaborative project with SGT Associates Pvt. Ltd. and Palletizer India Pvt. Ltd.",
   "RISE Lab has initiated a new consultancy project in collaboration with Pritika Auto Industries Limited, Punjab.",
   "Dr. Avala Lavakumar’s latest research paper, “Dynamics of Portevin–Le Chatelier Banding Revealed Through Grain Refinement in High-Mn Austenitic Steel: Sequential Overcoming of Necking,” has been accepted in the Journal of Materials Science & Technology.",
+  "Dharamveer has joined RISE Lab as a Project Associate on the Agnivastra project.",
+  "Mahinderdeep Singh has joined RISE Lab as a Ph.D. student.",
   "Mr. Gedela Santhosh Kumar joined as Ph.D. student in RISE Lab.",
   "Dr. Avala Lavakumar has been appointed to the Editorial Board of Scientific Reports, a journal from Springer Nature.",
   "RISE Lab has published a new journal article titled, \"Beyond the Blade: A Microstructural Investigation of an Ancient Indian Steel Sword,\" in Metallography, Microstructure, and Analysis (2025).",

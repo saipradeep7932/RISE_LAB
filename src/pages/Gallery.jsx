@@ -17,6 +17,7 @@ const CATEGORIES = [
   { id: 'events_ceremonies', title: 'Events & Ceremonies', description: 'Awards, grants, and celebrations.' },
   { id: 'rise_discussions_meetings', title: 'RISE Discussions & Meetings', description: 'Discussing research and sharing ideas.' },
   { id: 'life_at_rise', title: 'Life at RISE', description: 'Casual team moments, retreats, and student life.' },
+  { id: 'industrial_visit', title: 'Industrial Visit', description: 'Snapshots from industrial visits and partner facility tours.' },
 ];
 
 const GALLERY_ITEMS = [
@@ -30,11 +31,14 @@ const GALLERY_ITEMS = [
   { id: 8, category: 'conferences_lectures_talks', image: "gallery8.jpg", caption: "IMRC 2025 Conference Highlights" },
   { id: 9, category: 'conferences_lectures_talks', image: "gallery9.jpg", caption: "Sharing RISE Lab teaching material with Professor Rajesh Prasad" },
   { id: 10, category: 'life_at_rise', image: "gallery10.jpg", caption: "Farewell to Mr. Arun - Wishing him the best!" },
+  { id: 24, category: 'life_at_rise', image: "life_at_rise_1.jpeg", caption: "Team collaboration during a lab brainstorming session." },
+  { id: 25, category: 'life_at_rise', image: "life_at_rise_2.jpeg", caption: "Casual moments from RISE Lab group interaction." },
 
   // NCM4-2026 Keynote at VSSUT
   { id: 17, category: 'conferences_lectures_talks', image: "vssut_keynote_1.jpeg", caption: "Dr. Avala Lavakumar delivering engaging insights during a panel discussion following his keynote address at the NCM4-2026 Conference, VSSUT Burla, highlighting the evolving landscape of contemporary materials science." },
   { id: 18, category: 'conferences_lectures_talks', image: "vssut_keynote_2.jpeg", caption: "A commemorative group photograph capturing the vibrant industry-academia interaction at the NCM4-2026 Conference at VSSUT, Burla, joined by fellow researchers, academicians, and industry professionals." },
   { id: 19, category: 'conferences_lectures_talks', image: "vssut_keynote_3.jpeg", caption: "Receiving a memento of appreciation for the keynote address on advanced materials and sustainable manufacturing at the NCM4-2026 Conference hosted by VSSUT, Burla." },
+  { id: 20, category: 'industrial_visit', image: "industrial_visit_1.jpg", caption: "Industrial visit to a partner facility with team members inspecting high-temperature equipment." },
 
   // Lab Activities
   { id: 11, category: 'rise_lab_activities', image: "gallery_lab_1.jpg", caption: "Researchers conducting experiments in the lab" },
