@@ -77,6 +77,7 @@ export const btechStudents = [
 ];
 
 export const alumni = [
+  { name: "Ms. Bharthi Dayal", timeline: "2026", image: "Bharthi_dayal.jpeg" },
   { name: "Mr. Vishnu Prasad", timeline: "2023 – 2024", image: "vishnu_prasad.jpg" },
   { name: "Mr. Shashi Shekhar Prajapati", timeline: "2023 – 2024", image: "shashi_shekhar_prajapati.jpg" },
   { name: "Ms. Sejal Tandekar", timeline: "2022 – 2023", image: "sejal_tandekar.jpg" },
