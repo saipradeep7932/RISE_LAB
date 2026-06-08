@@ -10,7 +10,7 @@ export const equipmentList = [
     id: 2,
     name: "Metallography equipment Baincut LSS",
     category: "Cutting Machine",
-    description: "The precision section saw is designed for slicing all types of materials with ease. The slow speed cutter is mostly used for accurate sectioning of very small, hard components for machines.\n\n• Cutting capacity up to 20 mm\n• Built-in coolant tray\n• Down-feed facility with different weights up to 400 g\n• Variable speed up to 600 rpm\n• Micrometer for cross-feed adjustment up to 25 mm\n• AC motor single phase, 220 V / 50Hz or 110 V / 60 Hz\n• Diamond blade size: Ø 127 mm\n• Touch screen with preset programs\n• Automatic safety button\n• Dimensions: 400 x 300 x 250 mm",
+    description: "The precision section saw is designed for slicing all types of materials with ease. The slow speed cutter is mostly used for accurate sectioning of very small and hard components for machines.\n\n• Cutting capacity up to 20 mm\n• Built-in coolant tray\n• Down-feed facility with different weights up to 400 g\n• Variable speed up to 600 rpm\n• Micrometer for cross-feed adjustment up to 25 mm\n• AC motor single phase, 220 V / 50Hz or 110 V / 60 Hz\n• Diamond blade size: Ø 127 mm\n• Touch screen with preset programs\n• Automatic safety button\n• Dimensions: 400 x 300 x 250 mm",
     images: ["baincut_lss"]
   },
   {
