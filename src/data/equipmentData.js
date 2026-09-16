@@ -51,10 +51,10 @@ export const equipmentList = [
   },
   {
     id: 8,
-    name: "Electro polishing",
-    category: "Sample Preparation",
+    name: "Electro Polishing",
+    category: "Electro Polishing",
     description: "Electrolytic polishing and etching setup utilized for producing deformation-free, highly reflective surfaces required for electron backscatter diffraction (EBSD) and advanced microscopy.",
-    images: ["electro_polishing"]
+    images: ["EP1.jpeg"]
   },
   {
     id: 9,

@@ -1,112 +1,84 @@
 import React from 'react';
 
 const ProjectsFunded = () => {
-  // --- OLD DATA (Fully Restored) ---
-  const oldSponsoredProjects = [
+  // Projects loaded from CSV provided by user (Sponsored + Consultancy)
+  const sponsoredProjects = [
     {
-      title: "Energy efficient and Eco-friendly Automotive steels: Design strategy based on the science of deformation (P.I)",
-      agency: "(Institute Scheme for Innovative Research and Development (ISIRD), IIT Ropar)",
-      details: "(₹ 20.5 Lakhs) [July 2024 – August 2026]"
+      title: "AI/ML Driven design of TiC–Ni/Steel Brazed Tool Inserts for High-Wear Mining Rock Bits",
+      agency: "TEXMiN, Technology Innovation Hub sponsored by DST, Govt of India, IIT (ISM) Dhanabad",
+      amount: "₹35,25,400/-",
+      duration: "March 2026 – Nov 2027",
+      role: "Principal Investigator (P.I)",
+      remark: "Approved"
     },
-    {
-      title: "Solid state recycling of copper scrap: A sustainable approach for producing high strength, high conductivity copper wire (P.I)",
-      agency: "(Ministry of Mines, Government of India)",
-      details: "(₹ 53.76 Lakhs) [October 2024 – March 2026]"
-    }
-  ];
-
-  const oldConsultancyProjects = [
-    {
-      title: "Development of Bi-Metallic Blade for Petrochemical Industry (P.I)",
-      agency: "(SGT Associates, Haryana)",
-      details: "(₹ 8.5 Lakhs) [September 2024 – March 2025]"
-    },
-    {
-      title: "Carbon Footprint & Mechanical Performance of Gray and Ductile Cast Irons: Lost Foam Vs Green Sand Mould Casting (P.I)",
-      agency: "(Pritika Auto Industries Limited, Punjab)",
-      details: "(₹ 10 Lakhs) [September 2025 – November 2025]"
-    }
-  ];
-
-  // --- NEW DATA (Appended) ---
-  const newSponsoredProjects = [
     {
       title: "In-situ/ex-situ TEM investigation of dislocation activity in complex concentrated alloys: Redefining Alloy Design via Misfit Volume",
-      agency: "ARG-Anusandhan National Research Foundation (ANRF), Gov. of India",
-      amount: "Sanctioned",
-      duration: "Yet to be announced",
-      isPI: true
+      agency: "ANRF",
+      amount: "₹99,07,440/-",
+      duration: "Jun-26 – May-29",
+      role: "Principal Investigator (P.I)",
+      remark: "Active"
     },
     {
       title: "A novel sustainable approach for recovery of zinc and iron from electric arc furnace dust and conjugated tool",
       agency: "Ministry of Steel, Gov. of India",
-      amount: "Yet to be announced",
-      duration: "October 2025 – September 2027",
-      roleOverwrite: "Co-PI"
+      amount: "₹405,25,872/-",
+      duration: "Oct-25 – Sept-27",
+      role: "Co-Principal Investigator (Co-P.I)",
+      remark: "Active"
     },
     {
       title: "Solid state recycling of copper scrap: A sustainable approach for producing high strength, high conductivity copper wire",
-      agency: "Science and Technology Scheme of Ministry of Mines, Gov. of India",
-      amount: "Yet to be announced",
-      duration: "October 2024 – March 2026",
-      isPI: true
+      agency: "Ministry of Mines, Government of India",
+      amount: "₹53,76,200/-",
+      duration: "Oct-24 – Sep-26",
+      role: "Principal Investigator (P.I)",
+      remark: "Active"
     },
     {
-      title: "Carbon Footprint & Mechanical Performance of Gray and Ductile Cast Irons: Lost Foam Vs Green Sand Mould Casting",
-      agency: "Pritika Auto Industries Limited, Punjab, India",
-      amount: "Yet to be announced",
-      duration: "September 2025 – November 2025",
-      isPI: true
-    },
-    {
-      title: "Development of Bi-Metallic Blade for Petrochemical Industry",
-      agency: "SGT Associates, Haryana, India",
-      amount: "Yet to be announced",
-      duration: "September 2024 – March 2025",
-      isPI: true
-    },
-    {
-      title: "Energy-efficient and Eco-friendly Automotive steels: Design strategy based on science of deformation",
-      agency: "ISIRD Grant, IIT Ropar",
-      amount: "Yet to be announced",
-      duration: "June 2024 – May 2026",
-      isPI: true
+      title: "Energy efficient and Eco-friendly Automotive steels: Design strategy based on the science of deformation",
+      agency: "Institute Scheme for Innovative Research and Development (ISIRD), IIT Ropar",
+      amount: "₹20,50,000/-",
+      duration: "Jul-24 – Aug-26",
+      role: "Principal Investigator (P.I)",
+      remark: "Complete"
     },
     {
       title: "Understanding the transformation induced plasticity effect in automotive steels",
       agency: "IRIS Grant, IIT Ropar",
-      amount: "Yet to be announced",
-      duration: "April 2024 – March 2025",
-      isPI: true
-    },
-    {
-      title: "In-situ S/TEM investigation on nature and consequence of mechanically induced martensite in metallic materials",
-      agency: "JSPS KAKENHI Grant",
-      amount: "Yet to be announced",
-      duration: "April 2023 – December 2023",
-      isPI: true
-    },
-    {
-      title: "In-situ observation of crack growth behavior in BCC, FCC, and HCP metals",
-      agency: "Kyushu University, Japan",
-      amount: "Yet to be announced",
-      duration: "October 2022 – March 2023",
-      isPI: true
+      amount: "₹4,88,400/-",
+      duration: "Apr-24 – Mar-25",
+      role: "Principal Investigator (P.I)",
+      remark: "Complete"
     }
   ];
 
-  const newConsultancyProjects = [
+  const consultancyProjects = [
     {
       title: "Stealth Technologies Using Metallic Materials",
       agency: "Agneevasthra Pvt. Ltd",
-      amount: "₹10 Lakhs",
-      duration: "March 2026 – May 2026",
-      isPI: true
+      amount: "₹10,00,000/-",
+      duration: "Mar-26 – May-26",
+      role: "Principal Investigator (P.I)",
+      remark: "Complete"
+    },
+    {
+      title: "Carbon Footprint & Mechanical Performance of Gray and Ductile Cast Irons: Lost Foam Vs Green Sand Mould Casting",
+      agency: "Pritika Auto Industries Limited, Punjab",
+      amount: "₹10,00,000/-",
+      duration: "Sep-25 – Nov-25",
+      role: "Principal Investigator (P.I)",
+      remark: "Complete"
+    },
+    {
+      title: "Development of Bi-Metallic Blade for Petrochemical Industry",
+      agency: "SGT Associates, Haryana",
+      amount: "₹8,50,000/-",
+      duration: "Sep-24 – Mar-25",
+      role: "Principal Investigator (P.I)",
+      remark: "Complete"
     }
   ];
-
-  const sponsoredProjects = [...oldSponsoredProjects, ...newSponsoredProjects];
-  const consultancyProjects = [...oldConsultancyProjects, ...newConsultancyProjects];
 
   const ProjectCard = ({ project }) => {
     // 1. Process Fields for Old Data Compatibility

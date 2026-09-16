@@ -7,6 +7,7 @@ const equipmentImages = import.meta.glob('../assets/equipment/*.{png,jpg,jpeg,sv
 
 const getImagePath = (filename) => {
   if (!filename) return null;
+  if (filename.startsWith('/') || filename.startsWith('http')) return filename;
   const baseNameRequested = filename.split('.')[0].toLowerCase();
   const foundKey = Object.keys(equipmentImages).find(k => {
     const fileBaseName = k.split('/').pop().split('.')[0].toLowerCase();
@@ -38,6 +39,8 @@ const Equipment = () => {
     const topStripBg = "bg-white/50"; 
 
     const getImg = (name) => {
+      if (!name) return 'https://placehold.co/400x300/ffffff/0B5472?text=Equipment';
+      if (name.startsWith('/') || name.startsWith('http')) return getImagePath(name);
       const safeName = name.replace(/\s+/g, '_').toLowerCase();
       // Placeholder with dimensions to enforce proper display if image is missing
       return getImagePath(safeName) || `https://placehold.co/400x300/ffffff/0B5472?text=${encodeURIComponent(name.substring(0, 15))}`;

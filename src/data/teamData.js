@@ -3,7 +3,7 @@ export const groupHead = {
   title: "Assistant Professor",
   dept: "Department of Metallurgical and Materials Engineering",
   interest: "In-situ deformation studies, Transmission Electron Microscopy (TEM), Digital Image Correlation (DIC), Synchrotron X-ray diffraction, Transformation/Twinning induced plasticity materials, Martensite, Steels, Titanium and Aluminum alloys, High/Medium entropy alloys, Heterogeneous structured materials.",
-  image: "Dr_Avala_Lavakumar.jpg"
+  image: "lavasir.jpeg"
 };
 
 export const researchStaff = [
@@ -29,21 +29,21 @@ export const phdStudents = [
     role: "Ph.D. Student: 2024 September ~",
     area: "Deformation behaviour of equiatomic/non-equiatomic alloys",
     bio: "Sushree is a highly motivated metallurgical engineer with a strong academic background and a passion for research. She is currently seeking a Ph.D. position to further her knowledge and contribute to the advancement of materials science. Sushree has demonstrated her teaching abilities as a lecturer, where she effectively communicated complex engineering concepts to undergraduate students. Her research experience includes projects focused on the development and characterization of alloys, showcasing her practical skills in materials engineering. With her diverse skillset, which includes technical proficiency, teaching experience, and research capabilities, Sushree is well-equipped to excel in a challenging and collaborative academic environment.",
-    image: "Sushree_Priyadarshini_Mohapatra.jpg"
+    image: "sushree1.jpeg"
   },
   {
     name: "Mr. GEDELA SANTHOSH KUMAR",
     role: "Ph.D. Student: 2025 July ~",
     area: "Strategic design of Transformation-Induced Plasticity (TRIP) and Twinning-Induced Plasticity (TWIP) mechanisms in medium-manganese steels.",
     bio: "Santhosh completed his B.Tech in Metallurgical and Materials Engineering from the National Institute of Advanced Manufacturing Technology, Ranchi. He brings hands-on industrial experience from JSW’s Ayena Innovation, where he co-authored a granted patent and contributed to several others focused on sustainable materials. His training at Rashtriya Ispat Nigam Limited (RINL) involved leading teams and studying steel plant operations and rolling processes. His academic work includes research on heat treatment effects in F55 super duplex steel and pioneering studies on self-healing metals. Proficient in SEM, XRD, corrosion testing, and process optimization, he is passionate about applying advanced metallurgical techniques to real-world challenges. He is committed to contributing to the advancement of materials science through rigorous research and industry-aligned innovation.",
-    image: "Gedela_Santhosh_Kumar.jpg"
+    image: "santhosh.jpeg"
   },
   {
     name: "Mr. MAHINDERDEEP SINGH",
     role: "Ph.D. Student: 2026 January ~",
     area: "Development of High-Strength Nickel-Free Stainless Steel for Extreme Temperature Applications.",
     bio: "Mahinderdeep Singh holds a B.Tech. in Mechanical Engineering and an M.Tech in Manufacturing Engineering from Sant Longowal Institute of Engineering and Technology. His research focuses on alloy design and development of high-strength nickel-free stainless steels for extreme temperature applications. His work involves detailed investigation of microstructural evolution, phase transformations, deformation mechanisms, and temperature-dependent mechanical performance under cryogenic and elevated temperature conditions, with the objective of developing sustainable and high-performance structural materials.",
-    image: "Mahinderdeep_Singh.jpg"
+    image: "mahinder.jpeg"
   },
   {
     name: "Mr. VIKRAM TIRUKKOVELUR",

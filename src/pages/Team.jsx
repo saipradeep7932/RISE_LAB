@@ -35,17 +35,30 @@ import { groupHead, researchStaff, phdStudents, btechStudents, alumni } from '..
 const Team = () => {
   // Slideshow Logic
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  
-  // Here are your 4 image names. You can change these anytime!
-  const groupImages = ['group1', 'group2', 'group3', 'group4', 'group5'];
+
+  const groupImages = Object.keys(teamImages)
+    .filter((key) => /group/i.test(key) && !/placeholder/i.test(key))
+    .map((key) => key.split('/').pop().replace(/\.[^/.]+$/, ''))
+    .filter((name) => name && name.toLowerCase() !== 'group')
+    .sort((a, b) => {
+      const groupNumber = (name) => {
+        const match = name.match(/group(\d+)/i);
+        return match ? Number(match[1]) : 0;
+      };
+      return groupNumber(b) - groupNumber(a);
+    });
 
   useEffect(() => {
+    if (groupImages.length <= 1) return undefined;
+
     const timer = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % groupImages.length);
-    }, 3000); // Changes image every 3000ms (3 seconds)
-    
+    }, 3000);
+
     return () => clearInterval(timer);
-  }, [groupImages.length]);
+  }, [groupImages]);
+
+  const activeGroupImage = groupImages[currentImageIndex] || null;
 
   return (
     <div className="min-h-screen bg-white font-sans text-black">
@@ -53,33 +66,51 @@ const Team = () => {
 
         {/* --- GROUP PHOTO SLIDESHOW --- */}
         <section className="w-full">
-          <div className="w-full h-[300px] md:h-[500px] rounded-xl overflow-hidden shadow-lg border border-[#F5F5F5] relative bg-gray-200">
-            <AnimatePresence>
-              <motion.img
-                key={currentImageIndex}
-                src={getImagePath(groupImages[currentImageIndex]) || PLACEHOLDER_IMG || `https://placehold.co/1200x500?text=Team+Photo+${currentImageIndex + 1}`}
-                alt={`RISE Lab Team ${currentImageIndex + 1}`}
-                initial={{ opacity: 0, x: 100 }} // Starts off-screen to the right
-                animate={{ opacity: 1, x: 0 }}   // Slides into the center
-                exit={{ opacity: 0, x: -100 }}   // Slides off-screen to the left
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            </AnimatePresence>
-            
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pt-16 pointer-events-none">
-              <h2 className="text-white text-2xl font-bold mb-4">RISE Lab Team</h2>
-              
-              {/* Little animated dots at the bottom to show which photo is active */}
-              <div className="flex gap-2">
-                {groupImages.map((_, idx) => (
-                  <div 
-                    key={idx} 
-                    className={`h-1.5 rounded-full transition-all duration-500 ${idx === currentImageIndex ? 'w-8 bg-[#FF6600]' : 'w-2 bg-white/50'}`}
+          <div className="w-full h-[300px] md:h-[500px] rounded-xl overflow-hidden border border-white/60 bg-gray-100 relative shadow-[0_30px_60px_rgba(0,0,0,0.16)] ring-1 ring-gray-200">
+            {groupImages.length > 0 ? (
+              <AnimatePresence>
+                <motion.div
+                  key={activeGroupImage}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.8, ease: 'easeInOut' }}
+                  className="absolute inset-0 p-2 md:p-3"
+                >
+                  <img
+                    src={getImagePath(activeGroupImage) || PLACEHOLDER_IMG || `https://placehold.co/1200x500?text=Team+Photo+${currentImageIndex + 1}`}
+                    alt={`RISE Lab Team ${currentImageIndex + 1}`}
+                    className="w-full h-full rounded-xl block"
+                    style={{
+                      objectFit: 'contain',
+                      objectPosition: 'center center',
+                      backgroundColor: '#f3f4f6',
+                      boxShadow: '0 18px 36px rgba(15, 23, 42, 0.18)',
+                      filter: 'drop-shadow(0 12px 20px rgba(0, 0, 0, 0.14))'
+                    }}
                   />
-                ))}
+                </motion.div>
+              </AnimatePresence>
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-200 text-gray-500">
+                No team group photo available
               </div>
-            </div>
+            )}
+
+            {groupImages.length > 0 && (
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pt-16 pointer-events-none">
+                <h2 className="text-white text-2xl font-bold mb-4">RISE Lab Team</h2>
+
+                <div className="flex gap-2">
+                  {groupImages.map((_, idx) => (
+                    <div
+                      key={idx}
+                      className={`h-1.5 rounded-full transition-all duration-500 ${idx === currentImageIndex ? 'w-8 bg-[#FF6600]' : 'w-2 bg-white/50'}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
@@ -88,12 +119,13 @@ const Team = () => {
           <h2 className="text-2xl font-bold text-[#0B5472] border-l-4 border-rise-ocean pl-3 mb-8 uppercase">Group Head</h2>
           <div className="bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border border-[#F5F5F5] overflow-hidden flex flex-col md:flex-row">
             {/* 1:1 Aspect Ratio or properly contained */}
-            <div className="md:w-1/3 flex-shrink-0 bg-gray-200 relative">
-              <div className="w-full h-full min-h-[300px] md:min-h-full">
+            <div className="md:w-1/3 flex-shrink-0 flex items-center justify-center bg-white p-6">
+              <div className="w-full max-w-[320px] aspect-square bg-white rounded-lg overflow-hidden border-4 border-white shadow-sm relative">
                 <img
                   src={getImagePath(groupHead.image) || PLACEHOLDER_IMG}
                   alt={groupHead.name}
-                  className="absolute inset-0 w-full h-full object-cover object-top"
+                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  style={{ objectPosition: 'center 12%', backgroundColor: '#fff' }}
                 />
               </div>
             </div>
@@ -129,11 +161,12 @@ const Team = () => {
                 <div key={idx} className={`w-full md:w-[85%] bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border border-[#F5F5F5] px-6 py-5 flex flex-col md:flex-row gap-8 items-center border-l-4 border-l-[#FF6600] ${alignmentClass}`}>
                   <div className="w-full md:w-1/3 flex-shrink-0 flex justify-center">
                     {/* Large Avatar 1:1 */}
-                    <div className="w-64 h-64 bg-gray-200 rounded-lg overflow-hidden border-4 border-white shadow-sm relative">
+                    <div className="w-64 h-64 bg-white rounded-lg overflow-hidden border-4 border-white shadow-sm relative">
                       <img
                         src={getImagePath(staff.image) || PLACEHOLDER_IMG}
                         alt={staff.name}
-                        className="absolute inset-0 w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                        className="absolute inset-0 w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
+                        style={{ objectPosition: 'center 12%', backgroundColor: '#fff' }}
                       />
                     </div>
                   </div>
@@ -167,19 +200,25 @@ const Team = () => {
             {phdStudents.map((student, idx) => {
               // 1st (idx 0) -> Left (self-start), 2nd (idx 1) -> Right (self-end)
               const alignmentClass = idx % 2 === 0 ? 'self-start' : 'self-end';
+              const isSushree = student.name.toLowerCase().includes('sushree');
 
               return (
                 <div
                   key={idx}
-                  className={`w-full md:w-[85%] bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border-l-4 border-l-[#FF6600] flex flex-col md:flex-row gap-8 items-center px-6 py-5 ${alignmentClass}`}
+                  className={`w-full md:w-[85%] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border-l-4 border-l-[#FF6600] flex flex-col md:flex-row gap-8 items-center px-6 py-5 ${alignmentClass}`}
+                  style={{ backgroundColor: isSushree ? '#ffffff' : '#F5F5F5' }}
                 >
                   {/* Photo Side */}
                   <div className="w-full md:w-1/3 flex-shrink-0 flex justify-center">
-                    <div className="w-64 h-64 bg-gray-200 rounded-lg overflow-hidden shadow-sm relative border border-gray-100">
+                    <div
+                      className="w-64 h-64 rounded-lg overflow-hidden shadow-sm relative border border-gray-100"
+                      style={{ backgroundColor: '#fff' }}
+                    >
                       <img
                         src={getImagePath(student.image) || PLACEHOLDER_IMG}
                         alt={student.name}
-                        className="absolute inset-0 w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                        className="absolute inset-0 w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
+                        style={{ objectPosition: 'center 12%', backgroundColor: '#fff' }}
                       />
                     </div>
                   </div>
