@@ -1,20 +1,17 @@
 export const newsItems = [
+  "RISE Lab at ICPMAT, Vietnam — RISE Lab participated in ICPMAT, Vietnam, featuring a keynote by Dr. Avala Lavakumar and research presentations by Sushree P. Mohapatra and Santhosh Kumar Gedela.",
   "Successful trial production of our developed Bi-Metallic Blade, completed under an industrial collaborative project with SGT Associates Pvt. Ltd. and Palletizer India Pvt. Ltd.",
   "RISE Lab has initiated a new consultancy project in collaboration with Pritika Auto Industries Limited, Punjab.",
   "Dr. Avala Lavakumar’s latest research paper, “Dynamics of Portevin–Le Chatelier Banding Revealed Through Grain Refinement in High-Mn Austenitic Steel: Sequential Overcoming of Necking,” has been accepted in the Journal of Materials Science & Technology.",
   "Dharamveer has joined RISE Lab as a Project Associate on the Agnivastra project.",
   "Mahinderdeep Singh has joined RISE Lab as a Ph.D. student.",
-  "Mr. Gedela Santhosh Kumar joined as Ph.D. student in RISE Lab.",
+  "Mahinderdeep Singh joined RISE Lab as a Ph.D. scholar.",
+  "Jasdeep Singh joined RISE Lab as a Ph.D. scholar.",
   "Dr. Avala Lavakumar has been appointed to the Editorial Board of Scientific Reports, a journal from Springer Nature.",
   "RISE Lab has published a new journal article titled, \"Beyond the Blade: A Microstructural Investigation of an Ancient Indian Steel Sword,\" in Metallography, Microstructure, and Analysis (2025).",
   "RISE Lab and PMR Lab announced their collaborative publication in the Journal of Environmental Management.",
   "RISE Lab is seeking highly motivated Ph.D. students to join the research team.",
   "Dr. Avala Lavakumar selected as Divisional Editor for ASM Handbook Volume 27 – Renewable Materials.",
-  "Mr. T. Vikram joined as Ph.D. student in RISE Lab under ERP.",
-  "Dr. Avala Lavakumar is teaching a new course titled \"Electron Microscopy and Micro-Analysis.\"",
-  "Mr. Gopikrishna Guguloth joined as Junior Research Fellow in RISE Lab.",
-  "Mr. Arun Kumar Patro presented a paper at IIM-ATM 2024 & NMA, Bengaluru.",
-  "Mr. Vishnu Prasad presented a poster at IIM-ATM 2024 & NMA, Bengaluru."
 ];
 
 export const motiveText = {
