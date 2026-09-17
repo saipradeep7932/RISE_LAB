@@ -32,9 +32,43 @@ const PLACEHOLDER_IMG = getImagePath('placeholder') || null;
 
 import { groupHead, researchStaff, phdStudents, btechStudents, alumni } from '../data/teamData';
 
+const TeamPortrait = ({ primaryImage, hoverImage, alt, className = '' }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const activeImage = isHovered ? hoverImage || primaryImage : primaryImage;
+
+  return (
+    <div
+      className={className}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={activeImage || 'team-portrait'}
+          src={activeImage || PLACEHOLDER_IMG}
+          alt={alt}
+          initial={{ opacity: 0, scale: 1.18 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.08 }}
+          transition={{ duration: 0.22, ease: 'easeOut' }}
+          className="absolute inset-0 w-full h-full"
+          style={{
+            objectFit: isHovered ? 'contain' : 'cover',
+            objectPosition: isHovered ? 'center center' : 'center 18%',
+            backgroundColor: '#fff',
+            padding: isHovered ? '8%' : '0'
+          }}
+        />
+      </AnimatePresence>
+    </div>
+  );
+};
+
 const Team = () => {
   // Slideshow Logic
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  // Lightbox for zooming images
+  const [lightboxSrc, setLightboxSrc] = useState(null);
 
   const groupImages = Object.keys(teamImages)
     .filter((key) => /group/i.test(key) && !/placeholder/i.test(key))
@@ -121,11 +155,11 @@ const Team = () => {
             {/* 1:1 Aspect Ratio or properly contained */}
             <div className="md:w-1/3 flex-shrink-0 flex items-center justify-center bg-white p-6">
               <div className="w-full max-w-[320px] aspect-square bg-white rounded-lg overflow-hidden border-4 border-white shadow-sm relative">
-                <img
-                  src={getImagePath(groupHead.image) || PLACEHOLDER_IMG}
+                <TeamPortrait
+                  primaryImage={getImagePath(groupHead.image) || PLACEHOLDER_IMG}
+                  hoverImage={getImagePath(groupHead.hoverImage) || getImagePath(groupHead.image) || PLACEHOLDER_IMG}
                   alt={groupHead.name}
-                  className="absolute inset-0 w-full h-full object-cover object-center"
-                  style={{ objectPosition: 'center 12%', backgroundColor: '#fff' }}
+                  className="absolute inset-0"
                 />
               </div>
             </div>
@@ -162,11 +196,11 @@ const Team = () => {
                   <div className="w-full md:w-1/3 flex-shrink-0 flex justify-center">
                     {/* Large Avatar 1:1 */}
                     <div className="w-64 h-64 bg-white rounded-lg overflow-hidden border-4 border-white shadow-sm relative">
-                      <img
-                        src={getImagePath(staff.image) || PLACEHOLDER_IMG}
+                      <TeamPortrait
+                        primaryImage={getImagePath(staff.image) || PLACEHOLDER_IMG}
+                        hoverImage={getImagePath(staff.hoverImage) || getImagePath(staff.image) || PLACEHOLDER_IMG}
                         alt={staff.name}
-                        className="absolute inset-0 w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
-                        style={{ objectPosition: 'center 12%', backgroundColor: '#fff' }}
+                        className="absolute inset-0"
                       />
                     </div>
                   </div>
@@ -214,11 +248,11 @@ const Team = () => {
                       className="w-64 h-64 rounded-lg overflow-hidden shadow-sm relative border border-gray-100"
                       style={{ backgroundColor: '#fff' }}
                     >
-                      <img
-                        src={getImagePath(student.image) || PLACEHOLDER_IMG}
+                      <TeamPortrait
+                        primaryImage={getImagePath(student.image) || PLACEHOLDER_IMG}
+                        hoverImage={getImagePath(student.hoverImage) || getImagePath(student.image) || PLACEHOLDER_IMG}
                         alt={student.name}
-                        className="absolute inset-0 w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
-                        style={{ objectPosition: 'center 12%', backgroundColor: '#fff' }}
+                        className="absolute inset-0"
                       />
                     </div>
                   </div>
@@ -258,11 +292,12 @@ const Team = () => {
             {btechStudents.map((student, idx) => (
               <div key={idx} className="bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border border-[#F5F5F5] border-l-4 border-l-[#FF6600] overflow-hidden flex flex-col h-full hover:shadow-md transition group">
                 {/* Image Area */}
-                <div className="w-full aspect-square bg-gray-200 relative">
+                <div className="w-full aspect-square bg-gray-200 p-4 relative">
                   <img
                     src={getImagePath(student.image) || PLACEHOLDER_IMG}
                     alt={student.name}
-                    className="absolute inset-0 w-full h-full object-cover object-top"
+                    className="w-full h-full object-contain rounded-lg bg-[#f5f5f5]"
+                    style={{ objectPosition: 'center center' }}
                   />
                 </div>
 
@@ -285,35 +320,48 @@ const Team = () => {
         {/* --- SECTION 5: ALUMNI --- */}
         <section>
           <h2 className="text-2xl font-bold text-[#0B5472] border-l-4 border-rise-ocean pl-3 mb-8 uppercase">Alumni / Associated Members</h2>
-          {/* Using similar Grid Layout as B.Tech for consistent visual size */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {alumni.map((member, idx) => (
-              <div key={idx} className="bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border border-[#F5F5F5] border-l-4 border-l-[#FF6600] overflow-hidden flex flex-col h-full hover:shadow-md transition group">
-                {/* Size: 1:1 Aspect ratio image */}
-                <div className="w-full aspect-square bg-gray-200 relative">
-                  <img
-                    src={getImagePath(member.image) || PLACEHOLDER_IMG}
-                    alt={member.name}
-                    className="absolute inset-0 w-full h-full object-cover object-center"
-                  />
-                </div>
-                <div className="p-5 flex flex-col flex-grow bg-[#F5F5F5]">
-                  <span className="text-base font-bold text-[#FF6600] mb-1">{member.name}</span>
-                  <span className="text-sm text-black italic">{member.timeline}</span>
+          {/* Match B.Tech grid and card framing for uniform size */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {alumni.map((member, idx) => {
+              const isRahul = (member.image || '').toLowerCase().includes('rahul_kumar_sahu');
+              const imgSrc = getImagePath(member.image) || PLACEHOLDER_IMG;
+              const imgClass = isRahul
+                ? 'w-full h-full object-cover rounded-lg bg-[#f5f5f5] transform transition-transform duration-300 group-hover:scale-105'
+                : 'w-full h-full object-contain rounded-lg bg-[#f5f5f5] transform transition-transform duration-300 group-hover:scale-105';
+              const imgStyle = isRahul ? { objectPosition: 'center 30%' } : { objectPosition: 'center center' };
 
-                  {/* BOTTOM ACCENT WAVE */}
-                  <div className="w-full mt-auto pt-4 opacity-40 group-hover:opacity-70 transition-opacity duration-500">
-                    <svg className="w-full h-2 text-orange-400 fill-none stroke-current stroke-[3]" viewBox="0 0 100 12" preserveAspectRatio="none">
-                      <path d="M0,6 C30,12 70,0 100,6" strokeLinecap="round" />
-                    </svg>
+              return (
+                <div key={idx} className="bg-[#F5F5F5] rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] border border-[#F5F5F5] border-l-4 border-l-[#FF6600] overflow-hidden flex flex-col h-full hover:shadow-md transition group">
+                  {/* Image area matches B.Tech card: square aspect, padded, and contain */}
+                  <div className="w-full aspect-square bg-gray-200 p-4 relative cursor-zoom-in" onClick={() => setLightboxSrc(imgSrc)}>
+                    <img src={imgSrc} alt={member.name} className={imgClass} style={imgStyle} />
+                  </div>
+                  <div className="p-5 flex flex-col flex-grow">
+                    <span className="text-base font-bold text-[#FF6600] mb-1">{member.name}</span>
+                    <span className="text-sm text-black italic">{member.timeline}</span>
+
+                    {/* BOTTOM ACCENT WAVE */}
+                    <div className="w-full mt-auto pt-4 opacity-40 group-hover:opacity-70 transition-opacity duration-500">
+                      <svg className="w-full h-2 text-orange-400 fill-none stroke-current stroke-[3]" viewBox="0 0 100 12" preserveAspectRatio="none">
+                        <path d="M0,6 C30,12 70,0 100,6" strokeLinecap="round" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
       </div>
+      {/* Lightbox modal for zoomed image */}
+      {lightboxSrc && (
+        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center" onClick={() => setLightboxSrc(null)}>
+          <div className="max-w-[90%] max-h-[90%]" onClick={(e) => e.stopPropagation()}>
+            <img src={lightboxSrc} alt="zoomed" className="w-full h-auto max-h-[90vh] rounded-lg shadow-2xl object-contain" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

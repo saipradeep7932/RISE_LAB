@@ -76,6 +76,13 @@ const Publications = () => {
     { id: '9', authors: 'P.K. Singh, A. Lavakumar, R.K. Rai, S. Srivastava', title: 'Recycling of environmental hazardous wastage of integrated steel plants', journalInfo: <><span className="italic">Proceedings of the PSRC International Conference on Innovations in Civil, Water, Materials and Geo-Environmental Engineering (ICIWMGEE'13)</span>, Johannesburg, South Africa, April 15-16, 2013</> }
   ];
 
+  const bookChapters = [
+    { authors: 'Vatsala Chaturvedi, Rahul Kumar Sahu, Avala Lavakumar, Trinath Talapaneni', title: 'Properties of Shape Memory Alloys', journalInfo: <><span className="italic">Sustainability of Alloys and Polymers of Shape Memory Materials</span>, CRC Press (Taylor Francis Group), ISBN 9781003747901</> },
+    { authors: 'Trinath Talapaneni, Vatsala Chaturvedi, Rahul Kumar Sahu, Avala Lavakumar', title: 'Effect of Various Parameters on Shape Recovery of Shape Memory Alloys', journalInfo: <><span className="italic">Sustainability of Alloys and Polymers of Shape Memory Materials</span>, CRC Press (Taylor Francis Group), ISBN 9781003747901</> },
+    { authors: 'Sushree P. Mohapatra, Arun Kumar Patro, Vatsala Chaturvedi, Trinath Talapaneni, Avala Lavakumar', title: 'Phase Transformation Phenomena in Shape Memory Alloys', journalInfo: <><span className="italic">Sustainability of Alloys and Polymers of Shape Memory Materials</span>, CRC Press (Taylor Francis Group), ISBN 9781003747901</> },
+    { authors: 'Trinath Talapaneni, Avala Lavakumar, Vatsala Chaturvedi', title: 'Corrosion and Radiation Resistance Properties of High Entropy Alloys', journalInfo: <><span className="italic">Handbook of High Entropy Alloys: Fundamentals to Applications</span>, CRC Press (Taylor Francis Group), ISBN 9781032855578</> }
+  ];
+
   return (
     <div className="min-h-screen bg-white font-sans text-gray-800 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -105,7 +112,24 @@ const Publications = () => {
           </section>
 
 
-          {/* --- SECTION 3: JOURNAL PUBLICATIONS (NUMBERING 20 -> 1) --- */}
+          {/* --- SECTION 3: BOOK CHAPTERS --- */}
+          <section className="bg-[#F5F5F5] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
+            <h2 className="text-3xl font-bold text-[#FF6600] mb-6 border-b-2 border-[#FF6600] inline-block pb-2">BOOK CHAPTERS</h2>
+            <div className="space-y-6 pl-4 text-lg">
+              {bookChapters.map((chapter, index) => (
+                <div key={index} className="flex gap-2">
+                  <span className="font-bold min-w-[30px]">{index + 1}.</span>
+                  <div>
+                    <AuthorParams text={chapter.authors} />{' '}
+                    <span className="italic">{chapter.title}</span>{', '}
+                    {chapter.journalInfo}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* --- SECTION 4: JOURNAL PUBLICATIONS (NUMBERING 20 -> 1) --- */}
           <section className="bg-[#F5F5F5] rounded-2xl shadow-[inset_0_0_20px_rgba(0,0,0,0.08)] p-6">
             <h2 className="text-3xl font-bold text-[#FF6600] mb-6 border-b-2 border-[#FF6600] inline-block pb-2">JOURNAL PUBLICATIONS</h2>
             <div className="space-y-6 pl-4 text-lg">
