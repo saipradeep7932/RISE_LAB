@@ -3,7 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Use import.meta.glob to dynamically load images from assets
 // This ensures the build process knows about them and hashes them correctly.
-const teamImages = import.meta.glob('../assets/team/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
+const teamImages = import.meta.glob('../assets/team/*.{png,jpg,jpeg,svg}', {
+  eager: true,
+  query: '?url',
+  import: 'default'
+});
 
 const getImagePath = (filename) => {
   if (!filename) return null;
