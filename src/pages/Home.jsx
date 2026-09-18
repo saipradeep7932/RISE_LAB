@@ -103,7 +103,11 @@ const Home = () => {
   }, []);
 
   // --- Helpers ---
-  const homeAssets = import.meta.glob('../assets/home/*.{png,jpg,jpeg,svg,webp}', { eager: true, as: 'url' });
+  const homeAssets = import.meta.glob('../assets/home/*.{png,jpg,jpeg,svg,webp}', {
+  eager: true,
+  query: '?url',
+  import: 'default'
+});
   const getAsset = (name) => {
     for (const ext of ['jpg', 'jpeg', 'png', 'svg', 'webp']) {
       const key = `../assets/home/${name}.${ext}`;
@@ -240,7 +244,7 @@ const Home = () => {
         className="relative w-full overflow-hidden py-32 flex items-center justify-center text-center z-10"
         style={{ backgroundColor: isMotiveActive ? 'transparent' : '#0f172a' }}
       >
-        <div ref={motiveSectionRef} className="relative z-10 max-w-5xl mx-auto px-4">
+        <div ref={motiveSectionRef} className="rel  ative z-10 max-w-5xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
