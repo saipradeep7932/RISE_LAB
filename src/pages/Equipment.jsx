@@ -3,7 +3,11 @@ import { Mail, ArrowRight, ExternalLink } from 'lucide-react';
 import { equipmentList } from '../data/equipmentData';
 
 // Dynamically import equipment images (if they exist)
-const equipmentImages = import.meta.glob('../assets/equipment/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
+const equipmentImages = import.meta.glob('../assets/equipment/*.{png,jpg,jpeg,svg}', {
+  eager: true,
+  query: '?url',
+  import: 'default'
+});
 
 const getImagePath = (filename) => {
   if (!filename) return null;
