@@ -84,12 +84,9 @@ const ProjectsFunded = () => {
   const ProjectCard = ({ project }) => {
     // 1. Process Fields for Old Data Compatibility
     let displayTitle = project.title;
-    let displayRole = "Principal Investigator (P.I)";
+    let displayRole = project.roleOverwrite || project.role || "Principal Investigator (P.I)";
     if (displayTitle.endsWith("(P.I)")) {
       displayTitle = displayTitle.replace("(P.I)", "").trim();
-    }
-    if (project.roleOverwrite) {
-      displayRole = project.roleOverwrite;
     }
 
     let displayAgency = project.agency;
