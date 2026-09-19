@@ -24,8 +24,8 @@ const ProjectsFunded = () => {
       agency: "Ministry of Steel, Gov. of India",
       amount: "₹405,25,872/-",
       duration: "Oct-25 – Sept-27",
-      role: "Co-Principal Investigator (Co-P.I)",
-      roleOverwrite: "Co-Principal Investigator (Co-P.I)",
+      role: "Co-Principal Investigator (Co-PI)",
+      roleOverwrite: "Co-Principal Investigator (Co-PI)",
       remark: "Active"
     },
     {
